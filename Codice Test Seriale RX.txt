@@ -1,0 +1,41 @@
+package FS_Prototypes.ArduinoJavaSerialComm;
+
+import java.io.IOException;
+import com.fazecast.jSerialComm.SerialPort;
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+	public static void main(String[] args) throws IOException, InterruptedException 
+	{
+		
+		SerialPort comPort = SerialPort.getCommPort("COM3");
+		comPort.setComPortParameters(9600, 8, 1, 0); // default connection settings for Arduino
+	    
+	    if(comPort.openPort()) {
+		      System.out.println("Port is open :)");
+		    } else {
+		      System.out.println("Failed to open port :(");
+		      return;
+		    }	
+	    
+		try {
+		   while (true)
+		   {
+		      while (comPort.bytesAvailable() == 0)
+		         Thread.sleep(20);
+
+		      byte[] readBuffer = new byte[comPort.bytesAvailable()];
+		      int numRead = comPort.readBytes(readBuffer, readBuffer.length);
+		      for(int i=0; i<readBuffer.length; i++)
+		    	  System.out.print((char)readBuffer[i]);
+		      System.out.println();
+		   }
+		} catch (Exception e) { e.printStackTrace(); }
+		comPort.closePort();
+		
+	    
+	  }
+}
