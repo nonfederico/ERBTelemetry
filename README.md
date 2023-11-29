@@ -1,11 +1,11 @@
 # ERBTelemetry
-Software to monitor wirelessly the telemetry of FSAE electric racing car by E-Racing Bergamo team.
+Software to monitor wirelessly the telemetry of FSAE electric vehicle by E-Racing Bergamo team.
 
 ## Key functionalities
 * Live data monitoring
+* Live data recording
 * Car parameters editing 
 * Graphical user interface with charts and stats 
-* Live data saving
 * Import/Export saved data
 
 ## Requirements
