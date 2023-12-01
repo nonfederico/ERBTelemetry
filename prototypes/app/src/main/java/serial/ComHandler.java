@@ -50,12 +50,18 @@ public class ComHandler
 			new SerialPortDataListener() 
 			{
 			   @Override
-			   public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_AVAILABLE; }
+			   public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_AVAILABLE | SerialPort.LISTENING_EVENT_PORT_DISCONNECTED; }
 			   @Override
 			   public void serialEvent(SerialPortEvent event)
 			   {
-			      if (event.getEventType() != SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
+			      if (event.getEventType() != SerialPort.LISTENING_EVENT_DATA_AVAILABLE && event.getEventType() != SerialPort.LISTENING_EVENT_PORT_DISCONNECTED)
 			         return;
+			      if (event.getEventType() == SerialPort.LISTENING_EVENT_PORT_DISCONNECTED)
+			      {
+				      System.out.println("Imprevista interruzione del collegamento. Chiusura porta COM");
+				      stopListening();
+			      }   
+			      
 			      byte[] newData = new byte[comPort.bytesAvailable()];
 			      int numRead = comPort.readBytes(newData, newData.length);
 			      System.out.println("Read " + numRead + " bytes.");
@@ -83,6 +89,16 @@ public class ComHandler
 			   }
 			}
 		);
+		
+		
+		
+		return true;
+	}
+	
+	public boolean stopListening()
+	{
+		comPort.removeDataListener();
+		comPort.closePort();
 		
 		return true;
 	}
