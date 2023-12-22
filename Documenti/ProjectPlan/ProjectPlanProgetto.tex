@@ -1,0 +1,63 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{top=20pt}
+
+
+\title{PROJECT PLAN - ERB TELEMETRY}
+\author{Simone Manenti 104878\\ Cattaneo Federico 1053265}
+
+
+\begin{document}
+
+\maketitle
+
+\chapter{STORIA}
+Il progetto è nato dall’esigenza di avere un software di telemetria per il team di formula SAE, dell’università degli studi di Bergamo, da utilizzare durante i test e la competizione per poter leggere i dati raccolti e operare sulle variabili che influenzano la risposta della centralina
+
+\chapter{DESCRIZIONE DEL PROBLEMA}
+Nel sistema sono presenti due arduino, un arduino è collegato alla centralina dell'auto e si occupa di inviare costantemente i dati, un altro arduino invece è collegato al computer e si occupa di ricevere i dati dall'altro arduino.\\
+
+\chapter{Funzionalità}
+L'arduino può:\\
+
+\begin{itemize}
+\item Ricevere i dati in real time dei sensori collegati alla centralina: "accelleratore, pressione freno, temp. freno, temp. batteria, carica batteria, tempo sul giro, pressione gomme"
+\item 2)	Questi dati possono essere visualizzati in real time e salvati in un database locale oppure posso accedere allo storico dei dati salvati nel database locale\\
+\end{itemize}
+
+All'apertura dell'applicazione è presente una finestra di login per accedere con nome utente e password.\\
+
+\subsection{UTENTI}
+Ci sono due possibili Livelli utente, “CapoReparto” e “IngegnereDiPista”.\\
+
+L'IngegnereDiPista può:\\
+\begin{itemize}
+\item Accedere ai dati della telemetria e visualizzarli a schermo tramite grafici o tabelle 
+\item Selezionare quali tipi di dati sono da visulizzare
+\item Selezionare l’intervallo di tempo dei dati che vuole visualizzare\\
+\end{itemize}
+
+Il CapoReparto può:
+\begin{itemize}
+\item Svolgere tutte le funzioni dell’IngegnereDiPista
+\item Eliminare i dati presenti nel database locale
+\end{itemize}
+
+\subsection{COMPORTAMENTO COMUNICAZIONE REAL TIME}
+\begin{itemize}
+\item Qualsiasi utente, tramite pulsante, decide quando tentare di avviare la comunicazione tra i due arduino.
+Se la comunicazione è avvenuta, i dati possono essere visualizzati tramite tabella e contemporaneamente salvati in locale.
+\item L’utente deve anche stoppare la comunicazione tra i due arduino (implica lo stop della lettura e scrittura dei dati)
+\item Se la connessione tra arduino non avviene, deve apparire un messaggio di errore.
+\end{itemize}
+
+\subsection{COMPORTAMENTO DATI IN LOCALE}
+\begin{itemize}
+\item Qualsiasi utente può visualizzare i dati tramite grafici
+\item Qualsiasi utente può esportare i grafici o le tabelle tramite file csv
+\item L’utente CapoReparto può eliminare i dati presenti nel Database
+\end{itemize}
+
+\end{document}
