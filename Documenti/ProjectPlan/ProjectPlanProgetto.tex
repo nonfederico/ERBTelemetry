@@ -2,7 +2,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{geometry}
-\geometry{top=20pt}
+\geometry{top=50pt}
+
+\usepackage{titlesec}
+\usepackage{lipsum}
+\titleformat{\chapter}[display]
+ {\normalfont\bfseries}{}{0pt}{\LARGE} 
 
 
 \title{PROJECT PLAN - ERB TELEMETRY}
@@ -13,51 +18,68 @@
 
 \maketitle
 
-\chapter{STORIA}
-Il progetto è nato dall’esigenza di avere un software di telemetria per il team di formula SAE, dell’università degli studi di Bergamo, da utilizzare durante i test e la competizione per poter leggere i dati raccolti e operare sulle variabili che influenzano la risposta della centralina
+\chapter{INTRODUZIONE}
+\subsection{Storia}
+Durante la fase di progettazione svolta dal gruppo di controllo del team ERB di formula SAE, dell'università degli studi di Bergamo, si è scoperta la necessità di dover leggere i dati dei sensori collegati alla centralina, visualizzarli a schermo per poter fare un'analisi in tempo reale e verificare che nel sistema tutti i sensori siano in uno stato accettabile.
+Non trovando un software gratuito che andasse in contro alle esigenze del team, abbiamo deciso di sviluppare un software con le funzionalità essenziali per poter far procedere il team con la fase di test.
+\\
+Le necessità del team sono di visualizzare a schermo i dati in tempo reale, tramite tabelle o tramite grafici (funzionalità opzionale) e di salvare questi dati da qualche parte, per poter eventualmente confrontare i dati di due sessioni di test e capire se, a seguito di modifiche alla vettura, queste siano efficaci oppure siano modifiche non necessarie o controproducenti.
 
-\chapter{DESCRIZIONE DEL PROBLEMA}
-Nel sistema sono presenti due arduino, un arduino è collegato alla centralina dell'auto e si occupa di inviare costantemente i dati, un altro arduino invece è collegato al computer e si occupa di ricevere i dati dall'altro arduino.\\
 
-\chapter{Funzionalità}
-L'arduino può:\\
-
+\chapter{Descrizione del progetto}
+Nel sistema sono presenti due arduino:
 \begin{itemize}
-\item Ricevere i dati in real time dei sensori collegati alla centralina: "accelleratore, pressione freno, temp. freno, temp. batteria, carica batteria, tempo sul giro, pressione gomme"
-\item 2)	Questi dati possono essere visualizzati in real time e salvati in un database locale oppure posso accedere allo storico dei dati salvati nel database locale\\
+\item \textbf{arduinoTX}: collegato alla centralina, si occupa della trasmissione dei dati dalla vettura ad un ricevitore.
+\item \textbf{arduinoRX}: collegato ad un computer, si occupa della ricezione dei dati inviati dall'arduinoTX.
 \end{itemize}
 
-All'apertura dell'applicazione è presente una finestra di login per accedere con nome utente e password.\\
+\subsection{Funzionalità}
+
+\begin{itemize}
+\item Riceviamo i dati in real time dei sensori collegati alla centralina nel formato: "accelleratore, pressione freno, temp. freno, temp. batteria, carica batteria, tempo sul giro, pressione gomme".
+\item I dati possono essere visualizzati in real time tramite tabelle o grafici.
+\item I dati possono essere salvati in un database locale .
+\item Possiamo accedere allo storico dei dati salvati nel database locale.
+\item L'utente che è autorizzato, può eliminare i dati non necessari, presenti nel database locale.
+\end{itemize}
+
 
 \subsection{UTENTI}
 Ci sono due possibili Livelli utente, “CapoReparto” e “IngegnereDiPista”.\\
 
 L'IngegnereDiPista può:\\
 \begin{itemize}
-\item Accedere ai dati della telemetria e visualizzarli a schermo tramite grafici o tabelle 
-\item Selezionare quali tipi di dati sono da visulizzare
-\item Selezionare l’intervallo di tempo dei dati che vuole visualizzare\\
+\item Accedere ai dati della telemetria e visualizzarli a schermo tramite grafici o tabelle.
+\item Selezionare quali tipi di dati sono da visulizzare.
+\item Selezionare l’intervallo di tempo dei dati che vuole visualizzare.\\
 \end{itemize}
 
 Il CapoReparto può:
 \begin{itemize}
-\item Svolgere tutte le funzioni dell’IngegnereDiPista
-\item Eliminare i dati presenti nel database locale
+\item Svolgere tutte le funzioni dell’IngegnereDiPista.
+\item Selezionare dei dati ed eliminarli dal database locale.
 \end{itemize}
 
 \subsection{COMPORTAMENTO COMUNICAZIONE REAL TIME}
 \begin{itemize}
 \item Qualsiasi utente, tramite pulsante, decide quando tentare di avviare la comunicazione tra i due arduino.
 Se la comunicazione è avvenuta, i dati possono essere visualizzati tramite tabella e contemporaneamente salvati in locale.
-\item L’utente deve anche stoppare la comunicazione tra i due arduino (implica lo stop della lettura e scrittura dei dati)
+\item L’utente deve anche stoppare la comunicazione tra i due arduino (implica lo stop della lettura e scrittura dei dati).
 \item Se la connessione tra arduino non avviene, deve apparire un messaggio di errore.
 \end{itemize}
 
 \subsection{COMPORTAMENTO DATI IN LOCALE}
 \begin{itemize}
-\item Qualsiasi utente può visualizzare i dati tramite grafici
-\item Qualsiasi utente può esportare i grafici o le tabelle tramite file csv
-\item L’utente CapoReparto può eliminare i dati presenti nel Database
+\item Qualsiasi utente può visualizzare i dati salvati nel database locale tramite tabelle o grafici.
+\item Qualsiasi utente può esportare i grafici o le tabelle.
+\item L’utente CapoReparto può selezionare ed eliminare i dati presenti nel Database.
 \end{itemize}
 
+\subsection{OBIETTIVI}
+Dobbiamo sviluppare un software in grado di gestire i dati ricevuti.\\
+I dati li salveremo in un database locale, in forma tabellare.\\
+Dobbiamo avere delle funzioni per poter decidere se visualizzarli tramite tabelle o grafici.\\
+Per gestire la modifica dei dati, introduciamo una schermata di login all'apertura del software, così da poter determinare se l'utente ha l'autorizzazione per poter eventualmente, eliminare i dati presenti nel database locale.\\
+Dobbiamo avere una funzione che ci permetta di esportare i dati salvati nel database locale.\\
+Dobbiamo predisporre dei popup che comunichino all'utente se la comunicazione tra i trasmettitore e ricevitore è andata a buon fine.\\ 
 \end{document}
