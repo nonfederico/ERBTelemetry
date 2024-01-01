@@ -14,6 +14,7 @@
 \author{Simone Manenti 104878\\ Cattaneo Federico 1053265}
 
 
+
 \begin{document}
 
 \maketitle
@@ -44,7 +45,7 @@ Nel sistema sono presenti due arduino:
 \end{itemize}
 
 
-\subsection{UTENTI}
+\subsection{Utenti}
 Ci sono due possibili Livelli utente, “CapoReparto” e “IngegnereDiPista”.\\
 
 L'IngegnereDiPista può:\\
@@ -60,7 +61,7 @@ Il CapoReparto può:
 \item Selezionare dei dati ed eliminarli dal database locale.
 \end{itemize}
 
-\subsection{COMPORTAMENTO COMUNICAZIONE REAL TIME}
+\subsection{Comportamento comunicazione real time}
 \begin{itemize}
 \item Qualsiasi utente, tramite pulsante, decide quando tentare di avviare la comunicazione tra i due arduino.
 Se la comunicazione è avvenuta, i dati possono essere visualizzati tramite tabella e contemporaneamente salvati in locale.
@@ -68,18 +69,166 @@ Se la comunicazione è avvenuta, i dati possono essere visualizzati tramite tabe
 \item Se la connessione tra arduino non avviene, deve apparire un messaggio di errore.
 \end{itemize}
 
-\subsection{COMPORTAMENTO DATI IN LOCALE}
+\subsection{Comportamento dati in locale}
 \begin{itemize}
 \item Qualsiasi utente può visualizzare i dati salvati nel database locale tramite tabelle o grafici.
 \item Qualsiasi utente può esportare i grafici o le tabelle.
 \item L’utente CapoReparto può selezionare ed eliminare i dati presenti nel Database.
 \end{itemize}
 
-\subsection{OBIETTIVI}
+
+
+
+
+\chapter{MODELLO DI PROCESSO}
+Abbiamo deciso di adottare un modello di processo Agile ibrido per i seguenti motivi:
+\begin{itemize}
+\item Il team ERB attualmente non ha una visione completa del sistema
+\item Vogliamo procedere a piccoli incrementi per poter avere una qualità maggiore 
+\item Potrebbero avvenire cambiamenti dell'interfaccia e delle funzioni
+\item Dobbiamo ottimizzare il tempo a disposizione per lo sviluppo del sistema
+\end{itemize}
+aggiungi tabella scrum con il punto di partenza con tutte le attività da svolgere.\\
+aggiungi MoSCoW guardando i seguenti obbiettivi:\\\\
 Dobbiamo sviluppare un software in grado di gestire i dati ricevuti.\\
 I dati li salveremo in un database locale, in forma tabellare.\\
 Dobbiamo avere delle funzioni per poter decidere se visualizzarli tramite tabelle o grafici.\\
 Per gestire la modifica dei dati, introduciamo una schermata di login all'apertura del software, così da poter determinare se l'utente ha l'autorizzazione per poter eventualmente, eliminare i dati presenti nel database locale.\\
 Dobbiamo avere una funzione che ci permetta di esportare i dati salvati nel database locale.\\
 Dobbiamo predisporre dei popup che comunichino all'utente se la comunicazione tra i trasmettitore e ricevitore è andata a buon fine.\\ 
+
+
+\chapter{ORGANIZZAZIONE DEL PROGETTO}
+Avendo deciso di usare un modello SCRUM, ci troviamo a dover assegnare ognuno dei tre ruoli ad entrambi i membri del Team.\\
+I ruoli di SCRUM Master, Product owner e Development Team saranno ricoperti da:
+\begin{itemize}
+\item Cattaneo Federico
+\item Simone Manenti
+\end{itemize}
+Entrambi i membri del Team hanno pari responsabilità all'interno del progetto.
+
+\begingroup
+\let\clearpage\relax
+\chapter{STANDARD. LINEE GUIDA E PROCEDURE}
+\endgroup
+
+Le procedure che il team dovrà seguire sono:
+\begin{itemize}
+\item Individuazione dei requisiti, stima dei costi e delle tempistiche
+\item Progettazione dei modelli UML su cui si baserà il codice
+\item Implementazione del codice
+\item Verifica della qualità e della validità
+\end{itemize}
+Per la gestione delle versioni del sistema utiliziamo GIT, Per alcune componenti useremo uno sviluppo simile a quello adottato nell'extreme programming, nel quale entrambi i membri del Team programmeranno sulla stessa macchina.\\
+Gestiamo la priorità dei requisiti secondo le regole MoSCoW\\
+Adotteremo le linee guida ISO/IEC 9126
+
+
+\chapter{ATTIVITA' DI GESTIONE}
+Dopo esserci occupati dell'individuazione dei requisiti e aver fatto la prima stesura del Product Backlog, dobbiamo occuparci dello Sprint Planning.	\\
+\textbf{Sprint:}\\
+\begin{itemize}
+\item La durata di ogni sprint sarà di 7 giorni.
+\item Al termine del primo Sprint avverrà il rilascio di una prima versione del software, che non conterrà tutti i requisiti individuati nel Product Backlog, ma fungerà da Prototipo.
+\item Al termine del secondo Sprint, verrà rilasciata una versione software contenente tutti i requisiti "Must Have".
+\item Nei successivi Sprint andremo ad implementare i requisiti "Should have" ed eventuali nuovi requisiti "Must Have" e ci concentreremo principalmente sul miglioramento degli elementi già implementati nel software.
+\item Al termine di ogni Sprint presentiamo il software al team ERB per avere un feedback utile per apportare modifiche o individuare nuove funzionalità.
+\end{itemize}
+
+\textbf{Daily scrum:}\\
+\begin{itemize}
+\item I membri del team, a fine giornata, si riuniranno per pianificare l'attività del giorno dopo.
+\end{itemize}
+
+
+\chapter{RISCHI}
+Abbiamo individuato diverse tipologie di rischi:
+\begin{itemize}
+\item Ritardo nel rappresentare i dati ricevuti sul TX
+\item Possibilità di ottenere grafici non intuitivi da leggere
+\item Errore di eliminazione dei dati sul database da parte del CapoReparto
+\item Possibilità di perdita dei dati nel caso in cui ci sia un guasto dell'hardware, poichè il database è locale, sulla macchina dell'utente
+\end{itemize}
+
+\begingroup
+\let\clearpage\relax
+\chapter{PERSONALE}
+\endgroup
+Entrambi i membri del team:
+\begin{itemize}
+\item Entrambi i membri del team avranno pari responsabilità e si divideranno equamente le attività da svolgere.
+\item partecipano, gratuitamente, dalle prime fasi del progetto.
+\item hanno dovuto imparare ad utilizzare i vari software e tools proposti per lo sviluppo del sistema, ad esempio:
+ Maven, StarUml, GitHub.
+\item hanno conoscenze di base del linguaggio Java.
+\item Non hanno competenze sulla libreria SQLite.
+\end{itemize}
+
+\chapter{METODI E TECNICHE}
+Per lo sviluppo del progetto utiliziamo diversi software e tools:
+\begin{itemize}
+\item Eclipse e Maven
+\item SQLite
+\item GitHub
+\item StarUML
+\end{itemize}
+Per gestire la configurazione e tener traccia delle modifiche apportate al software, utiliziamo la notazione orientata alla versione;\\
+Ogni modifica genererà una versione numerata del software (ad esempio: X.0.1).
+\chapter{GARANZIA DI QUALITA'}
+DA COMPLETARE
+\chapter{PACCHETTI DI LAVORO}
+DA COMPLETARE
+\chapter{RISORSE}
+Le funzioni svolte dal software non richiedono grandi quantità di potenza computazionale e generalmente non richiedono grandi quantità di memoria per il salvataggio dei dati.\\
+
+\begingroup
+\let\clearpage\relax
+\chapter{BUDGET}
+\endgroup
+
+Il progetto è diviso in Milestone:
+\textbf{Inizio del progetto:} 
+\begin{itemize}
+\item L'obiettivo è di individuare il problema da risolvere, i requisiti per risolverlo e descrivere gli obiettivi.
+\item Concluso in data 15/12/2023
+\end{itemize}
+
+\textbf{Stesura Project Plan:}
+\begin{itemize}
+\item L'obiettivo è quello di generare il project plan
+\item Concluso in data 24/12/2023
+\end{itemize}
+
+\textbf{Elaborazione dei modelli UML:}
+\begin{itemize}
+\item L'obiettivo è quello di ottenere l'architettura del software tramite diagrammi UML
+\item Concluso in data 29/12/2023
+\end{itemize}
+
+\textbf{Generazione del codice:}
+\begin{itemize}
+\item L'obiettivo è quello di generare il codice a partire dai modelli UML ottenuti nella Milestone precedente ed avere le prime versioni preliminari del software
+\item Da concludere entro 07/01/2024
+\end{itemize}
+
+\textbf{Conclusione del progetto:}
+\begin{itemize}
+\item L'obiettivo è quello di verificare e validare il software e consegnare la versione definitiva al team ERB
+\item Da concludere entro 19/01/2024
+\end{itemize}
+
+\chapter{CAMBIAMENTI}
+Al termine di ogni Sprint, se vengono proposti dei cambiamenti da parte del team ERB, verranno inseriti all'interno del Product Backlog per poter procedere con lo Sprint planning.\\
+Verranno anche aggiornati i documenti e verranno rilasciate le versioni del software con la numerazione descritta precedentemente.
+
+\begingroup
+\let\clearpage\relax
+\chapter{CONSEGNA}
+\endgroup
+
+Al termine di ogni sprint, nel caso in cui siano state sviluppate nuove versioni del software, verrà consegnata al team ERB la versione più recente e verranno descritte le funzionalità aggiunte.\\
+Ad ogni versione consegnata al team ERB, verrà rilasciata anche la documentazione inerente per poter facilitare l'utilizzo del software.\\\\
+La versione finale del software verrà rilasciata solo dopo la fase di validazione e verifica fatta quando tutti i requisiti presenti nella categoria "Must Have" sono presenti all'interno del software.
+
+
 \end{document}
