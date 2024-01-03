@@ -36,6 +36,11 @@
     	<version>21</version>
     	<type>pom</type>
 	</dependency>
+	<dependency>
+      <groupId>eu.hansolo</groupId>
+      <artifactId>Medusa</artifactId>
+      <version>16.0.0</version>
+	</dependency>
   </dependencies>
 
   <build>
