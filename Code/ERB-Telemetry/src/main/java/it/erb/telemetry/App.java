@@ -1,14 +1,14 @@
 package it.erb.telemetry;
 
 import java.time.LocalDateTime;
+
+import it.erb.telemetry.controller.Controller;
 import it.erb.telemetry.database.DatabaseManager;
+import it.erb.telemetry.model.Model;
 import it.erb.telemetry.model.TelemetryData;
 import it.erb.telemetry.view.View;
 
-/**
- * Hello world!
- *
- */
+
 public class App 
 {
     public static void main( String[] args )
@@ -16,6 +16,11 @@ public class App
     	System.out.println( "Hello World!" );
     	
     	View view = new View();
+    	view.run();
+    	System.out.println("Game over2");
+    	Model model = new Model();
+    	System.out.println("Game over1");
+    	Controller controller = new Controller(model, view);
         
         DatabaseManager db = DatabaseManager.getInstance();
         
@@ -32,6 +37,9 @@ public class App
         resTD = db.retrieveRecord( LocalDateTime.now().minusMinutes(3), LocalDateTime.now() );
         resTD.print();
         
-        view.run();
+        controller.updateView();
+        
+        System.out.println("Game over");
+        
     }
 }
