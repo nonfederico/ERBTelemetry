@@ -7,6 +7,7 @@ import eu.hansolo.medusa.Gauge.NeedleShape;
 import eu.hansolo.medusa.Gauge.NeedleSize;
 import eu.hansolo.medusa.Gauge.ScaleDirection;
 import eu.hansolo.medusa.Gauge.SkinType;
+import eu.hansolo.medusa.skins.ModernSkin;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -33,6 +34,7 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class View extends Application
@@ -392,8 +394,7 @@ public class View extends Application
 		Circle circle_safSDBCockpit = new Circle(5);
 		Circle circle_safSDBLeft = new Circle(5);
 		Circle circle_safSDBRight = new Circle(5);
-		
-        
+		       
 		circle_safBSPD.setStyle(style_circle);
 		circle_safIMD.setStyle(style_circle);
 		circle_safLVMS.setStyle(style_circle);
@@ -436,8 +437,113 @@ public class View extends Application
 		vb_saf.getChildren().add(lbl_safTitle);
 		vb_saf.getChildren().add(gridPane_saf);
 
+		// DRIVING data
+		// TITLE + GRID PANE
+		VBox vb_drv = new VBox();
+		vb_drv.setStyle(style_dataPane);
 		
-				
+		Label lbl_drvTitle = new Label("Driving");
+		
+		lbl_drvTitle.setStyle(style_LblTitle); 
+		
+		GridPane gridPane_drv = new GridPane();
+		gridPane_drv.setStyle(style_gridPane);
+		gridPane_drv.setAlignment(Pos.CENTER);
+		gridPane_drv.setPadding(new Insets(10, 10, 10, 10)); 
+		gridPane_drv.setVgap(0); 
+		gridPane_drv.setHgap(5);       
+		gridPane_drv.setMaxWidth(400);
+		gridPane_drv.setMaxHeight(200);
+		
+		vb_drv.getChildren().add(lbl_drvTitle);
+		vb_drv.getChildren().add(gridPane_drv);
+
+		// TEST data
+		// TITLE + GRID PANE
+		VBox vb_tst = new VBox();
+		vb_tst.setStyle(style_dataPane);
+		
+		Label lbl_tstTitle = new Label("Driving");
+		
+		lbl_tstTitle.setStyle(style_LblTitle); 
+		
+		Gauge gauge_DrvThrottle = GaugeBuilder.create()
+                .skinType(SkinType.MODERN)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle2 = GaugeBuilder.create()
+                .skinType(SkinType.LEVEL)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle3 = GaugeBuilder.create()
+                .skinType(SkinType.BATTERY)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle4 = GaugeBuilder.create()
+                .skinType(SkinType.DASHBOARD)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle5 = GaugeBuilder.create()
+                .skinType(SkinType.DIGITAL)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle6 = GaugeBuilder.create()
+                .skinType(SkinType.FLAT)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle7 = GaugeBuilder.create()
+                .skinType(SkinType.GAUGE)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle8 = GaugeBuilder.create()
+                .skinType(SkinType.INDICATOR)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle9 = GaugeBuilder.create()
+                .skinType(SkinType.KPI)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle10 = GaugeBuilder.create()
+                .skinType(SkinType.NASA)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle11 = GaugeBuilder.create()
+                .skinType(SkinType.SLIM)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle12 = GaugeBuilder.create()
+                .skinType(SkinType.SPACE_X)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle13 = GaugeBuilder.create()
+                .skinType(SkinType.WHITE)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		Gauge gauge_DrvThrottle14 = GaugeBuilder.create()
+                .skinType(SkinType.BAR)
+                .title("TITLE")
+                .unit("km/h")
+                .build();
+		gauge_DrvThrottle10.setValue(50);
+		gauge_DrvThrottle11.setValue(50);
+		gauge_DrvThrottle14.setValue(50);
+		
+		vb_tst.getChildren().add(lbl_tstTitle);
+		vb_tst.getChildren().add(gauge_DrvThrottle10);
+		
 		// BOTTOM PANE
 		// HV ACCUMULATOR + INVERTER + MOTORS + TYRES + SAFETY CIRCUIT + DRIVING
 		HBox bottomPane = new HBox();
@@ -446,6 +552,10 @@ public class View extends Application
 		bottomPane.getChildren().add(vb_inv);
 		bottomPane.getChildren().add(vb_mot);
 		bottomPane.getChildren().add(vb_saf);
+		bottomPane.getChildren().add(vb_drv);
+		bottomPane.getChildren().add(vb_tst);
+		
+		
 		
 		// TILEPANE (not used)
 		/*
