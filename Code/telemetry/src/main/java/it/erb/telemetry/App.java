@@ -79,8 +79,8 @@ public class App extends Application {
                     	}
                           	
                     });
-                    System.out.print(" "); 
-                    System.out.println(s);
+                    //System.out.print(" "); 
+                    //System.out.println(s);
                     try {
 						Thread.sleep(3000);
 					} catch (InterruptedException e) {

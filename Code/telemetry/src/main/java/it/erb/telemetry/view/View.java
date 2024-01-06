@@ -33,7 +33,7 @@ public class View
 {
 	public Scene scene;
 	
-	public ChoiceBox chBox_comPort;
+	public ChoiceBox<String> chBox_comPort;
 	
 	public Button btn_comScan;
 	
@@ -77,7 +77,7 @@ public class View
 		btn_comScan.setText("Connetti");
 		btn_comScan.setOnAction(null);
 		
-		chBox_comPort = new ChoiceBox();
+		chBox_comPort = new ChoiceBox<>();
 		chBox_comPort.setPrefWidth(100);
 		
 		
