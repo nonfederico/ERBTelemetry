@@ -42,10 +42,6 @@ public class App extends Application {
         
         data = new SimpleStringProperty();
         
-        //view.lbl_accCurrentData.textProperty().bind(data);
-        serialItems = FXCollections.observableArrayList();
-        view.chBox_comPort = new ChoiceBox<String>(serialItems);
-        
         
         stage.setTitle("ERB Telemetry");
         stage.setScene(view.getScene());
@@ -59,11 +55,6 @@ public class App extends Application {
                 while (mainThread.isAlive()) {
                 	Double f = Math.random()*130f;
                     s = f.toString();
-                    
-                    
-                    
-                    
-                    
                     
                     
                     

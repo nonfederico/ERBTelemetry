@@ -35,7 +35,8 @@ public class View
 	
 	public ChoiceBox<String> chBox_comPort;
 	
-	public Button btn_comScan;
+	public Button btn_comConnect;
+	public Button btn_comDisconnect;
 	
 	public Label lbl_accTitle;
 	public Label lbl_accVoltage;
@@ -46,6 +47,9 @@ public class View
 	public Label lbl_accPowerData;
 	public Label lbl_accTemp;
 	public Label lbl_accTempData;
+	public Label lbl_comStatus;
+	
+	public Circle circle_comStatus;
 	
 	String style_LblTitle = ""
 			+ "-fx-text-fill: #eeeeee; "
@@ -73,19 +77,27 @@ public class View
 	public View()
 	{
 		
-		btn_comScan = new Button();
-		btn_comScan.setText("Connetti");
-		btn_comScan.setOnAction(null);
+		btn_comConnect = new Button();
+		btn_comConnect.setText("Connect");
 		
+		btn_comDisconnect = new Button();
+		btn_comDisconnect.setText("Disconnect");
+				
 		chBox_comPort = new ChoiceBox<>();
 		chBox_comPort.setPrefWidth(100);
+		
+		circle_comStatus = new Circle(5);
+		
+		lbl_comStatus = new Label("Not connected");
 		
 		
 		// TOOL BAR COM port
 		ToolBar tlb_com = new ToolBar();
 		tlb_com.getItems().add(chBox_comPort);
-		tlb_com.getItems().add(new Separator());
-		tlb_com.getItems().add(btn_comScan);
+		tlb_com.getItems().add(btn_comConnect);
+		tlb_com.getItems().add(btn_comDisconnect);
+		tlb_com.getItems().add(circle_comStatus);
+		tlb_com.getItems().add(lbl_comStatus);
 		
 		// HV accumulator data
 		// TITLE + GRID PANE
