@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 
 public class Model 
 {
-	TelemetryData td;
+	TelemetryData td = new TelemetryData();
 	
 	private SerialPort comPort;
 	private SerialPort[] availableSerialPorts;		
@@ -109,11 +109,21 @@ public class Model
 				      {
 				    	  text = text.substring(startIndex+3, endIndex);
 				    	  System.out.println(text);
-					      String[] values = text.split(",");
+				    	  
+				    	  td.parsePacket(text);
+				    	  /*String[] values = text.split(",");
 					      for(String s : values)
 					      {
-					    	  System.out.println(s);
+					    	  System.out.print(s);
+					    	  
+					    	  String[] d = s.split("=");
+					    	  
+					    	  System.out.print(" " + d[0] + " " + d[1] + " ");
+					    	  
 					      }
+					      System.out.println();*/
+				    	  td.print();	
+					      
 				      }
 				   }
 				}
@@ -124,6 +134,8 @@ public class Model
 	
 	public void stopListening()
 	{
+		if( comPort == null )
+			return;
 		comPort.removeDataListener();
 		comPort.closePort();
 		isComPortOpen = false;
