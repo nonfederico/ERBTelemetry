@@ -1,5 +1,8 @@
 package it.erb.telemetry.view;
 
+import java.time.LocalDate;
+
+import it.erb.telemetry.model.TelemetryData;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -7,9 +10,13 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -37,6 +44,8 @@ public class View
 	
 	public Button btn_comConnect;
 	public Button btn_comDisconnect;
+	public Button btn_tableLoad;
+	public Button btn_tableCsvExport;
 	
 	public Label lbl_accTitle;
 	public Label lbl_accVoltage;
@@ -50,6 +59,11 @@ public class View
 	public Label lbl_comStatus;
 	
 	public Circle circle_comStatus;
+	
+	public DatePicker dp_tableStartDate;
+	public DatePicker dp_tableEndDate;
+	
+	public TableView<TelemetryData> tableView;
 	
 	String style_LblTitle = ""
 			+ "-fx-text-fill: #eeeeee; "
@@ -98,6 +112,52 @@ public class View
 		tlb_com.getItems().add(btn_comDisconnect);
 		tlb_com.getItems().add(circle_comStatus);
 		tlb_com.getItems().add(lbl_comStatus);
+		
+		
+		// CENTER PANE
+		// TABLE
+		VBox centerPane = new VBox();
+		
+		// CONTROL BOX
+		HBox table_ctrlBox = new HBox();
+		
+		dp_tableStartDate = new DatePicker(LocalDate.now());
+		dp_tableEndDate = new DatePicker(LocalDate.now().plusDays(1));
+		btn_tableLoad = new Button("Load");
+		btn_tableCsvExport = new Button("CSV Export");
+		
+		table_ctrlBox.getChildren().add(dp_tableStartDate);
+		table_ctrlBox.getChildren().add(dp_tableEndDate);
+		table_ctrlBox.getChildren().add(btn_tableLoad);
+		table_ctrlBox.getChildren().add(btn_tableCsvExport);
+		
+		// TABLE
+		tableView = new TableView<>();
+		tableView.setPlaceholder( new Label("No rows to display"));
+		TableColumn<TelemetryData,String> col1 = new TableColumn<>("Throttle Pedal Position");
+		TableColumn<TelemetryData,String> col2 = new TableColumn<>("Brake Pedal Position");
+		TableColumn<TelemetryData,String> col3 = new TableColumn<>("Steering Wheel Position");
+		TableColumn<TelemetryData,String> col4 = new TableColumn<>("Accumulator Voltage");
+		TableColumn<TelemetryData,String> col5 = new TableColumn<>("Accumulator Current");
+		TableColumn<TelemetryData,String> col6 = new TableColumn<>("Accumulator Temperature");
+		
+		col1.setCellValueFactory(data -> data.getValue().ThrottlePedal_Pos.getProperty());
+		col2.setCellValueFactory(data -> data.getValue().BrakePedal_Pos.getProperty());
+		col3.setCellValueFactory(data -> data.getValue().SteeringWheel_Pos.getProperty());
+		col4.setCellValueFactory(data -> data.getValue().Acc_Voltage.getProperty());
+		col5.setCellValueFactory(data -> data.getValue().Acc_Current.getProperty());
+		col6.setCellValueFactory(data -> data.getValue().Acc_Temp.getProperty());
+		
+		tableView.getColumns().add(col1);
+		tableView.getColumns().add(col2);
+		tableView.getColumns().add(col3);
+		tableView.getColumns().add(col4);
+		tableView.getColumns().add(col5);
+		tableView.getColumns().add(col6);
+		
+		centerPane.getChildren().add(table_ctrlBox);
+		centerPane.getChildren().add(tableView);
+		centerPane.setPadding(new Insets(20));
 		
 		// HV accumulator data
 		// TITLE + GRID PANE
@@ -361,6 +421,7 @@ public class View
 		// MAIN PANE
 		BorderPane bPane = new BorderPane();
 		bPane.setTop(tlb_com);
+		bPane.setCenter(centerPane);
 		bPane.setBottom(bottomPane);
 		
 		LinearGradient paint = new LinearGradient(
