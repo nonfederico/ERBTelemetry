@@ -3,32 +3,35 @@ package it.erb.telemetry.model;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+import it.erb.telemetry.model.sensor.AnalogSensor;
+import it.erb.telemetry.model.sensor.DigitalSensor;
+import it.erb.telemetry.model.sensor.Sensor;
+
 public class TelemetryData 
 {
 	public LocalDateTime date;
-	public Float ThrottlePedal_Pos = 0f;
-	public Float BrakePedal_Pos;
-	public Float SteeringWheel_Pos;
-	public Measurement<Float> Acc_Voltage = new Measurement<Float>(0f);
-	public Measurement<Float> Acc_SoC = new Measurement<Float>(0f);
-	public Measurement<Float> Acc_Current = new Measurement<Float>(0f);
-	public Measurement<Float> Acc_Temp = new Measurement<Float>(0f);
-	public Float Acc_Cell_1_Temp;
-	public Float Acc_Cell_2_Temp;
-	public Float Acc_Cell_3_Temp;
-	public Float Acc_Cell_4_Temp;
-	public Float MotorRR_ActCurrent;
-	public Float MotorRR_ActSpeed;
-	public Float MotorRR_ActTorque;
-	public Float MotorRR_CmdSpeed;
-	public Float MotorRR_CmdTorque;
-	public Float MotorRL_ActCurrent;
-	public Float MotorRL_ActSpeed;
-	public Float MotorRL_ActTorque;
-	public Float MotorRL_CmdSpeed;
-	public Float MotorRL_CmdTorque;
-	
-	
+	public AnalogSensor ThrottlePedal_Pos = new AnalogSensor();
+	public AnalogSensor BrakePedal_Pos = new AnalogSensor();
+	public AnalogSensor SteeringWheel_Pos = new AnalogSensor();
+	public AnalogSensor Acc_Voltage = new AnalogSensor();
+	public AnalogSensor Acc_SoC = new AnalogSensor();
+	public AnalogSensor Acc_Current = new AnalogSensor();
+	public AnalogSensor Acc_Temp = new AnalogSensor();
+	public AnalogSensor Acc_Cell_1_Temp = new AnalogSensor();
+	public AnalogSensor Acc_Cell_2_Temp = new AnalogSensor();
+	public AnalogSensor Acc_Cell_3_Temp = new AnalogSensor();
+	public AnalogSensor Acc_Cell_4_Temp = new AnalogSensor();
+	public AnalogSensor MotorRR_ActCurrent = new AnalogSensor();
+	public AnalogSensor MotorRR_ActSpeed = new AnalogSensor();
+	public AnalogSensor MotorRR_ActTorque = new AnalogSensor();
+	public AnalogSensor MotorRR_CmdSpeed = new AnalogSensor();
+	public AnalogSensor MotorRR_CmdTorque = new AnalogSensor();
+	public AnalogSensor MotorRL_ActCurrent = new AnalogSensor();
+	public AnalogSensor MotorRL_ActSpeed = new AnalogSensor();
+	public AnalogSensor MotorRL_ActTorque = new AnalogSensor();
+	public AnalogSensor MotorRL_CmdSpeed = new AnalogSensor();
+	public AnalogSensor MotorRL_CmdTorque = new AnalogSensor();
+	public DigitalSensor Saf_BSPD = new DigitalSensor();
 	
 
 	
@@ -48,40 +51,39 @@ public class TelemetryData
 		System.out.println(Acc_Current.getValue());
 		
 		System.out.print("ThrottlePedal_Pos: ");
-		System.out.println(ThrottlePedal_Pos);
+		System.out.println(ThrottlePedal_Pos.getValue());
 		
 		System.out.print("MotorRL_CmdSpeed: ");
-		System.out.println(MotorRL_CmdSpeed);
+		System.out.println(MotorRL_CmdSpeed.getValue());
 		
 		System.out.print("MotorRL_CmdTorque: ");
-		System.out.println(MotorRL_CmdTorque);
+		System.out.println(MotorRL_CmdTorque.getValue());
 		
 	
 	}
 	
 	public void parsePacket(String packet)
 	{
-		HashMap<String, Measurement<Float>> map = new HashMap<String, Measurement<Float>>();
+		HashMap<String, Sensor> map = new HashMap<String, Sensor>();
 		
 		map.put("F01", Acc_Voltage );
 		map.put("F02", Acc_SoC );
 		map.put("F03", Acc_Current );
 		
-				
 		date = LocalDateTime.now();
+		
 		String[] values = packet.split(",");
-		
-		
+			
 		for(String s : values)
 		{
-			System.out.print(s);
-			String[] d = s.split("=");
-		
-			Measurement<Float> m = map.get(d[0]);
-			if( m != null )
+			String[] substring = s.split("=");
+			String id = substring[0];
+			String value = substring[1];
+			
+			Sensor sensor = map.get(id);
+			if( sensor != null )
 			{
-				m.setValue(Float.valueOf(d[1]));
-				System.out.println(" " + m.getValue());
+				sensor.setValue(value);
 			}
 			
 		}

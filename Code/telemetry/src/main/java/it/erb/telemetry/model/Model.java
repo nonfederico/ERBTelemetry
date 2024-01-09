@@ -7,6 +7,7 @@ import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 
+import it.erb.telemetry.database.DatabaseManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,14 +15,19 @@ import javafx.collections.ObservableList;
 
 public class Model 
 {
-	TelemetryData td = new TelemetryData();
 	
+	DatabaseManager db;
 	private SerialPort comPort;
 	private SerialPort[] availableSerialPorts;		
 	private ObservableList<String> serialPortNameList = FXCollections.observableArrayList();
 	private int SelectComPortIndex = -1;
 	private boolean isComPortOpen = false;
 	
+	public Model()
+	{
+		db = DatabaseManager.getInstance();
+		
+	}
 	
 	public void loadSerialPorts()
 	{
@@ -110,19 +116,10 @@ public class Model
 				    	  text = text.substring(startIndex+3, endIndex);
 				    	  System.out.println(text);
 				    	  
+				    	  TelemetryData td = new TelemetryData();
 				    	  td.parsePacket(text);
-				    	  /*String[] values = text.split(",");
-					      for(String s : values)
-					      {
-					    	  System.out.print(s);
-					    	  
-					    	  String[] d = s.split("=");
-					    	  
-					    	  System.out.print(" " + d[0] + " " + d[1] + " ");
-					    	  
-					      }
-					      System.out.println();*/
 				    	  td.print();	
+				    	  db.addRecord(td);
 					      
 				      }
 				   }

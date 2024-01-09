@@ -4,6 +4,7 @@ module it.erb.telemetry {
 	requires javafx.graphics;
 	requires com.fazecast.jSerialComm;
 	requires java.desktop;
+	requires java.sql;
 	
     exports it.erb.telemetry;
 }
