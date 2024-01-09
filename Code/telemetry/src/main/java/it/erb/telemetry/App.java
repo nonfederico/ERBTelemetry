@@ -42,10 +42,6 @@ public class App extends Application {
         
         data = new SimpleStringProperty();
         
-        //view.lbl_accCurrentData.textProperty().bind(data);
-        serialItems = FXCollections.observableArrayList();
-        view.chBox_comPort = new ChoiceBox<String>(serialItems);
-        
         
         stage.setTitle("ERB Telemetry");
         stage.setScene(view.getScene());
@@ -64,11 +60,6 @@ public class App extends Application {
                     
                     
                     
-                    
-                    
-                    
-                    
-                    
                     Platform.runLater(new Runnable(){
                     	@Override
                     	public void run()
@@ -79,8 +70,8 @@ public class App extends Application {
                     	}
                           	
                     });
-                    System.out.print(" "); 
-                    System.out.println(s);
+                    //System.out.print(" "); 
+                    //System.out.println(s);
                     try {
 						Thread.sleep(3000);
 					} catch (InterruptedException e) {

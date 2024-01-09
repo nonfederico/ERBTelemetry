@@ -33,9 +33,10 @@ public class View
 {
 	public Scene scene;
 	
-	public ChoiceBox chBox_comPort;
+	public ChoiceBox<String> chBox_comPort;
 	
-	public Button btn_comScan;
+	public Button btn_comConnect;
+	public Button btn_comDisconnect;
 	
 	public Label lbl_accTitle;
 	public Label lbl_accVoltage;
@@ -46,6 +47,9 @@ public class View
 	public Label lbl_accPowerData;
 	public Label lbl_accTemp;
 	public Label lbl_accTempData;
+	public Label lbl_comStatus;
+	
+	public Circle circle_comStatus;
 	
 	String style_LblTitle = ""
 			+ "-fx-text-fill: #eeeeee; "
@@ -73,19 +77,27 @@ public class View
 	public View()
 	{
 		
-		btn_comScan = new Button();
-		btn_comScan.setText("Connetti");
-		btn_comScan.setOnAction(null);
+		btn_comConnect = new Button();
+		btn_comConnect.setText("Connect");
 		
-		chBox_comPort = new ChoiceBox();
+		btn_comDisconnect = new Button();
+		btn_comDisconnect.setText("Disconnect");
+				
+		chBox_comPort = new ChoiceBox<>();
 		chBox_comPort.setPrefWidth(100);
+		
+		circle_comStatus = new Circle(5);
+		
+		lbl_comStatus = new Label("Not connected");
 		
 		
 		// TOOL BAR COM port
 		ToolBar tlb_com = new ToolBar();
 		tlb_com.getItems().add(chBox_comPort);
-		tlb_com.getItems().add(new Separator());
-		tlb_com.getItems().add(btn_comScan);
+		tlb_com.getItems().add(btn_comConnect);
+		tlb_com.getItems().add(btn_comDisconnect);
+		tlb_com.getItems().add(circle_comStatus);
+		tlb_com.getItems().add(lbl_comStatus);
 		
 		// HV accumulator data
 		// TITLE + GRID PANE
@@ -236,18 +248,21 @@ public class View
 		gridPane_mot.add(lbl_motCmdSpeed, 0, 1);
 		gridPane_mot.add(lbl_motRLCmdSpeedData, 1, 1);
 		gridPane_mot.add(lbl_motRRCmdSpeedData, 2, 1);
-		gridPane_mot.add(lbl_motCmdTorque, 0, 2);
-		gridPane_mot.add(lbl_motRLCmdTorqueData, 1, 2);
-		gridPane_mot.add(lbl_motRRCmdTorqueData, 2, 2);
-		gridPane_mot.add(lbl_motActCurrent, 0, 3);
-		gridPane_mot.add(lbl_motRLActCurrentData, 1, 3);
-		gridPane_mot.add(lbl_motRRActCurrentData, 2, 3);
-		gridPane_mot.add(lbl_motActFrequency, 0, 4);
-		gridPane_mot.add(lbl_motRLActFrequencyData, 1, 4);
-		gridPane_mot.add(lbl_motRRActFrequencyData, 2, 4);
-		gridPane_mot.add(lbl_motTemperature, 0, 5);
-		gridPane_mot.add(lbl_motRLTemperatureData, 1, 5);
-		gridPane_mot.add(lbl_motRRTemperatureData, 2, 5);
+		gridPane_mot.add(lbl_motActTorque, 0, 2);
+		gridPane_mot.add(lbl_motRLActTorqueData, 1, 2);
+		gridPane_mot.add(lbl_motRRActTorqueData, 2, 2);
+		gridPane_mot.add(lbl_motCmdTorque, 0, 3);
+		gridPane_mot.add(lbl_motRLCmdTorqueData, 1, 3);
+		gridPane_mot.add(lbl_motRRCmdTorqueData, 2, 3);
+		gridPane_mot.add(lbl_motActCurrent, 0, 4);
+		gridPane_mot.add(lbl_motRLActCurrentData, 1, 4);
+		gridPane_mot.add(lbl_motRRActCurrentData, 2, 4);
+		gridPane_mot.add(lbl_motActFrequency, 0, 5);
+		gridPane_mot.add(lbl_motRLActFrequencyData, 1, 5);
+		gridPane_mot.add(lbl_motRRActFrequencyData, 2, 5);
+		gridPane_mot.add(lbl_motTemperature, 0, 6);
+		gridPane_mot.add(lbl_motRLTemperatureData, 1, 6);
+		gridPane_mot.add(lbl_motRRTemperatureData, 2, 6);
 		gridPane_mot.setMaxWidth(400);
 		gridPane_mot.setMaxHeight(200);
 		

@@ -1,8 +1,15 @@
+it\erb\telemetry\model\Model$1.class
+it\erb\telemetry\view\View.class
+it\erb\telemetry\controller\Controller.class
+it\erb\telemetry\model\Sensor.class
 it\erb\telemetry\App$1$1.class
 it\erb\telemetry\model\TelemetryData.class
 it\erb\telemetry\App$1.class
-it\erb\telemetry\view\View.class
+it\erb\telemetry\model\Measurement.class
+it\erb\telemetry\database\DatabaseManager.class
 module-info.class
+it\erb\telemetry\model\AnalogSensor.class
 it\erb\telemetry\model\Model.class
 it\erb\telemetry\SystemInfo.class
 it\erb\telemetry\App.class
+it\erb\telemetry\model\DigitalSensor.class
