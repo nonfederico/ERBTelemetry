@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -34,6 +35,8 @@ import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 
 public class View 
@@ -66,6 +69,8 @@ public class View
 	
 	public TableView<TelemetryData> tableView;
 	
+	public DriverInputDataPane driverInputDataPane;
+	
 	String style_LblTitle = ""
 			+ "-fx-text-fill: rgba(160, 160, 160, 1); "
 			+ "-fx-font-weight: normal; "
@@ -73,9 +78,7 @@ public class View
 			+ "-fx-background-color: rgba(0, 0, 0, 0);"
 			+ "-fx-alignment: center; "
 			+ "-fx-text-alignment: center; "; 
-	String style_lbl = ""
-			+ "-fx-text-fill: rgba(220, 220, 220, 1); "
-			+ "-fx-background-color: rgba(0, 0, 0, 0);";
+	String style_lbl = "";
 	String style_lblData = ""
 			+ "-fx-text-fill: rgba(220, 220, 220, 1); "
 			+ "-fx-background-color: rgba(0, 0, 0, 0);"
@@ -101,6 +104,8 @@ public class View
 			+ "-fx-background-color: rgba(0, 0, 0, 0);";
 	String style_bPane = ""
 			+ "-fx-background-color: rgba(55, 55, 55, 1);";
+	String style_tableView = ""
+			+ "-fx-background-color: rgba(0, 0, 0, 0.5);";
 	
 	
 	
@@ -149,6 +154,7 @@ public class View
 		
 		// TABLE
 		tableView = new TableView<>();
+		//tableView.setStyle(style_tableView);
 		tableView.setPlaceholder( new Label("No rows to display"));
 		TableColumn<TelemetryData,String> col1 = new TableColumn<>("Throttle Pedal Position");
 		TableColumn<TelemetryData,String> col2 = new TableColumn<>("Brake Pedal Position");
@@ -177,8 +183,8 @@ public class View
 		
 		// HV accumulator data
 		// TITLE + GRID PANE
-		VBox vb_acc = new VBox();
-		vb_acc.setStyle(style_dataPane);
+		VBox vb_hvAcc = new VBox();
+		vb_hvAcc.setStyle(style_dataPane);
 		
 		lbl_accTitle = new Label("HV Accumulator");
 		lbl_accVoltage = new Label("Voltage");
@@ -214,8 +220,8 @@ public class View
 		gridPane_Acc.setMaxWidth(400);
 		gridPane_Acc.setMaxHeight(200);
 		
-		vb_acc.getChildren().add(lbl_accTitle);
-		vb_acc.getChildren().add(gridPane_Acc);
+		vb_hvAcc.getChildren().add(lbl_accTitle);
+		vb_hvAcc.getChildren().add(gridPane_Acc);
 		
 		// LV accumulator data
 		// TITLE + GRID PANE
@@ -432,16 +438,22 @@ public class View
 		
 		vb_saf.getChildren().add(lbl_safTitle);
 		vb_saf.getChildren().add(gridPane_saf);
+		
+		// DRIVER INPUT DATA PANE
+		driverInputDataPane = new DriverInputDataPane(style_dataPane, style_gridPane, style_LblTitle, style_LblTitle, style_lblData);
+		
 
 		// BOTTOM PANE
 		// HV ACCUMULATOR + INVERTER + MOTORS + TYRES + SAFETY CIRCUIT + DRIVING
 		HBox bottomPane = new HBox();
 		bottomPane.setStyle(style_bottomPane);
-		bottomPane.getChildren().add(vb_acc);
+		bottomPane.getChildren().add(vb_hvAcc);
 		bottomPane.getChildren().add(vb_lvAcc);
 		bottomPane.getChildren().add(vb_inv);
 		bottomPane.getChildren().add(vb_mot);
 		bottomPane.getChildren().add(vb_saf);
+		bottomPane.getChildren().add(driverInputDataPane.getPane());
+
 		//bottomPane.getChildren().add(vb_drv);
 		//bottomPane.getChildren().add(vb_tst);
 		
@@ -461,6 +473,7 @@ public class View
 		// SCENE
 		scene = new Scene(bPane, 1500, 850);
 		scene.setFill(Color.BLACK);
+		scene.getStylesheets().add("/stylesheet.css");
 		
 	}
 	
@@ -476,4 +489,28 @@ public class View
 	
 	
 	
+}
+
+class UpwardProgress 
+{
+    private ProgressBar progressBar    = new ProgressBar();
+    private Group       progressHolder = new Group(progressBar);
+
+    public UpwardProgress(double width, double height) {
+        progressBar.setMinSize(StackPane.USE_PREF_SIZE, StackPane.USE_PREF_SIZE);
+        progressBar.setPrefSize(height, width);
+        progressBar.setMaxSize(StackPane.USE_PREF_SIZE, StackPane.USE_PREF_SIZE);
+        progressBar.getTransforms().setAll(
+                new Translate(0, height),
+                new Rotate(-90, 0, 0)
+        );
+    }
+
+    public ProgressBar getProgressBar() {
+        return progressBar;
+    }
+
+    public Group getProgressHolder() {
+        return progressHolder;
+    }
 }

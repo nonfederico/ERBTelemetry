@@ -1,0 +1,28 @@
+.label{
+	-fx-text-fill: rgba(220, 220, 220, 1); 
+	-fx-background-color: rgba(0, 0, 0, 0);
+}
+
+.progress-bar { 
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-accent: green;
+    -fx-indeterminate-bar-length: 0;
+    -fx-indeterminate-bar-animation-time: 2;
+
+}
+
+.progress-bar > .bar {
+    -fx-background-color: -fx-accent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.progress-bar > .track {
+	-fx-background-color: rgba(70, 70, 70, 1);
+	-fx-background-insets: 0;
+    -fx-background-radius: 0; 
+}
+
