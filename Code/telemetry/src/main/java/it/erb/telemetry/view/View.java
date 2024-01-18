@@ -78,7 +78,7 @@ public class View
 			+ "-fx-background-color: rgba(0, 0, 0, 0);";
 	String style_lblData = ""
 			+ "-fx-text-fill: rgba(220, 220, 220, 1); "
-			+ "-fx-background-color: rgba(0, 0, 0, 1);"
+			+ "-fx-background-color: rgba(0, 0, 0, 0);"
 			+ "-fx-font-weight: bold;"
 			+ "-fx-font-size: 13; "
 			+ "-fx-alignment: center-right;";
