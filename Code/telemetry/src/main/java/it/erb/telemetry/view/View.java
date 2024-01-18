@@ -1,5 +1,8 @@
 package it.erb.telemetry.view;
 
+import java.time.LocalDate;
+
+import it.erb.telemetry.model.TelemetryData;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -7,9 +10,13 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -37,6 +44,8 @@ public class View
 	
 	public Button btn_comConnect;
 	public Button btn_comDisconnect;
+	public Button btn_tableLoad;
+	public Button btn_tableCsvExport;
 	
 	public Label lbl_accTitle;
 	public Label lbl_accVoltage;
@@ -47,31 +56,52 @@ public class View
 	public Label lbl_accPowerData;
 	public Label lbl_accTemp;
 	public Label lbl_accTempData;
+	public Label lbl_lvAccTitle;
 	public Label lbl_comStatus;
 	
 	public Circle circle_comStatus;
 	
+	public DatePicker dp_tableStartDate;
+	public DatePicker dp_tableEndDate;
+	
+	public TableView<TelemetryData> tableView;
+	
 	String style_LblTitle = ""
-			+ "-fx-text-fill: #eeeeee; "
-			+ "-fx-font-weight: bold; "
-			+ "-fx-font-size: 14; "
-			+ "-fx-background-color: #ff0000;"
+			+ "-fx-text-fill: rgba(160, 160, 160, 1); "
+			+ "-fx-font-weight: normal; "
+			+ "-fx-font-size: 13; "
+			+ "-fx-background-color: rgba(0, 0, 0, 0);"
 			+ "-fx-alignment: center; "
 			+ "-fx-text-alignment: center; "; 
 	String style_lbl = ""
-			+ "-fx-text-fill: #eeeeee; ";
+			+ "-fx-text-fill: rgba(220, 220, 220, 1); "
+			+ "-fx-background-color: rgba(0, 0, 0, 0);";
 	String style_lblData = ""
-			+ "-fx-text-fill: #eeeeee; "
+			+ "-fx-text-fill: rgba(220, 220, 220, 1); "
+			+ "-fx-background-color: rgba(0, 0, 0, 0);"
 			+ "-fx-font-weight: bold;"
-			+ "-fx-font-size: 13; ";
+			+ "-fx-font-size: 13; "
+			+ "-fx-alignment: center-right;";
 	String style_circle = ""
 			+ "-fx-fill: rgba(20, 150, 20, 0.8);"
 			+ "-fx-stroke: rgba(150, 150, 150, 1); "
 			+ "-fx-stroke-width: 0.5; ";
 	String style_dataPane = ""
-			+ "-fx-background-color: #333333";
+			+ "-fx-background-color: rgba(45, 45, 45, 1);"
+			+ "-fx-background-insets: 2.5;"
+			+ "-fx-padding: 5 10 5 10;"
+			+ "-fx-background-radius: 5;"
+			+ "-fx-pref-width: 250;";
 	String style_gridPane = ""
-			+ "-fx-background-color: rgba(150, 150, 150, 0.3)";
+			+ "-fx-background-color: rgba(0, 0, 0, 0);"
+			+ "-fx-padding: 0;"
+			+ "-fx-vgap: 0;"
+			+ "-fx-hgap: 5;";
+	String style_bottomPane = ""
+			+ "-fx-background-color: rgba(0, 0, 0, 0);";
+	String style_bPane = ""
+			+ "-fx-background-color: rgba(55, 55, 55, 1);";
+	
 	
 	
 	public View()
@@ -98,6 +128,52 @@ public class View
 		tlb_com.getItems().add(btn_comDisconnect);
 		tlb_com.getItems().add(circle_comStatus);
 		tlb_com.getItems().add(lbl_comStatus);
+		
+		
+		// CENTER PANE
+		// TABLE
+		VBox centerPane = new VBox();
+		
+		// CONTROL BOX
+		HBox table_ctrlBox = new HBox();
+		
+		dp_tableStartDate = new DatePicker(LocalDate.now());
+		dp_tableEndDate = new DatePicker(LocalDate.now().plusDays(1));
+		btn_tableLoad = new Button("Load");
+		btn_tableCsvExport = new Button("CSV Export");
+		
+		table_ctrlBox.getChildren().add(dp_tableStartDate);
+		table_ctrlBox.getChildren().add(dp_tableEndDate);
+		table_ctrlBox.getChildren().add(btn_tableLoad);
+		table_ctrlBox.getChildren().add(btn_tableCsvExport);
+		
+		// TABLE
+		tableView = new TableView<>();
+		tableView.setPlaceholder( new Label("No rows to display"));
+		TableColumn<TelemetryData,String> col1 = new TableColumn<>("Throttle Pedal Position");
+		TableColumn<TelemetryData,String> col2 = new TableColumn<>("Brake Pedal Position");
+		TableColumn<TelemetryData,String> col3 = new TableColumn<>("Steering Wheel Position");
+		TableColumn<TelemetryData,String> col4 = new TableColumn<>("Accumulator Voltage");
+		TableColumn<TelemetryData,String> col5 = new TableColumn<>("Accumulator Current");
+		TableColumn<TelemetryData,String> col6 = new TableColumn<>("Accumulator Temperature");
+		
+		col1.setCellValueFactory(data -> data.getValue().ThrottlePedal_Pos.getProperty());
+		col2.setCellValueFactory(data -> data.getValue().BrakePedal_Pos.getProperty());
+		col3.setCellValueFactory(data -> data.getValue().SteeringWheel_Pos.getProperty());
+		col4.setCellValueFactory(data -> data.getValue().Acc_Voltage.getProperty());
+		col5.setCellValueFactory(data -> data.getValue().Acc_Current.getProperty());
+		col6.setCellValueFactory(data -> data.getValue().Acc_Temp.getProperty());
+		
+		tableView.getColumns().add(col1);
+		tableView.getColumns().add(col2);
+		tableView.getColumns().add(col3);
+		tableView.getColumns().add(col4);
+		tableView.getColumns().add(col5);
+		tableView.getColumns().add(col6);
+		
+		centerPane.getChildren().add(table_ctrlBox);
+		centerPane.getChildren().add(tableView);
+		centerPane.setPadding(new Insets(20));
 		
 		// HV accumulator data
 		// TITLE + GRID PANE
@@ -127,10 +203,6 @@ public class View
 		// GRIDPANE
 		GridPane gridPane_Acc = new GridPane();
 		gridPane_Acc.setStyle(style_gridPane);
-		gridPane_Acc.setAlignment(Pos.CENTER);
-		gridPane_Acc.setPadding(new Insets(10, 10, 10, 10)); 
-		gridPane_Acc.setVgap(0); 
-	    gridPane_Acc.setHgap(5);       
 		gridPane_Acc.add(lbl_accVoltage, 0, 0);
 		gridPane_Acc.add(lbl_accVoltageData, 1, 0);
 		gridPane_Acc.add(lbl_accCurrent, 0, 1);
@@ -144,6 +216,30 @@ public class View
 		
 		vb_acc.getChildren().add(lbl_accTitle);
 		vb_acc.getChildren().add(gridPane_Acc);
+		
+		// LV accumulator data
+		// TITLE + GRID PANE
+		VBox vb_lvAcc = new VBox();
+		vb_lvAcc.setStyle(style_dataPane);
+		
+		lbl_lvAccTitle = new Label("LV Accumulator");
+		
+		lbl_lvAccTitle.setStyle(style_LblTitle);
+			
+		// GRIDPANE
+		GridPane gridPane_lvAcc = new GridPane();
+		gridPane_lvAcc.setStyle(style_gridPane);
+		gridPane_lvAcc.add(new Label("Voltage"), 0, 0);
+		gridPane_lvAcc.add(new Label("ND"), 1, 0);
+		gridPane_lvAcc.add(new Label("Current"), 0, 1);
+		gridPane_lvAcc.add(new Label("ND"), 1, 1);
+		gridPane_lvAcc.add(new Label("Power"), 0, 2);
+		gridPane_lvAcc.add(new Label("ND"), 1, 2);
+		gridPane_lvAcc.setMaxWidth(400);
+		gridPane_lvAcc.setMaxHeight(200);
+		
+		vb_lvAcc.getChildren().add(lbl_lvAccTitle);
+		vb_lvAcc.getChildren().add(gridPane_lvAcc);
 		
 		// INVERTER data
 		// TITLE + GRID PANE
@@ -168,10 +264,6 @@ public class View
 				
 		GridPane gridPane_inv = new GridPane();
 		gridPane_inv.setStyle(style_gridPane);
-		gridPane_inv.setAlignment(Pos.CENTER);
-		gridPane_inv.setPadding(new Insets(10, 10, 10, 10)); 
-		gridPane_inv.setVgap(0); 
-		gridPane_inv.setHgap(5);       
 		gridPane_inv.add(lbl_invTemp, 0, 0);
 		gridPane_inv.add(lbl_invTempData, 1, 0);
 		gridPane_inv.add(lbl_hvVoltage, 0, 1);
@@ -189,6 +281,7 @@ public class View
 		// TITLE + GRID PANE
 		VBox vb_mot = new VBox();
 		vb_mot.setStyle(style_dataPane);
+		
 		
 		Label lbl_motTitle = new Label("Motors");
 		Label lbl_motActSpeed = new Label("Act. speed");
@@ -238,10 +331,6 @@ public class View
 		
 		GridPane gridPane_mot = new GridPane();
 		gridPane_mot.setStyle(style_gridPane);
-		gridPane_mot.setAlignment(Pos.CENTER);
-		gridPane_mot.setPadding(new Insets(10, 10, 10, 10)); 
-		gridPane_mot.setVgap(0); 
-		gridPane_mot.setHgap(5);       
 		gridPane_mot.add(lbl_motActSpeed, 0, 0);
 		gridPane_mot.add(lbl_motRLActSpeedData, 1, 0);
 		gridPane_mot.add(lbl_motRRActSpeedData, 2, 0);
@@ -318,10 +407,6 @@ public class View
 		
 		GridPane gridPane_saf = new GridPane();
 		gridPane_saf.setStyle(style_gridPane);
-		gridPane_saf.setAlignment(Pos.CENTER);
-		gridPane_saf.setPadding(new Insets(10, 10, 10, 10)); 
-		gridPane_saf.setVgap(0); 
-		gridPane_saf.setHgap(5);       
 		gridPane_saf.add(circle_safBSPD, 0, 0);
 		gridPane_saf.add(lbl_safBSPD, 1, 0);
 		gridPane_saf.add(circle_safIMD, 0, 1);
@@ -351,7 +436,9 @@ public class View
 		// BOTTOM PANE
 		// HV ACCUMULATOR + INVERTER + MOTORS + TYRES + SAFETY CIRCUIT + DRIVING
 		HBox bottomPane = new HBox();
+		bottomPane.setStyle(style_bottomPane);
 		bottomPane.getChildren().add(vb_acc);
+		bottomPane.getChildren().add(vb_lvAcc);
 		bottomPane.getChildren().add(vb_inv);
 		bottomPane.getChildren().add(vb_mot);
 		bottomPane.getChildren().add(vb_saf);
@@ -360,7 +447,9 @@ public class View
 		
 		// MAIN PANE
 		BorderPane bPane = new BorderPane();
+		bPane.setStyle(style_bPane);
 		bPane.setTop(tlb_com);
+		bPane.setCenter(centerPane);
 		bPane.setBottom(bottomPane);
 		
 		LinearGradient paint = new LinearGradient(

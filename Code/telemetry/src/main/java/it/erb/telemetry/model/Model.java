@@ -1,5 +1,6 @@
 package it.erb.telemetry.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,7 @@ import javafx.collections.ObservableList;
 
 public class Model 
 {
-	
-	DatabaseManager db;
+	private DatabaseManager db;
 	private SerialPort comPort;
 	private SerialPort[] availableSerialPorts;		
 	private ObservableList<String> serialPortNameList = FXCollections.observableArrayList();
@@ -154,7 +154,10 @@ public class Model
 	}
 	
 	
-	
+	public TelemetryData retrieveDataFromDB( LocalDateTime startDate, LocalDateTime endDate )
+	{
+		return db.retrieveRecord(startDate, endDate);	
+	}
 	
 	
 }
