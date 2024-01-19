@@ -9,6 +9,7 @@ import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 
 import it.erb.telemetry.database.DatabaseManager;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -22,6 +23,9 @@ public class Model
 	private ObservableList<String> serialPortNameList = FXCollections.observableArrayList();
 	private int SelectComPortIndex = -1;
 	private boolean isComPortOpen = false;
+	
+	public TelemetryData td = new TelemetryData();
+	
 	
 	public Model()
 	{

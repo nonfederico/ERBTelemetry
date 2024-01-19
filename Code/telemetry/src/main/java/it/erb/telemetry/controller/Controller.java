@@ -7,18 +7,46 @@ import java.time.LocalTime;
 
 import it.erb.telemetry.model.Model;
 import it.erb.telemetry.model.TelemetryData;
+import it.erb.telemetry.model.sensor.AnalogSensor;
 import it.erb.telemetry.view.View;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.util.Duration;
 import javafx.util.FXPermission;
 
 public class Controller 
 {
 	public Controller(Model model, View view)
 	{
+		// UI periodic update
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000),
+				
+			e ->
+			{
+				model.td.Acc_Temp.setValue((float) (Math.random()*100f));
+				model.td.Acc_SoC.setValue((float) (Math.random()*100f));
+				model.td.LVAcc_SoC.setValue((float) (Math.random()*100f));
+				
+				
+				view.gg_hvAcc.setValue(model.td.Acc_SoC.getValue());
+        		view.gg_lvAcc.setValue(model.td.LVAcc_SoC.getValue());	
+        		view.gg_linearSpeed.setValue(Math.random()*130f);
+        		view.lbl_accCurrentData.setText(String.format("%.2f", Math.random()*100f) );	
+        		updateLabel(view.lbl_accTempData, model.td.Acc_Temp);	
+				System.out.println("UI update");
+					
+			}));
+		   
+		timeline.setCycleCount(Animation.INDEFINITE); // loop forever
+		timeline.play();
+		
 		view.chBox_comPort.setItems(model.getSerialPortName());
 			
 		view.chBox_comPort.setOnAction((event) -> {
@@ -61,5 +89,10 @@ public class Controller
 		});
 		
 		
+	}
+	
+	void updateLabel(Label label, AnalogSensor sensor)
+	{
+		label.setText(String.format("%.2f", sensor.getValue()) + " " + sensor.getUnit() );
 	}
 }

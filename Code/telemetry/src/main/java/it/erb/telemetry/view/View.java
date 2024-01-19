@@ -75,6 +75,7 @@ public class View
 	
 	public Gauge gg_hvAcc;
 	public Gauge gg_lvAcc;
+	public Gauge gg_linearSpeed;
 	
 	public DriverInputDataPane driverInputDataPane;
 	
@@ -486,9 +487,13 @@ public class View
 		VBox vb_speed = new VBox();
 		vb_speed.setStyle(style_dataPane);
 			
-		Gauge gauge = GaugeBuilder.create().skinType(SkinType.SPACE_X).build();
-		gauge.setValue(95);
-		vb_speed.getChildren().add(gauge);
+		gg_linearSpeed = GaugeBuilder.create()
+				.skinType(SkinType.SPACE_X)
+				.prefSize(150,150)  
+				.unit("km/h")
+				.build();
+		gg_linearSpeed.setValue(95);
+		vb_speed.getChildren().add(gg_linearSpeed);
 		
 		// BOTTOM PANE
 		// HV ACCUMULATOR + INVERTER + MOTORS + TYRES + SAFETY CIRCUIT + DRIVING

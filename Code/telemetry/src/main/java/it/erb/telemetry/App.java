@@ -56,7 +56,7 @@ public class App extends Application {
                 	Double f = Math.random()*130f;
                     s = f.toString();
                     
-                    
+                   
                     
                     
                     
@@ -65,9 +65,9 @@ public class App extends Application {
                     	public void run()
                     	{
                     		//data.setValue(s);
-                    		view.lbl_accCurrentData.setText(s);
-                    		view.gg_hvAcc.setValue(Math.random()*100f);
-                    		view.gg_lvAcc.setValue(Math.random()*100f);
+                    		
+                    		
+                    		
                     	}
                           	
                     });

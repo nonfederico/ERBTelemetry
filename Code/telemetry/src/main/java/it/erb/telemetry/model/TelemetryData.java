@@ -13,14 +13,17 @@ public class TelemetryData
 	public AnalogSensor ThrottlePedal_Pos = new AnalogSensor();
 	public AnalogSensor BrakePedal_Pos = new AnalogSensor();
 	public AnalogSensor SteeringWheel_Pos = new AnalogSensor();
-	public AnalogSensor Acc_Voltage = new AnalogSensor();
-	public AnalogSensor Acc_SoC = new AnalogSensor();
-	public AnalogSensor Acc_Current = new AnalogSensor();
-	public AnalogSensor Acc_Temp = new AnalogSensor();
+	public AnalogSensor Acc_Voltage = new AnalogSensor("V");
+	public AnalogSensor Acc_SoC = new AnalogSensor("%");
+	public AnalogSensor Acc_Current = new AnalogSensor("A");
+	public AnalogSensor Acc_Temp = new AnalogSensor("°C");
 	public AnalogSensor Acc_Cell_1_Temp = new AnalogSensor();
 	public AnalogSensor Acc_Cell_2_Temp = new AnalogSensor();
 	public AnalogSensor Acc_Cell_3_Temp = new AnalogSensor();
 	public AnalogSensor Acc_Cell_4_Temp = new AnalogSensor();
+	public AnalogSensor LVAcc_Voltage = new AnalogSensor("V");
+	public AnalogSensor LVAcc_SoC = new AnalogSensor("%");
+	public AnalogSensor LVAcc_Current = new AnalogSensor("A");
 	public AnalogSensor MotorRR_ActCurrent = new AnalogSensor();
 	public AnalogSensor MotorRR_ActSpeed = new AnalogSensor();
 	public AnalogSensor MotorRR_ActTorque = new AnalogSensor();
@@ -31,6 +34,7 @@ public class TelemetryData
 	public AnalogSensor MotorRL_ActTorque = new AnalogSensor();
 	public AnalogSensor MotorRL_CmdSpeed = new AnalogSensor();
 	public AnalogSensor MotorRL_CmdTorque = new AnalogSensor();
+	public AnalogSensor vehicle_linearSpeed = new AnalogSensor();
 	public DigitalSensor Saf_BSPD = new DigitalSensor();
 	
 
