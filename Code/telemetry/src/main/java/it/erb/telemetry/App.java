@@ -66,7 +66,8 @@ public class App extends Application {
                     	{
                     		//data.setValue(s);
                     		view.lbl_accCurrentData.setText(s);
-                    		
+                    		view.gg_hvAcc.setValue(Math.random()*100f);
+                    		view.gg_lvAcc.setValue(Math.random()*100f);
                     	}
                           	
                     });

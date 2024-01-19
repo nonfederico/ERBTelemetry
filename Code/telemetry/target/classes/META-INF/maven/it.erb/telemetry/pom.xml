@@ -30,6 +30,11 @@
     		<artifactId>sqlite-jdbc</artifactId>
    			<version>3.44.1.0</version>
 		</dependency>
+		<dependency>
+    		<groupId>eu.hansolo</groupId>
+   			<artifactId>Medusa</artifactId>
+    		<version>11.7</version>
+		</dependency>
     </dependencies>
     <build>
         <plugins>

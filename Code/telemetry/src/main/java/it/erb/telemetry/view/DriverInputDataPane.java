@@ -32,8 +32,8 @@ class DriverInputDataPane
 		lbl_throttleData.setStyle(style_lblData); 
 		lbl_brakeData.setStyle(style_lblData); 
 		
-		upb_throttle = new UpwardProgress(20, 60);
-		upb_brake = new UpwardProgress(20, 60);
+		upb_throttle = new UpwardProgress(25, 80);
+		upb_brake = new UpwardProgress(25, 80);
 		
 		upb_brake.getProgressBar().setStyle("-fx-accent: red;");
 		

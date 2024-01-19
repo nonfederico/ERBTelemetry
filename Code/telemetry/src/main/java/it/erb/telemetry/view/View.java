@@ -2,6 +2,10 @@ package it.erb.telemetry.view;
 
 import java.time.LocalDate;
 
+import eu.hansolo.medusa.Gauge;
+import eu.hansolo.medusa.Gauge.SkinType;
+import eu.hansolo.medusa.GaugeBuilder;
+import eu.hansolo.medusa.Section;
 import it.erb.telemetry.model.TelemetryData;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -68,6 +72,9 @@ public class View
 	public DatePicker dp_tableEndDate;
 	
 	public TableView<TelemetryData> tableView;
+	
+	public Gauge gg_hvAcc;
+	public Gauge gg_lvAcc;
 	
 	public DriverInputDataPane driverInputDataPane;
 	
@@ -205,7 +212,24 @@ public class View
 		lbl_accPowerData.setStyle(style_lblData); 
 		lbl_accTemp.setStyle(style_lbl); 
 		lbl_accTempData.setStyle(style_lblData); 
-				
+		
+		gg_hvAcc = GaugeBuilder.create()
+				.skinType(SkinType.SIMPLE_SECTION)
+				.prefSize(90,90)  
+				.minValue(0)                                                                     
+                .maxValue(100) 
+                .title("")
+                .barColor(Color.GREEN)
+                .valueColor(Color.WHITE)
+                .decimals(1)  
+                .sectionsAlwaysVisible(true)
+                .sectionsVisible(true)
+                .highlightSections(true)
+                .sections(new Section(0, 30, Color.RED), new Section(30, 50, Color.ORANGE), new Section(50, 100, Color.GREEN))
+				.build();
+		gg_hvAcc.setStyle("-fx-padding: 10;");
+		gg_hvAcc.setValue(90);
+		
 		// GRIDPANE
 		GridPane gridPane_Acc = new GridPane();
 		gridPane_Acc.setStyle(style_gridPane);
@@ -221,6 +245,7 @@ public class View
 		gridPane_Acc.setMaxHeight(200);
 		
 		vb_hvAcc.getChildren().add(lbl_accTitle);
+		vb_hvAcc.getChildren().add(gg_hvAcc);
 		vb_hvAcc.getChildren().add(gridPane_Acc);
 		
 		// LV accumulator data
@@ -231,6 +256,19 @@ public class View
 		lbl_lvAccTitle = new Label("LV Accumulator");
 		
 		lbl_lvAccTitle.setStyle(style_LblTitle);
+		
+		gg_lvAcc = GaugeBuilder.create()
+				.skinType(SkinType.SIMPLE_SECTION)
+				.prefSize(90,90)  
+				.minValue(0)                                                                     
+                .maxValue(100) 
+                .title("")
+                .barColor(Color.GREEN)
+                .valueColor(Color.WHITE)
+                .decimals(1)   
+                .build();
+		gg_lvAcc.setStyle("-fx-padding: 10; ");
+		gg_lvAcc.setValue(90);
 			
 		// GRIDPANE
 		GridPane gridPane_lvAcc = new GridPane();
@@ -245,6 +283,7 @@ public class View
 		gridPane_lvAcc.setMaxHeight(200);
 		
 		vb_lvAcc.getChildren().add(lbl_lvAccTitle);
+		vb_lvAcc.getChildren().add(gg_lvAcc);
 		vb_lvAcc.getChildren().add(gridPane_lvAcc);
 		
 		// INVERTER data
@@ -442,7 +481,15 @@ public class View
 		// DRIVER INPUT DATA PANE
 		driverInputDataPane = new DriverInputDataPane(style_dataPane, style_gridPane, style_LblTitle, style_LblTitle, style_lblData);
 		
-
+		// SAFETY CIRCUIT data
+		// TITLE + GRID PANE
+		VBox vb_speed = new VBox();
+		vb_speed.setStyle(style_dataPane);
+			
+		Gauge gauge = GaugeBuilder.create().skinType(SkinType.SPACE_X).build();
+		gauge.setValue(95);
+		vb_speed.getChildren().add(gauge);
+		
 		// BOTTOM PANE
 		// HV ACCUMULATOR + INVERTER + MOTORS + TYRES + SAFETY CIRCUIT + DRIVING
 		HBox bottomPane = new HBox();
@@ -453,9 +500,9 @@ public class View
 		bottomPane.getChildren().add(vb_mot);
 		bottomPane.getChildren().add(vb_saf);
 		bottomPane.getChildren().add(driverInputDataPane.getPane());
-
-		//bottomPane.getChildren().add(vb_drv);
-		//bottomPane.getChildren().add(vb_tst);
+		bottomPane.getChildren().add(vb_speed);
+		
+		
 		
 		// MAIN PANE
 		BorderPane bPane = new BorderPane();
@@ -471,7 +518,7 @@ public class View
 		bPane.setBackground(new Background(new BackgroundFill(paint, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		// SCENE
-		scene = new Scene(bPane, 1500, 850);
+		scene = new Scene(bPane, 1920, 900);
 		scene.setFill(Color.BLACK);
 		scene.getStylesheets().add("/stylesheet.css");
 		
