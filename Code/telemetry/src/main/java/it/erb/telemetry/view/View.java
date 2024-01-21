@@ -108,19 +108,6 @@ public class View
 	public DriverInputDataPane driverInputDataPane;
 	
 	
-	String style_gridPane = ""
-			+ "-fx-background-color: rgba(0, 0, 0, 0);"
-			+ "-fx-padding: 0;"
-			+ "-fx-vgap: 0;"
-			+ "-fx-hgap: 5;";
-	
-	String style_bPane = ""
-			+ "-fx-background-color: rgba(55, 55, 55, 1);";
-	String style_tableView = ""
-			+ "-fx-background-color: rgba(0, 0, 0, 0.5);";
-	
-	
-	
 	public View()
 	{
 		
@@ -178,9 +165,9 @@ public class View
 		col1.setCellValueFactory(data -> data.getValue().ThrottlePedal_Pos.getProperty());
 		col2.setCellValueFactory(data -> data.getValue().BrakePedal_Pos.getProperty());
 		col3.setCellValueFactory(data -> data.getValue().SteeringWheel_Pos.getProperty());
-		col4.setCellValueFactory(data -> data.getValue().Acc_Voltage.getProperty());
-		col5.setCellValueFactory(data -> data.getValue().Acc_Current.getProperty());
-		col6.setCellValueFactory(data -> data.getValue().Acc_Temp.getProperty());
+		col4.setCellValueFactory(data -> data.getValue().HVAcc_Voltage.getProperty());
+		col5.setCellValueFactory(data -> data.getValue().HVAcc_Current.getProperty());
+		col6.setCellValueFactory(data -> data.getValue().HVAcc_Temp.getProperty());
 		
 		tableView.getColumns().add(col1);
 		tableView.getColumns().add(col2);
@@ -224,7 +211,7 @@ public class View
 		
 		// GRIDPANE
 		GridPane gridPane_HVAcc = new GridPane();
-		gridPane_HVAcc.setStyle(style_gridPane);
+		gridPane_HVAcc.getStyleClass().add("gridPane");
 		gridPane_HVAcc.add(new Label("Voltage"), 0, 0);
 		gridPane_HVAcc.add(lbl_HVAccVoltage, 1, 0);
 		gridPane_HVAcc.add(new Label("Current"), 0, 1);
@@ -265,7 +252,7 @@ public class View
 			
 		// GRIDPANE
 		GridPane gridPane_lvAcc = new GridPane();
-		gridPane_lvAcc.setStyle(style_gridPane);
+		gridPane_lvAcc.getStyleClass().add("gridPane");
 		gridPane_lvAcc.add(new Label("Voltage"), 0, 0);
 		gridPane_lvAcc.add(lbl_LVAcc_Voltage, 1, 0);
 		gridPane_lvAcc.add(new Label("Current"), 0, 1);
@@ -289,7 +276,7 @@ public class View
 		lbl_inv_LVVoltage = new DataLabel("-",1,true);
 					
 		GridPane gridPane_inv = new GridPane();
-		gridPane_inv.setStyle(style_gridPane);
+		gridPane_inv.getStyleClass().add("gridPane");
 		gridPane_inv.add(new Label("Temperature"), 0, 0);
 		gridPane_inv.add(lbl_inv_Temperature, 1, 0);
 		gridPane_inv.add(new Label("HV Voltage"), 0, 1);
@@ -328,7 +315,7 @@ public class View
 		lbl_motRRTemperature = new DataLabel("-",1,true);
 				
 		GridPane gridPane_mot = new GridPane();
-		gridPane_mot.setStyle(style_gridPane);
+		gridPane_mot.getStyleClass().add("gridPane");
 		gridPane_mot.add(new Label("Act. speed"), 0, 0);
 		gridPane_mot.add(lbl_motRLActSpeed, 1, 0);
 		gridPane_mot.add(lbl_motRRActSpeed, 2, 0);
@@ -375,7 +362,7 @@ public class View
 		led_safSDBRight = new Led(5);
 		       
 		GridPane gridPane_saf = new GridPane();
-		gridPane_saf.setStyle(style_gridPane);
+		gridPane_saf.getStyleClass().add("gridPane");
 		gridPane_saf.add(led_safBSPD, 0, 0);
 		gridPane_saf.add(new Label("BSPD"), 1, 0);
 		gridPane_saf.add(led_safIMD, 0, 1);
@@ -401,11 +388,14 @@ public class View
 		vb_saf.getChildren().add(gridPane_saf);
 		
 		// DRIVER INPUT DATA PANE
-		driverInputDataPane = new DriverInputDataPane(style_gridPane);
+		driverInputDataPane = new DriverInputDataPane();
 		
 		// SPEED data
 		VBox vb_speed = new VBox();
 		vb_speed.getStyleClass().add("dataPane");
+		
+		Label lbl_vehicleTitle = new Label("Speed");
+		lbl_vehicleTitle.getStyleClass().add("titleLabel");
 			
 		gg_linearSpeed = GaugeBuilder.create()
 				.skinType(SkinType.SPACE_X)
@@ -414,7 +404,7 @@ public class View
 				.maxValue(200)
 				.threshold(150)
 				.build();
-		vb_speed.getChildren().add(gg_linearSpeed);
+		vb_speed.getChildren().addAll(lbl_vehicleTitle, gg_linearSpeed);
 		
 		// BOTTOM PANE
 		// HV ACCUMULATOR + INVERTER + MOTORS + TYRES + SAFETY CIRCUIT + DRIVING
@@ -428,11 +418,9 @@ public class View
 		bottomPane.getChildren().add(driverInputDataPane.getPane());
 		bottomPane.getChildren().add(vb_speed);
 		
-		
-		
 		// MAIN PANE
 		BorderPane bPane = new BorderPane();
-		bPane.setStyle(style_bPane);
+		bPane.getStyleClass().add("borderPane");
 		bPane.setTop(tlb_com);
 		bPane.setCenter(centerPane);
 		bPane.setBottom(bottomPane);

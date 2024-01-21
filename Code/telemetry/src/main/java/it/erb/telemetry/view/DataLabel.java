@@ -38,4 +38,9 @@ public class DataLabel extends Label
 		this.setText(s1);
 	}
 	
+	public void update(double value)
+	{
+		this.update(value, "");
+	}
+	
 }

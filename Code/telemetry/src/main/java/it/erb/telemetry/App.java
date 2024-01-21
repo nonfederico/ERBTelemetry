@@ -23,7 +23,10 @@ import javafx.stage.Stage;
 public class App extends Application {
 
 	String s;
-	private StringProperty data;
+	View view;
+	Model model;
+	Controller controller;
+	
 	private Thread thread;
 	private Thread mainThread;
 	
@@ -32,34 +35,26 @@ public class App extends Application {
 	
 	
     @Override
-    public void start(Stage stage) {
-
+    public void start(Stage stage) 
+    {
     	mainThread = Thread.currentThread();
     	
-        View view = new View();
-        Model model = new Model();
-        Controller controller = new Controller(model, view);
-        
-        data = new SimpleStringProperty();
-        
+    	view = new View();
+        model = new Model();
+        controller = new Controller(model, view);
         
         stage.setTitle("ERB Telemetry");
         stage.setScene(view.getScene());
         stage.getIcons().add(new Image("file:Logo.png"));
         stage.show();
         
+        // Secondary thread
         thread = new Thread(new Runnable() {
         	
         	public void run() {
 
                 while (mainThread.isAlive()) {
-                	Double f = Math.random()*130f;
-                    s = f.toString();
-                    
-                   
-                    
-                    
-                    
+                	   
                     Platform.runLater(new Runnable(){
                     	@Override
                     	public void run()
@@ -71,8 +66,7 @@ public class App extends Application {
                     	}
                           	
                     });
-                    //System.out.print(" "); 
-                    //System.out.println(s);
+                    
                     try {
 						Thread.sleep(3000);
 					} catch (InterruptedException e) {
@@ -89,12 +83,11 @@ public class App extends Application {
     
     public void stop()
     {
-    	
-    	
-    	
+    	model.stopListening();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         launch();
     }
 

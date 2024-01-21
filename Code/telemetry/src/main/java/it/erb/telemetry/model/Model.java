@@ -24,7 +24,7 @@ public class Model
 	private int SelectComPortIndex = -1;
 	private boolean isComPortOpen = false;
 	
-	public TelemetryData td = new TelemetryData();
+	public TelemetryData latestData = new TelemetryData();
 	
 	
 	public Model()
@@ -90,6 +90,7 @@ public class Model
 				{
 				   @Override
 				   public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_AVAILABLE | SerialPort.LISTENING_EVENT_PORT_DISCONNECTED; }
+				   
 				   @Override
 				   public void serialEvent(SerialPortEvent event)
 				   {
@@ -111,18 +112,19 @@ public class Model
 				      System.out.println();
 				      
 				      
-				      String text = new String(newData);
-				      int startIndex = text.indexOf("#$*");
-				      int endIndex = text.indexOf("*&#");
+				      String packet = new String(newData);
+				      int startIndex = packet.indexOf("#$*");
+				      int endIndex = packet.indexOf("*&#");
 				      
 				      if( endIndex > startIndex && startIndex >= 0)
 				      {
-				    	  text = text.substring(startIndex+3, endIndex);
-				    	  System.out.println(text);
+				    	  String payload = packet.substring(startIndex+3, endIndex);
+				    	  System.out.println(payload);
 				    	  
 				    	  TelemetryData td = new TelemetryData();
-				    	  td.parsePacket(text);
+				    	  td.parsePacket(payload);
 				    	  td.print();	
+				    	  latestData = td;
 				    	  db.addRecord(td);
 					      
 				      }

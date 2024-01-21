@@ -15,14 +15,14 @@ public class DriverInputDataPane
 	UpwardProgress upb_throttle;
 	UpwardProgress upb_brake;
 
-	public DriverInputDataPane(String style_gridPane)
+	public DriverInputDataPane()
 	{
 		// TITLE + GRID PANE
 		vb.getStyleClass().add("dataPane");
 		
-		Label lbl_title = new Label("Driver input");
-		lbl_throttle = new DataLabel("50",0,false);
-		lbl_brake = new DataLabel("100",0,false);
+		Label lbl_title = new Label("Driver controls");
+		lbl_throttle = new DataLabel("-",0,false);
+		lbl_brake = new DataLabel("-",0,false);
 		
 		lbl_title.getStyleClass().add("titleLabel"); 
 		
@@ -32,7 +32,7 @@ public class DriverInputDataPane
 		upb_brake.getProgressBar().setStyle("-fx-accent: red;");
 		
 		GridPane gridPane = new GridPane();
-		gridPane.setStyle(style_gridPane);
+		gridPane.getStyleClass().add("gridPane");
 		gridPane.add(new Label("T"), 0, 0);
 		gridPane.add(new Label("B"), 1, 0);
 		gridPane.add(upb_throttle.getProgressHolder(), 0, 1);
@@ -58,6 +58,14 @@ public class DriverInputDataPane
 
 	public void set_brakeProgressBar(double value) {
 		upb_brake.getProgressBar().setProgress(value);
+	}
+	
+	public void set_throttleLabel(double value) {
+		lbl_throttle.update(value);
+	}
+
+	public void set_brakeLabel(double value) {
+		lbl_brake.update(value);
 	}
 
 }

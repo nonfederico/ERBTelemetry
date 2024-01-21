@@ -31,60 +31,52 @@ public class Controller
 				
 			e ->
 			{
-				model.td.Acc_Voltage.setValue((float) (Math.random()*700f));
-				model.td.Acc_Current.setValue((float) (Math.random()*150f));
-				model.td.Acc_Temp.setValue((float) (Math.random()*100f));
-				model.td.Acc_SoC.setValue((float) (Math.random()*100f));
-				model.td.LVAcc_SoC.setValue((float) (Math.random()*100f));
-				
-				
-				
-        		view.gg_HVAcc.setValue(model.td.Acc_SoC.getValue());
-        		view.lbl_HVAccVoltage.update(model.td.Acc_Voltage.getValue(), model.td.Acc_Voltage.getUnit());
-        		view.lbl_HVAccCurrent.update(model.td.Acc_Current.getValue(), model.td.Acc_Current.getUnit());
-        		view.lbl_HVAccPower.update(model.td.Acc_Voltage.getValue()*model.td.Acc_Current.getValue(), "W");
-        		view.lbl_HVAccTemp.update(model.td.Acc_Temp.getValue(), model.td.Acc_Temp.getUnit());
+				view.gg_HVAcc.setValue(model.latestData.HVAcc_SoC.getValue());
+        		view.lbl_HVAccVoltage.update(model.latestData.HVAcc_Voltage.getValue(), model.latestData.HVAcc_Voltage.getUnit());
+        		view.lbl_HVAccCurrent.update(model.latestData.HVAcc_Current.getValue(), model.latestData.HVAcc_Current.getUnit());
+        		view.lbl_HVAccPower.update(model.latestData.HVAcc_Voltage.getValue()*model.latestData.HVAcc_Current.getValue(), "W");
+        		view.lbl_HVAccTemp.update(model.latestData.HVAcc_Temp.getValue(), model.latestData.HVAcc_Temp.getUnit());
         		
-        		view.gg_LVAcc.setValue(model.td.LVAcc_SoC.getValue());	
-        		view.lbl_LVAcc_Voltage.update(model.td.LVAcc_Voltage.getValue(), model.td.LVAcc_Voltage.getUnit());
-        		view.lbl_LVAcc_Current.update(model.td.LVAcc_Current.getValue(), model.td.LVAcc_Current.getUnit());
+        		view.gg_LVAcc.setValue(model.latestData.LVAcc_SoC.getValue());	
+        		view.lbl_LVAcc_Voltage.update(model.latestData.LVAcc_Voltage.getValue(), model.latestData.LVAcc_Voltage.getUnit());
+        		view.lbl_LVAcc_Current.update(model.latestData.LVAcc_Current.getValue(), model.latestData.LVAcc_Current.getUnit());
         		
-        		view.lbl_inv_Temperature.update(model.td.inv_Temperature.getValue(), model.td.inv_Temperature.getUnit());
-        		view.lbl_inv_HVVoltage.update(model.td.inv_HVVoltage.getValue(), model.td.inv_HVVoltage.getUnit());
-        		view.lbl_inv_LVVoltage.update(model.td.inv_LVVoltage.getValue(), model.td.inv_LVVoltage.getUnit());
+        		view.lbl_inv_Temperature.update(model.latestData.inv_Temperature.getValue(), model.latestData.inv_Temperature.getUnit());
+        		view.lbl_inv_HVVoltage.update(model.latestData.inv_HVVoltage.getValue(), model.latestData.inv_HVVoltage.getUnit());
+        		view.lbl_inv_LVVoltage.update(model.latestData.inv_LVVoltage.getValue(), model.latestData.inv_LVVoltage.getUnit());
         		
-        		view.lbl_motRLActSpeed.update(model.td.MotorRL_ActSpeed.getValue(), model.td.MotorRL_ActSpeed.getUnit());
-        		view.lbl_motRRActSpeed.update(model.td.MotorRR_ActSpeed.getValue(), model.td.MotorRR_ActSpeed.getUnit());
-        		view.lbl_motRLCmdSpeed.update(model.td.MotorRL_CmdSpeed.getValue(), model.td.MotorRL_CmdSpeed.getUnit());
-        		view.lbl_motRRCmdSpeed.update(model.td.MotorRR_CmdSpeed.getValue(), model.td.MotorRR_CmdSpeed.getUnit());
-        		view.lbl_motRLActTorque.update(model.td.MotorRL_ActTorque.getValue(), model.td.MotorRL_ActTorque.getUnit());
-        		view.lbl_motRRActTorque.update(model.td.MotorRR_ActTorque.getValue(), model.td.MotorRR_ActTorque.getUnit());
-        		view.lbl_motRLCmdTorque.update(model.td.MotorRL_CmdTorque.getValue(), model.td.MotorRL_CmdTorque.getUnit());
-        		view.lbl_motRRCmdTorque.update(model.td.MotorRR_CmdTorque.getValue(), model.td.MotorRR_CmdTorque.getUnit());
-        		view.lbl_motRLActCurrent.update(model.td.MotorRL_ActCurrent.getValue(), model.td.MotorRL_ActCurrent.getUnit());
-        		view.lbl_motRRActCurrent.update(model.td.MotorRR_ActCurrent.getValue(), model.td.MotorRR_ActCurrent.getUnit());
-        		view.lbl_motRLActFrequency.update(model.td.MotorRL_Frequency.getValue(), model.td.MotorRL_Frequency.getUnit());
-        		view.lbl_motRRActFrequency.update(model.td.MotorRR_Frequency.getValue(), model.td.MotorRR_Frequency.getUnit());
-        		view.lbl_motRLTemperature.update(model.td.MotorRL_Temperature.getValue(), model.td.MotorRL_Temperature.getUnit());
-        		view.lbl_motRRTemperature.update(model.td.MotorRR_Temperature.getValue(), model.td.MotorRR_Temperature.getUnit());
+        		view.lbl_motRLActSpeed.update(model.latestData.MotorRL_ActSpeed.getValue(), model.latestData.MotorRL_ActSpeed.getUnit());
+        		view.lbl_motRRActSpeed.update(model.latestData.MotorRR_ActSpeed.getValue(), model.latestData.MotorRR_ActSpeed.getUnit());
+        		view.lbl_motRLCmdSpeed.update(model.latestData.MotorRL_CmdSpeed.getValue(), model.latestData.MotorRL_CmdSpeed.getUnit());
+        		view.lbl_motRRCmdSpeed.update(model.latestData.MotorRR_CmdSpeed.getValue(), model.latestData.MotorRR_CmdSpeed.getUnit());
+        		view.lbl_motRLActTorque.update(model.latestData.MotorRL_ActTorque.getValue(), model.latestData.MotorRL_ActTorque.getUnit());
+        		view.lbl_motRRActTorque.update(model.latestData.MotorRR_ActTorque.getValue(), model.latestData.MotorRR_ActTorque.getUnit());
+        		view.lbl_motRLCmdTorque.update(model.latestData.MotorRL_CmdTorque.getValue(), model.latestData.MotorRL_CmdTorque.getUnit());
+        		view.lbl_motRRCmdTorque.update(model.latestData.MotorRR_CmdTorque.getValue(), model.latestData.MotorRR_CmdTorque.getUnit());
+        		view.lbl_motRLActCurrent.update(model.latestData.MotorRL_ActCurrent.getValue(), model.latestData.MotorRL_ActCurrent.getUnit());
+        		view.lbl_motRRActCurrent.update(model.latestData.MotorRR_ActCurrent.getValue(), model.latestData.MotorRR_ActCurrent.getUnit());
+        		view.lbl_motRLActFrequency.update(model.latestData.MotorRL_Frequency.getValue(), model.latestData.MotorRL_Frequency.getUnit());
+        		view.lbl_motRRActFrequency.update(model.latestData.MotorRR_Frequency.getValue(), model.latestData.MotorRR_Frequency.getUnit());
+        		view.lbl_motRLTemperature.update(model.latestData.MotorRL_Temperature.getValue(), model.latestData.MotorRL_Temperature.getUnit());
+        		view.lbl_motRRTemperature.update(model.latestData.MotorRR_Temperature.getValue(), model.latestData.MotorRR_Temperature.getUnit());
         		
-        		view.led_safBSPD.update(Math.random()*100f<50);
-        		view.led_safIMD.update(Math.random()*100f<50);
-        		view.led_safLVMS.update(Math.random()*100f<50);
-        		view.led_safAMS.update(Math.random()*100f<50);
-        		view.led_safIS.update(Math.random()*100f<50);
-        		view.led_safBOTS.update(Math.random()*100f<50);
-        		view.led_safSDBCockpit.update(Math.random()*100f<50);
-        		view.led_safSDBLeft.update(Math.random()*100f<50);
-        		view.led_safSDBRight.update(Math.random()*100f<50);
+        		view.led_safBSPD.update(model.latestData.saf_BSPD.getValue());
+        		view.led_safIMD.update(model.latestData.saf_IMD.getValue());
+        		view.led_safLVMS.update(model.latestData.saf_LVMS.getValue());
+        		view.led_safAMS.update(model.latestData.saf_AMS.getValue());
+        		view.led_safIS.update(model.latestData.saf_IS.getValue());
+        		view.led_safBOTS.update(model.latestData.saf_BOTS.getValue());
+        		view.led_safSDBCockpit.update(model.latestData.saf_SDBCockpit.getValue());
+        		view.led_safSDBLeft.update(model.latestData.saf_SDBLeft.getValue());
+        		view.led_safSDBRight.update(model.latestData.saf_SDBRght.getValue());
         		
-        		view.driverInputDataPane.set_throttleProgressBar(Math.random()*1f);
-        		view.driverInputDataPane.set_brakeProgressBar(Math.random()*1f);
-        	
-        		view.gg_linearSpeed.setValue(Math.random()*130f);
+        		view.driverInputDataPane.set_throttleProgressBar(model.latestData.ThrottlePedal_Pos.getValue()/100f);
+        		view.driverInputDataPane.set_brakeProgressBar(model.latestData.BrakePedal_Pos.getValue()/100f);
+        		view.driverInputDataPane.set_throttleLabel(model.latestData.ThrottlePedal_Pos.getValue());
+        		view.driverInputDataPane.set_brakeLabel(model.latestData.BrakePedal_Pos.getValue());
         		
-        		System.out.println("UI update");
-					
+        		view.gg_linearSpeed.setValue(model.latestData.vehicle_linearSpeed.getValue());
+        			
 			}));
 		   
 		timeline.setCycleCount(Animation.INDEFINITE); // loop forever
