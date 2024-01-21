@@ -7,6 +7,7 @@ import java.util.List;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
+import com.fazecast.jSerialComm.SerialPortMessageListener;
 
 import it.erb.telemetry.database.DatabaseManager;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -84,53 +85,9 @@ public class Model
 		isComPortOpen = true;
 		System.out.println("Port (" + portName + ") is open" );
 		
+		MessageListener listener = new MessageListener();
 		
-		comPort.addDataListener(
-				new SerialPortDataListener() 
-				{
-				   @Override
-				   public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_AVAILABLE | SerialPort.LISTENING_EVENT_PORT_DISCONNECTED; }
-				   
-				   @Override
-				   public void serialEvent(SerialPortEvent event)
-				   {
-				      if (event.getEventType() != SerialPort.LISTENING_EVENT_DATA_AVAILABLE && event.getEventType() != SerialPort.LISTENING_EVENT_PORT_DISCONNECTED)
-				         return;
-				      if (event.getEventType() == SerialPort.LISTENING_EVENT_PORT_DISCONNECTED)
-				      {
-					      System.out.println("Connection has been lost. COM port closing");
-					      stopListening();
-				      }   
-				      
-				      byte[] newData = new byte[comPort.bytesAvailable()];
-				      int numRead = comPort.readBytes(newData, newData.length);
-				      System.out.println("Read " + numRead + " bytes.");
-				      for(byte b : newData)
-				      {
-				    	  System.out.print((char)b);
-				      }
-				      System.out.println();
-				      
-				      
-				      String packet = new String(newData);
-				      int startIndex = packet.indexOf("#$*");
-				      int endIndex = packet.indexOf("*&#");
-				      
-				      if( endIndex > startIndex && startIndex >= 0)
-				      {
-				    	  String payload = packet.substring(startIndex+3, endIndex);
-				    	  System.out.println(payload);
-				    	  
-				    	  TelemetryData td = new TelemetryData();
-				    	  td.parsePacket(payload);
-				    	  td.print();	
-				    	  latestData = td;
-				    	  db.addRecord(td);
-					      
-				      }
-				   }
-				}
-			);
+		comPort.addDataListener(listener);
 			
 		
 	}
@@ -144,18 +101,34 @@ public class Model
 		isComPortOpen = false;
 	}
 	
-	void onDataReceived()
+	
+	public void handleComPacket()
 	{
-		//Validate data packet
-		
-		//copy data packet into td
-		
-		//add record into db
-		
-		//update GUI
-		
-		
-		
+		byte[] newData = new byte[comPort.bytesAvailable()];
+		int numRead = comPort.readBytes(newData, newData.length);
+		System.out.println("Read " + numRead + " bytes.");
+		for(byte b : newData)
+		{
+			System.out.print((char)b);
+		}
+		System.out.println();
+		  
+		  
+		String text = new String(newData);
+		int startIndex = text.indexOf("#$*");
+		int endIndex = text.indexOf("*&#");
+		 
+		if( endIndex > startIndex && startIndex >= 0)
+		{
+			text = text.substring(startIndex+3, endIndex);
+			System.out.println(text);
+			
+			TelemetryData td = new TelemetryData();
+			td.parsePacket(text);
+			td.print();	
+			db.addRecord(td);
+		}
+
 		
 	}
 	
@@ -166,4 +139,49 @@ public class Model
 	}
 	
 	
+}
+
+
+final class MessageListener implements SerialPortMessageListener
+{
+   @Override
+   public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_RECEIVED | SerialPort.LISTENING_EVENT_PORT_DISCONNECTED; }
+   
+   @Override
+   public byte[] getMessageDelimiter() { return new byte[] { (byte)0x2A, (byte)0x26, (byte)0x23 }; }
+
+   @Override
+   public boolean delimiterIndicatesEndOfMessage() { return true; }
+
+   @Override
+   public void serialEvent(SerialPortEvent event)
+   {
+           
+	  if (event.getEventType() != SerialPort.LISTENING_EVENT_DATA_RECEIVED && event.getEventType() != SerialPort.LISTENING_EVENT_PORT_DISCONNECTED)
+	     return;
+	  
+	  if (event.getEventType() == SerialPort.LISTENING_EVENT_PORT_DISCONNECTED)
+	  {
+	      System.out.println("Connection has been lost. COM port closing");
+	      //stopListening();
+	  }  
+	 
+	  if (event.getEventType() == SerialPort.LISTENING_EVENT_DATA_RECEIVED)
+	  {
+	      byte[] message = event.getReceivedData();
+		  
+	      System.out.println("(COM) read " + message.length + " bytes.");
+	      for(byte b : message)
+	      {
+	    	  System.out.print((char)b);
+	      }
+	      System.out.println();
+	      
+	      handleComPacket();
+	  } 
+	  
+	 
+   }
+   
+   
 }
