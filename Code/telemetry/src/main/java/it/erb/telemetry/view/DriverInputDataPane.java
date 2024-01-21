@@ -5,49 +5,40 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-class DriverInputDataPane 
+public class DriverInputDataPane 
 {
 	VBox vb = new VBox();
 	ProgressBar pb_throttle = new ProgressBar();
 	ProgressBar pb_brake = new ProgressBar();
-	Label lbl_throttleData;
-	Label lbl_brakeData;
+	DataLabel lbl_throttle;
+	DataLabel lbl_brake;
 	UpwardProgress upb_throttle;
 	UpwardProgress upb_brake;
 
-	public DriverInputDataPane(String style_dataPane, String style_gridPane, String style_LblTitle, String style_lbl, String style_lblData)
+	public DriverInputDataPane(String style_gridPane)
 	{
 		// TITLE + GRID PANE
-		vb.setStyle(style_dataPane);
+		vb.getStyleClass().add("dataPane");
 		
 		Label lbl_title = new Label("Driver input");
-		Label lbl_throttle = new Label("T");
-		Label lbl_brake = new Label("B");
-		lbl_throttleData = new Label("50");
-		lbl_brakeData = new Label("100");
+		lbl_throttle = new DataLabel("50",0,false);
+		lbl_brake = new DataLabel("100",0,false);
 		
-		lbl_title.setStyle(style_LblTitle); 
-		lbl_throttle.setStyle(style_lbl); 
-		lbl_brake.setStyle(style_lbl); 
-		lbl_throttleData.setStyle(style_lblData); 
-		lbl_brakeData.setStyle(style_lblData); 
+		lbl_title.getStyleClass().add("titleLabel"); 
 		
 		upb_throttle = new UpwardProgress(25, 80);
 		upb_brake = new UpwardProgress(25, 80);
 		
 		upb_brake.getProgressBar().setStyle("-fx-accent: red;");
 		
-		upb_throttle.getProgressBar().setProgress(0.5);
-		upb_brake.getProgressBar().setProgress(0.9);
-						
 		GridPane gridPane = new GridPane();
 		gridPane.setStyle(style_gridPane);
-		gridPane.add(lbl_throttle, 0, 0);
-		gridPane.add(lbl_brake, 1, 0);
+		gridPane.add(new Label("T"), 0, 0);
+		gridPane.add(new Label("B"), 1, 0);
 		gridPane.add(upb_throttle.getProgressHolder(), 0, 1);
 		gridPane.add(upb_brake.getProgressHolder(), 1, 1);
-		gridPane.add(lbl_throttleData, 0, 2);
-		gridPane.add(lbl_brakeData, 1, 2);
+		gridPane.add(lbl_throttle, 0, 2);
+		gridPane.add(lbl_brake, 1, 2);
 		gridPane.setMaxWidth(400);
 		gridPane.setMaxHeight(200);
 		
@@ -57,6 +48,16 @@ class DriverInputDataPane
 		
 	VBox getPane(){ return vb; }
 	
-	
+	public UpwardProgress getUpb_throttle() {
+		return upb_throttle;
+	}
+
+	public void set_throttleProgressBar(double value) {
+		upb_throttle.getProgressBar().setProgress(value);
+	}
+
+	public void set_brakeProgressBar(double value) {
+		upb_brake.getProgressBar().setProgress(value);
+	}
 
 }

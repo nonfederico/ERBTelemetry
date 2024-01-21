@@ -3,6 +3,23 @@
 	-fx-background-color: rgba(0, 0, 0, 0);
 }
 
+.dataLabel{
+	-fx-text-fill: rgba(220, 220, 220, 1);
+	-fx-background-color: rgba(0, 0, 0, 0);
+	-fx-font-weight: bold;
+	-fx-font-size: 13; 
+	-fx-alignment: center-right;
+}
+
+.titleLabel{
+	-fx-text-fill: rgba(160, 160, 160, 1); 
+	-fx-font-weight: normal; 
+	-fx-font-size: 13; 
+	-fx-background-color: rgba(0, 0, 0, 0);
+	-fx-alignment: center; 
+	-fx-text-alignment: center; 
+}
+
 .progress-bar { 
     -fx-padding: 0;
     -fx-background-insets: 0;
@@ -26,3 +43,21 @@
     -fx-background-radius: 0; 
 }
 
+.dataPane {
+	-fx-background-color: rgba(45, 45, 45, 1);
+	-fx-background-insets: 2.5;
+	-fx-padding: 5 10 5 10;
+	-fx-background-radius: 5;
+	-fx-pref-width: 250;
+}
+
+.bottomPane {
+	-fx-background-color: rgba(0, 0, 0, 0);
+}
+
+.led
+{
+	-fx-fill: rgba(50, 50, 50, 1);
+	-fx-stroke: rgba(100, 100, 100, 1);
+	-fx-stroke-width: 0.5; 
+}
