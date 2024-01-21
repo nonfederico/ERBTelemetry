@@ -5,6 +5,7 @@ module it.erb.telemetry {
 	requires com.fazecast.jSerialComm;
 	requires java.desktop;
 	requires java.sql;
+	requires eu.hansolo.medusa;
 	
     exports it.erb.telemetry;
 }
