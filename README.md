@@ -14,4 +14,4 @@ Software to monitor wirelessly the telemetry of FSAE electric vehicle by E-Racin
 * Radio transmitter and receiver module
 
 ## System overview
-<img src="https://github.com/nonfederico/ERBTelemetry/blob/main/Img/IMG002.jpg" height="172">
+<img src="https://github.com/nonfederico/ERBTelemetry/blob/main/Img/IMG002.jpeg" height="172">
