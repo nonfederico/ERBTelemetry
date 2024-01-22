@@ -151,7 +151,7 @@ public class DatabaseManager
 			
 			TelemetryData td = new TelemetryData();
 			
-			td.date					= rs.getObject("Data",LocalDateTime.class);
+			td.date	= rs.getObject("Data",LocalDateTime.class);
 			td.ThrottlePedal_Pos.setValue(rs.getFloat("ThrottlePedal_Pos"));
 			td.BrakePedal_Pos.setValue(rs.getFloat("BrakePedal_Pos"));
 			td.SteeringWheel_Pos.setValue(rs.getFloat("SteeringWheel_Pos"));

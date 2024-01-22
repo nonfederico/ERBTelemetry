@@ -444,12 +444,6 @@ public class View
 	}
 	
 	
-	
-	
-	
-	
-	
-	
 }
 
 class UpwardProgress 

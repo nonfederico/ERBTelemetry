@@ -6,11 +6,13 @@ it\erb\telemetry\view\UpwardProgress.class
 it\erb\telemetry\view\DriverInputDataPane.class
 it\erb\telemetry\App$1$1.class
 it\erb\telemetry\model\TelemetryData.class
+it\erb\telemetry\view\DataLabel.class
 it\erb\telemetry\App$1.class
 it\erb\telemetry\database\DatabaseManager.class
 module-info.class
 it\erb\telemetry\model\sensor\Sensor.class
 it\erb\telemetry\model\Model.class
 it\erb\telemetry\SystemInfo.class
+it\erb\telemetry\view\Led.class
 it\erb\telemetry\App.class
 it\erb\telemetry\model\sensor\AnalogSensor.class
