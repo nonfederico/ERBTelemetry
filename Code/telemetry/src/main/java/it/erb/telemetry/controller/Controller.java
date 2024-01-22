@@ -111,7 +111,6 @@ public class Controller
 			
 			TelemetryData td = model.retrieveDataFromDB( sDateTime, eDateTime);
 			
-			td.print();
 			//view.tableView.getItems().add(td);
 			ObservableList<TelemetryData> items = FXCollections.<TelemetryData>observableArrayList();
 			

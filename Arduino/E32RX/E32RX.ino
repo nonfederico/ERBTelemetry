@@ -8,7 +8,7 @@ SoftwareSerial mySerial(2, 3);  // E32 TX, RX
  
 void setup() 
 {
-  Serial.begin(9600);
+  Serial.begin(38400);
   Serial.println("E32 Rx setup..");
 
   delay(500);

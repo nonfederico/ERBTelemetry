@@ -55,7 +55,7 @@ TelemetryData td;
 
 void setup() 
 {
-  Serial.begin(9600);
+  Serial.begin(38400);
   Serial.println("E32 Tx setup..");
 
   delay(500);
@@ -70,13 +70,19 @@ void loop()
   
   td.ThrottlePedal_Pos = random(0,1000)/10.0;
   td.BrakePedal_Pos = random(0,1000)/10.0;
+  td.SteeringWheel_Pos = random(0,1000)/10.0;
+  td.HVAcc_Voltage = random(0,1000)/10.0;
+  td.HVAcc_SoC = random(0,1000)/10.0;
+  td.HVAcc_Current = random(0,1000)/10.0;
+  td.HVAcc_Temp = random(0,1000)/10.0;
+  td.HVAcc_Cell_1_Temp = random(0,1000)/10.0;
   td.saf_BSPD = random(0,100)>50;
   td.saf_IMD = random(0,100)>50;
 
 
-
-  mySerial.println(encodePacket(td));
-  //Serial.println(encodePacket(td));
+  String packet = encodePacket(td);
+  mySerial.println(packet);
+  Serial.println(packet);
   delay(1000);
 
     
@@ -91,8 +97,15 @@ String encodePacket(TelemetryData td)
 
   packet.concat(startCode);
   packet.concat(encodeData("F01", td.ThrottlePedal_Pos, 4, 1));
-  //packet.concat(encodeData("F02", td.BrakePedal_Pos, 4, 1));
-  //packet.concat(encodeData("B01", td.saf_BSPD));
+  packet.concat(encodeData("F02", td.BrakePedal_Pos, 4, 1));
+  packet.concat(encodeData("F03", td.SteeringWheel_Pos, 4, 1));
+  packet.concat(encodeData("F04", td.HVAcc_Voltage, 4, 1));
+  packet.concat(encodeData("F05", td.HVAcc_SoC, 4, 1));
+  packet.concat(encodeData("F06", td.HVAcc_Current, 4, 1));
+  packet.concat(encodeData("F07", td.HVAcc_Temp, 4, 1));
+  packet.concat(encodeData("F08", td.HVAcc_Cell_1_Temp, 4, 1));
+
+  packet.concat(encodeData("B01", td.saf_BSPD));
   packet.concat(encodeData("B02", td.saf_IMD));
 
   packet.concat(endCode);

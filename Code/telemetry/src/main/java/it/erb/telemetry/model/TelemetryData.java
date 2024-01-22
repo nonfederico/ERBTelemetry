@@ -52,33 +52,6 @@ public class TelemetryData
 	public DigitalSensor saf_SDBLeft = new DigitalSensor();
 	public DigitalSensor saf_SDBRght = new DigitalSensor();
 	
-	// Stampa i campi su console
-	public void print()
-	{
-		System.out.print("Date: ");
-		System.out.println(date);
-		
-		System.out.print("Acc_Voltage: ");
-		System.out.println(HVAcc_Voltage.getValue());
-
-		System.out.print("Acc_SoC: ");
-		System.out.println(HVAcc_SoC.getValue());
-
-		System.out.print("Acc_Current: ");
-		System.out.println(HVAcc_Current.getValue());
-		
-		System.out.print("ThrottlePedal_Pos: ");
-		System.out.println(ThrottlePedal_Pos.getValue());
-		
-		System.out.print("MotorRL_CmdSpeed: ");
-		System.out.println(MotorRL_CmdSpeed.getValue());
-		
-		System.out.print("MotorRL_CmdTorque: ");
-		System.out.println(MotorRL_CmdTorque.getValue());
-		
-	
-	}
-	
 	public void parsePacket(String packet)
 	{
 		HashMap<String, Sensor> map = new HashMap<String, Sensor>();
@@ -131,6 +104,9 @@ public class TelemetryData
 			
 		for(String p : packets)
 		{
+			if(p.indexOf(':') == -1)
+				break;
+			
 			String[] substring = p.split(":");
 			String id = substring[0];
 			String value = substring[1];
