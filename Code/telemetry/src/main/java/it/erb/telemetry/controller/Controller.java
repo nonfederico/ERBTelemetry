@@ -68,7 +68,7 @@ public class Controller
         		view.led_safBOTS.update(model.latestData.saf_BOTS.getValue());
         		view.led_safSDBCockpit.update(model.latestData.saf_SDBCockpit.getValue());
         		view.led_safSDBLeft.update(model.latestData.saf_SDBLeft.getValue());
-        		view.led_safSDBRight.update(model.latestData.saf_SDBRght.getValue());
+        		view.led_safSDBRight.update(model.latestData.saf_SDBRight.getValue());
         		
         		view.driverInputDataPane.set_throttleProgressBar(model.latestData.ThrottlePedal_Pos.getValue()/100f);
         		view.driverInputDataPane.set_brakeProgressBar(model.latestData.BrakePedal_Pos.getValue()/100f);

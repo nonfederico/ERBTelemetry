@@ -50,7 +50,7 @@ public class TelemetryData
 	public DigitalSensor saf_BOTS = new DigitalSensor();
 	public DigitalSensor saf_SDBCockpit = new DigitalSensor();
 	public DigitalSensor saf_SDBLeft = new DigitalSensor();
-	public DigitalSensor saf_SDBRght = new DigitalSensor();
+	public DigitalSensor saf_SDBRight = new DigitalSensor();
 	
 	public void parsePacket(String packet)
 	{
@@ -96,7 +96,7 @@ public class TelemetryData
 		map.put("B06", saf_BOTS );
 		map.put("B07", saf_SDBCockpit );
 		map.put("B08", saf_SDBLeft );
-		map.put("B09", saf_SDBRght );
+		map.put("B09", saf_SDBRight );
 		
 		date = LocalDateTime.now();
 		
