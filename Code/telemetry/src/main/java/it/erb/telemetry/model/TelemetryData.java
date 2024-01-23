@@ -6,10 +6,12 @@ import java.util.HashMap;
 import it.erb.telemetry.model.sensor.AnalogSensor;
 import it.erb.telemetry.model.sensor.DigitalSensor;
 import it.erb.telemetry.model.sensor.Sensor;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 public class TelemetryData 
 {
-	public LocalDateTime date;
+	public ObjectProperty<LocalDateTime> date = new SimpleObjectProperty<>();
 	public AnalogSensor ThrottlePedal_Pos = new AnalogSensor();
 	public AnalogSensor BrakePedal_Pos = new AnalogSensor();
 	public AnalogSensor SteeringWheel_Pos = new AnalogSensor("°");
@@ -27,20 +29,20 @@ public class TelemetryData
 	public AnalogSensor inv_Temperature = new AnalogSensor("°C");
 	public AnalogSensor inv_HVVoltage = new AnalogSensor("V");
 	public AnalogSensor inv_LVVoltage = new AnalogSensor("V");
-	public AnalogSensor MotorRR_ActCurrent = new AnalogSensor("A");
-	public AnalogSensor MotorRR_ActSpeed = new AnalogSensor("rpm");
-	public AnalogSensor MotorRR_ActTorque = new AnalogSensor("Nm");
-	public AnalogSensor MotorRR_CmdSpeed = new AnalogSensor("rpm");
-	public AnalogSensor MotorRR_CmdTorque = new AnalogSensor("Nm");
-	public AnalogSensor MotorRL_ActCurrent = new AnalogSensor("A");
-	public AnalogSensor MotorRL_ActSpeed = new AnalogSensor("rpm");
-	public AnalogSensor MotorRL_ActTorque = new AnalogSensor("Nm");
-	public AnalogSensor MotorRL_CmdSpeed = new AnalogSensor("rpm");
-	public AnalogSensor MotorRL_CmdTorque = new AnalogSensor("Nm");
-	public AnalogSensor MotorRL_Frequency = new AnalogSensor("Hz");
-	public AnalogSensor MotorRR_Frequency = new AnalogSensor("Hz");
-	public AnalogSensor MotorRL_Temperature = new AnalogSensor("°C");
-	public AnalogSensor MotorRR_Temperature = new AnalogSensor("°C");
+	public AnalogSensor motorRR_ActCurrent = new AnalogSensor("A");
+	public AnalogSensor motorRR_ActSpeed = new AnalogSensor("rpm");
+	public AnalogSensor motorRR_ActTorque = new AnalogSensor("Nm");
+	public AnalogSensor motorRR_CmdSpeed = new AnalogSensor("rpm");
+	public AnalogSensor motorRR_CmdTorque = new AnalogSensor("Nm");
+	public AnalogSensor motorRR_Frequency = new AnalogSensor("Hz");
+	public AnalogSensor motorRR_Temperature = new AnalogSensor("°C");
+	public AnalogSensor motorRL_ActCurrent = new AnalogSensor("A");
+	public AnalogSensor motorRL_ActSpeed = new AnalogSensor("rpm");
+	public AnalogSensor motorRL_ActTorque = new AnalogSensor("Nm");
+	public AnalogSensor motorRL_CmdSpeed = new AnalogSensor("rpm");
+	public AnalogSensor motorRL_CmdTorque = new AnalogSensor("Nm");
+	public AnalogSensor motorRL_Frequency = new AnalogSensor("Hz");
+	public AnalogSensor motorRL_Temperature = new AnalogSensor("°C");
 	public AnalogSensor vehicle_linearSpeed = new AnalogSensor("km/h");
 	public DigitalSensor saf_BSPD = new DigitalSensor();
 	public DigitalSensor saf_IMD = new DigitalSensor();
@@ -73,20 +75,20 @@ public class TelemetryData
 		map.put("F15", inv_Temperature );
 		map.put("F16", inv_HVVoltage );
 		map.put("F17", inv_LVVoltage );
-		map.put("F18", MotorRR_ActCurrent );
-		map.put("F19", MotorRR_ActSpeed );
-		map.put("F20", MotorRR_ActTorque );
-		map.put("F21", MotorRR_CmdSpeed );
-		map.put("F22", MotorRR_CmdTorque );
-		map.put("F23", MotorRL_ActCurrent );
-		map.put("F24", MotorRL_ActSpeed );
-		map.put("F25", MotorRL_ActTorque );
-		map.put("F26", MotorRL_CmdSpeed );
-		map.put("F27", MotorRL_CmdTorque );
-		map.put("F28", MotorRL_Frequency );
-		map.put("F29", MotorRR_Frequency );
-		map.put("F30", MotorRL_Temperature );
-		map.put("F31", MotorRR_Temperature );
+		map.put("F18", motorRR_ActCurrent );
+		map.put("F19", motorRR_ActSpeed );
+		map.put("F20", motorRR_ActTorque );
+		map.put("F21", motorRR_CmdSpeed );
+		map.put("F22", motorRR_CmdTorque );
+		map.put("F23", motorRL_ActCurrent );
+		map.put("F24", motorRL_ActSpeed );
+		map.put("F25", motorRL_ActTorque );
+		map.put("F26", motorRL_CmdSpeed );
+		map.put("F27", motorRL_CmdTorque );
+		map.put("F28", motorRL_Frequency );
+		map.put("F29", motorRR_Frequency );
+		map.put("F30", motorRL_Temperature );
+		map.put("F31", motorRR_Temperature );
 		map.put("F32", vehicle_linearSpeed );
 		map.put("B01", saf_BSPD );
 		map.put("B02", saf_IMD );
@@ -98,7 +100,7 @@ public class TelemetryData
 		map.put("B08", saf_SDBLeft );
 		map.put("B09", saf_SDBRight );
 		
-		date = LocalDateTime.now();
+		date.set(LocalDateTime.now());
 		
 		String[] packets = packet.split(";");
 			
