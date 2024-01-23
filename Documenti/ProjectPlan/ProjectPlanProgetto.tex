@@ -11,7 +11,7 @@
 
 
 \title{PROJECT PLAN - ERB TELEMETRY}
-\author{Simone Manenti 104878\\ Cattaneo Federico 1053265}
+\author{Simone Manenti 1048788\\ Cattaneo Federico 1053265}
 
 
 
@@ -21,23 +21,23 @@
 
 \chapter{INTRODUZIONE}
 \subsection{Storia}
-Durante la fase di progettazione svolta dal gruppo di controllo del team ERB di formula SAE, dell'università degli studi di Bergamo, si è scoperta la necessità di dover leggere i dati dei sensori collegati alla centralina, visualizzarli a schermo per poter fare un'analisi in tempo reale e verificare che nel sistema tutti i sensori siano in uno stato accettabile.
-Non trovando un software gratuito che andasse in contro alle esigenze del team, abbiamo deciso di sviluppare un software con le funzionalità essenziali per poter far procedere il team con la fase di test.
+Durante la fase di progettazione svolta dal gruppo di controllo del team ERB di Formula SAE, dell'Università degli Studi di Bergamo, si è scoperta la necessità di dover leggere i dati dei sensori collegati alla centralina, visualizzarli a schermo per poter fare un'analisi in tempo reale e verificare che nel sistema tutti i sensori siano in uno stato accettabile.
+Non trovando un software gratuito che andasse incontro alle esigenze del team, abbiamo deciso di sviluppare un software con le funzionalità essenziali per poter far procedere il team con la fase di test.
 \\
-Le necessità del team sono di visualizzare a schermo i dati in tempo reale, tramite tabelle o tramite grafici (funzionalità opzionale) e di salvare questi dati da qualche parte, per poter eventualmente confrontare i dati di due sessioni di test e capire se, a seguito di modifiche alla vettura, queste siano efficaci oppure siano modifiche non necessarie o controproducenti.
+Le necessità del team sono di visualizzare a schermo i dati in tempo reale, tramite tabelle o tramite grafici (funzionalità opzionale) e di salvare questi dati su file, per poter eventualmente confrontare i dati di due sessioni di test e capire se, a seguito di modifiche alla vettura, queste siano efficaci oppure siano modifiche non necessarie o controproducenti.
 
 
 \chapter{Descrizione del progetto}
-Nel sistema sono presenti due arduino:
+Nel sistema sono presenti due Arduino:
 \begin{itemize}
-\item \textbf{arduinoTX}: collegato alla centralina, si occupa della trasmissione dei dati dalla vettura ad un ricevitore.
-\item \textbf{arduinoRX}: collegato ad un computer, si occupa della ricezione dei dati inviati dall'arduinoTX.
+\item \textbf{Arduino TX}: collegato alla centralina, si occupa della trasmissione dei dati dalla vettura ad un ricevitore.
+\item \textbf{Arduino RX}: collegato ad un computer, si occupa della ricezione dei dati inviati dall'arduinoTX e all'inoltro degli stessi verso il PC tramite USB.
 \end{itemize}
 
 \subsection{Funzionalità}
 
 \begin{itemize}
-\item Riceviamo i dati in real time dei sensori collegati alla centralina nel formato: "accelleratore, pressione freno, temp. freno, temp. batteria, carica batteria, tempo sul giro, pressione gomme".
+\item Riceviamo i dati in real time dei sensori collegati alla centralina nel formato: "acceleratore, pressione freno, temperatura freno, temperatura batteria, carica batteria, tempo sul giro, pressione gomme".
 \item I dati possono essere visualizzati in real time tramite tabelle o grafici.
 \item I dati possono essere salvati in un database locale .
 \item Possiamo accedere allo storico dei dati salvati nel database locale.
@@ -63,10 +63,11 @@ Il CapoReparto può:
 
 \subsection{Comportamento comunicazione real time}
 \begin{itemize}
-\item Qualsiasi utente, tramite pulsante, decide quando tentare di avviare la comunicazione tra i due arduino.
+\item La monoposto trasmette i dati in modalità broadcast a prescindere dalla presenza di ricevitori collegati.
+\item Qualsiasi utente, tramite pulsante, decide quando avviare la comunicazione con il ricevitore.
 Se la comunicazione è avvenuta, i dati possono essere visualizzati tramite tabella e contemporaneamente salvati in locale.
-\item L’utente deve anche stoppare la comunicazione tra i due arduino (implica lo stop della lettura e scrittura dei dati).
-\item Se la connessione tra arduino non avviene, deve apparire un messaggio di errore.
+\item L’utente può interrompere la comunicazione a piacimento (implica lo stop della lettura e scrittura dei dati).
+\item Se la connessione tra il PC e il ricevitore non avviene, deve apparire un messaggio di errore.
 \end{itemize}
 
 \subsection{Comportamento dati in locale}
@@ -88,14 +89,35 @@ Abbiamo deciso di adottare un modello di processo Agile ibrido per i seguenti mo
 \item Potrebbero avvenire cambiamenti dell'interfaccia e delle funzioni
 \item Dobbiamo ottimizzare il tempo a disposizione per lo sviluppo del sistema
 \end{itemize}
-aggiungi tabella scrum con il punto di partenza con tutte le attività da svolgere.\\
-aggiungi MoSCoW guardando i seguenti obbiettivi:\\\\
-Dobbiamo sviluppare un software in grado di gestire i dati ricevuti.\\
-I dati li salveremo in un database locale, in forma tabellare.\\
-Dobbiamo avere delle funzioni per poter decidere se visualizzarli tramite tabelle o grafici.\\
-Per gestire la modifica dei dati, introduciamo una schermata di login all'apertura del software, così da poter determinare se l'utente ha l'autorizzazione per poter eventualmente, eliminare i dati presenti nel database locale.\\
-Dobbiamo avere una funzione che ci permetta di esportare i dati salvati nel database locale.\\
-Dobbiamo predisporre dei popup che comunichino all'utente se la comunicazione tra i trasmettitore e ricevitore è andata a buon fine.\\ 
+
+\textbf{Requisiti Must have:}
+\begin{itemize}
+\item Gestione porta COM comunicazione con ricevitore
+\item Gestione database locale per archiviazione/consultazione storico dati.
+\item GUI: Visualizzazione real-time dei dati ricevuti.
+\item GUI: Gestione porta COM 
+\item GUI: Visualizzazione tabellare storico dati
+\item GUI: Grafico dei trend 
+\item GUI: Visualizzazione errori di connessione
+\item Export dello storico dati tramite file CSV
+\end{itemize}
+
+\textbf{Requisiti Should have:}
+\begin{itemize}
+\item GUI: identificazione tramite colore dei valori che richiedono l'attenzione dell'operatore
+\item Accesso utenti
+\end{itemize}
+
+\textbf{Requisiti Could have:}
+\begin{itemize}
+\item Possibilità di muovere i componenti grafici all'interno dell'interfaccia
+\item Possibilità di cambiare il tema dell'interfaccia
+\end{itemize}
+
+\textbf{Requisiti Would have:}
+\begin{itemize}
+\item Possibilità di inviare comandi alla monoposto
+\end{itemize}
 
 
 \chapter{ORGANIZZAZIONE DEL PROGETTO}
@@ -119,12 +141,12 @@ Le procedure che il team dovrà seguire sono:
 \item Implementazione del codice
 \item Verifica della qualità e della validità
 \end{itemize}
-Per la gestione delle versioni del sistema utiliziamo GIT, Per alcune componenti useremo uno sviluppo simile a quello adottato nell'extreme programming, nel quale entrambi i membri del Team programmeranno sulla stessa macchina.\\
+Per la gestione delle versioni del sistema utilizziamo GIT, per alcune componenti useremo uno sviluppo simile a quello adottato nell'extreme programming, nel quale entrambi i membri del Team programmeranno sulla stessa macchina.\\
 Gestiamo la priorità dei requisiti secondo le regole MoSCoW\\
 Adotteremo le linee guida ISO/IEC 9126
 
 
-\chapter{ATTIVITA' DI GESTIONE}
+\chapter{ATTIVITÀ DI GESTIONE}
 Dopo esserci occupati dell'individuazione dei requisiti e aver fatto la prima stesura del Product Backlog, dobbiamo occuparci dello Sprint Planning.	\\
 \textbf{Sprint:}\\
 \begin{itemize}
@@ -144,10 +166,10 @@ Dopo esserci occupati dell'individuazione dei requisiti e aver fatto la prima st
 \chapter{RISCHI}
 Abbiamo individuato diverse tipologie di rischi:
 \begin{itemize}
-\item Ritardo nel rappresentare i dati ricevuti sul TX
+\item Ritardo nel rappresentare i dati ricevuti dal trasmettitore
 \item Possibilità di ottenere grafici non intuitivi da leggere
-\item Errore di eliminazione dei dati sul database da parte del CapoReparto
-\item Possibilità di perdita dei dati nel caso in cui ci sia un guasto dell'hardware, poichè il database è locale, sulla macchina dell'utente
+\item Errore di eliminazione dei dati sul database da parte del Capo Reparto
+\item Possibilità di perdita dei dati nel caso in cui ci sia un guasto dell'hardware, poiché il database è locale, sulla macchina dell'utente
 \end{itemize}
 
 \begingroup
@@ -157,15 +179,15 @@ Abbiamo individuato diverse tipologie di rischi:
 Entrambi i membri del team:
 \begin{itemize}
 \item Entrambi i membri del team avranno pari responsabilità e si divideranno equamente le attività da svolgere.
-\item partecipano, gratuitamente, dalle prime fasi del progetto.
-\item hanno dovuto imparare ad utilizzare i vari software e tools proposti per lo sviluppo del sistema, ad esempio:
- Maven, StarUml, GitHub.
-\item hanno conoscenze di base del linguaggio Java.
+\item Partecipano, gratuitamente, dalle prime fasi del progetto.
+\item Hanno dovuto imparare ad utilizzare i vari software e tools proposti per lo sviluppo del sistema, ad esempio:
+ Maven, StarUML, GitHub.
+\item Hanno conoscenze di base del linguaggio Java.
 \item Non hanno competenze sulla libreria SQLite.
 \end{itemize}
 
 \chapter{METODI E TECNICHE}
-Per lo sviluppo del progetto utiliziamo diversi software e tools:
+Per lo sviluppo del progetto utilizziamo diversi software e tools:
 \begin{itemize}
 \item Eclipse e Maven
 \item SQLite
@@ -174,10 +196,10 @@ Per lo sviluppo del progetto utiliziamo diversi software e tools:
 \item SceneBuilder e Javafx
 \item Texmaker
 \end{itemize}
-Per gestire la configurazione e tener traccia delle modifiche apportate al software, utiliziamo la notazione orientata alla versione;\\
+Per gestire la configurazione e tener traccia delle modifiche apportate al software, utilizziamo la notazione orientata alla versione;\\
 Ogni modifica genererà una versione numerata del software (ad esempio: X.0.1).
 
-\chapter{GARANZIA DI QUALITA'}
+\chapter{GARANZIA DI QUALITÀ}
 Il progetto è basato sul modello ISO 9126.\\
 Durante la progettazione e l'implementazione, il team cerca di rispettare le caratteristiche di Funzionalità, Affidabilità, Usabilità, Efficienza, Manutenibilità e Portabilità che sono definite nel modello di qualità interno, cioè del codice sorgente, e nel modello esterno, cioè la qualità quando il software viene eseguito, dell'ISO.\\
 Utilizzando il modello ISO 9126 il team ERB è interessato alla qualità in uso, cioè quando il team eseguirà il software durante le fasi di test dell'autovettura.\\
@@ -189,19 +211,19 @@ Dovremo anche sviluppare dei casi di test mirati, per simulare l'ambiente nel qu
 Dobbiamo suddividere il lavoro in diverse attività, alle quali entrambi i membri parteciperanno.\\
 In ordine dovremo fare le seguenti attività:
 \subsection*{Comunicazione con il cliente e requisiti del sistema}
-Fare degli incontri con il team ERB dell'università degli studi di Bergamo per poter definire i requisiti del progetto
+Fare degli incontri con il team ERB dell'Università degli Studi di Bergamo per poter definire i requisiti del progetto
 \subsection{Scelta ciclo di vita del progetto}
 Decidere come organizzare il lavoro
 \subsection*{Creazione grafici UML}
 Dedicare una parte del tempo per creare i diagrammi UML, in particolare i diagrammi degli stati, per poter creare una struttura di partenza per il software.
 \subsection*{Software:}
-Dividiamo l'attività di creazione del software in diverse sottoattività:
+Dividiamo l'attività di creazione del software in diverse sotto-attività:
 \subsubsection{Scelta dei tool}
 Fare degli incontri per scegliere i tool da utilizzare per la creazione dell'interfaccia grafica e per la creazione del database.
 \subsubsection{Creazione interfaccia grafica}
 Fare degli incontri per trovare la soluzione migliore per la scelta della composizione dell'interfaccia grafica e successivamente presentarla al team.
 \subsubsection{Interazione con interfaccia grafica}
-Implementare l'interazione con l'iterfaccia grafica, le componenti dinamiche come pulsanti o slider.
+Implementare l'interazione con l'interfaccia grafica, le componenti dinamiche come pulsanti, gauge graphs e dropdown.
 \subsubsection{Creazione database}
 Implementare il database per la gestione dei dati
 \subsubsection{Comunicazione tra gli arduino}
