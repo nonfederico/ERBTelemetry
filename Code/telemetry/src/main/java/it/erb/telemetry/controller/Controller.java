@@ -4,6 +4,8 @@ package it.erb.telemetry.controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import it.erb.telemetry.model.Model;
 import it.erb.telemetry.model.TelemetryData;
@@ -45,20 +47,20 @@ public class Controller
         		view.lbl_inv_HVVoltage.update(model.latestData.inv_HVVoltage.getValue(), model.latestData.inv_HVVoltage.getUnit());
         		view.lbl_inv_LVVoltage.update(model.latestData.inv_LVVoltage.getValue(), model.latestData.inv_LVVoltage.getUnit());
         		
-        		view.lbl_motRLActSpeed.update(model.latestData.MotorRL_ActSpeed.getValue(), model.latestData.MotorRL_ActSpeed.getUnit());
-        		view.lbl_motRRActSpeed.update(model.latestData.MotorRR_ActSpeed.getValue(), model.latestData.MotorRR_ActSpeed.getUnit());
-        		view.lbl_motRLCmdSpeed.update(model.latestData.MotorRL_CmdSpeed.getValue(), model.latestData.MotorRL_CmdSpeed.getUnit());
-        		view.lbl_motRRCmdSpeed.update(model.latestData.MotorRR_CmdSpeed.getValue(), model.latestData.MotorRR_CmdSpeed.getUnit());
-        		view.lbl_motRLActTorque.update(model.latestData.MotorRL_ActTorque.getValue(), model.latestData.MotorRL_ActTorque.getUnit());
-        		view.lbl_motRRActTorque.update(model.latestData.MotorRR_ActTorque.getValue(), model.latestData.MotorRR_ActTorque.getUnit());
-        		view.lbl_motRLCmdTorque.update(model.latestData.MotorRL_CmdTorque.getValue(), model.latestData.MotorRL_CmdTorque.getUnit());
-        		view.lbl_motRRCmdTorque.update(model.latestData.MotorRR_CmdTorque.getValue(), model.latestData.MotorRR_CmdTorque.getUnit());
-        		view.lbl_motRLActCurrent.update(model.latestData.MotorRL_ActCurrent.getValue(), model.latestData.MotorRL_ActCurrent.getUnit());
-        		view.lbl_motRRActCurrent.update(model.latestData.MotorRR_ActCurrent.getValue(), model.latestData.MotorRR_ActCurrent.getUnit());
-        		view.lbl_motRLActFrequency.update(model.latestData.MotorRL_Frequency.getValue(), model.latestData.MotorRL_Frequency.getUnit());
-        		view.lbl_motRRActFrequency.update(model.latestData.MotorRR_Frequency.getValue(), model.latestData.MotorRR_Frequency.getUnit());
-        		view.lbl_motRLTemperature.update(model.latestData.MotorRL_Temperature.getValue(), model.latestData.MotorRL_Temperature.getUnit());
-        		view.lbl_motRRTemperature.update(model.latestData.MotorRR_Temperature.getValue(), model.latestData.MotorRR_Temperature.getUnit());
+        		view.lbl_motRLActSpeed.update(model.latestData.motorRL_ActSpeed.getValue(), model.latestData.motorRL_ActSpeed.getUnit());
+        		view.lbl_motRRActSpeed.update(model.latestData.motorRR_ActSpeed.getValue(), model.latestData.motorRR_ActSpeed.getUnit());
+        		view.lbl_motRLCmdSpeed.update(model.latestData.motorRL_CmdSpeed.getValue(), model.latestData.motorRL_CmdSpeed.getUnit());
+        		view.lbl_motRRCmdSpeed.update(model.latestData.motorRR_CmdSpeed.getValue(), model.latestData.motorRR_CmdSpeed.getUnit());
+        		view.lbl_motRLActTorque.update(model.latestData.motorRL_ActTorque.getValue(), model.latestData.motorRL_ActTorque.getUnit());
+        		view.lbl_motRRActTorque.update(model.latestData.motorRR_ActTorque.getValue(), model.latestData.motorRR_ActTorque.getUnit());
+        		view.lbl_motRLCmdTorque.update(model.latestData.motorRL_CmdTorque.getValue(), model.latestData.motorRL_CmdTorque.getUnit());
+        		view.lbl_motRRCmdTorque.update(model.latestData.motorRR_CmdTorque.getValue(), model.latestData.motorRR_CmdTorque.getUnit());
+        		view.lbl_motRLActCurrent.update(model.latestData.motorRL_ActCurrent.getValue(), model.latestData.motorRL_ActCurrent.getUnit());
+        		view.lbl_motRRActCurrent.update(model.latestData.motorRR_ActCurrent.getValue(), model.latestData.motorRR_ActCurrent.getUnit());
+        		view.lbl_motRLActFrequency.update(model.latestData.motorRL_Frequency.getValue(), model.latestData.motorRL_Frequency.getUnit());
+        		view.lbl_motRRActFrequency.update(model.latestData.motorRR_Frequency.getValue(), model.latestData.motorRR_Frequency.getUnit());
+        		view.lbl_motRLTemperature.update(model.latestData.motorRL_Temperature.getValue(), model.latestData.motorRL_Temperature.getUnit());
+        		view.lbl_motRRTemperature.update(model.latestData.motorRR_Temperature.getValue(), model.latestData.motorRR_Temperature.getUnit());
         		
         		view.led_safBSPD.update(model.latestData.saf_BSPD.getValue());
         		view.led_safIMD.update(model.latestData.saf_IMD.getValue());
@@ -109,17 +111,14 @@ public class Controller
 			
 			System.out.println("Query date range: " + sDateTime + " " + eDateTime);
 			
-			TelemetryData td = model.retrieveDataFromDB( sDateTime, eDateTime);
+			// Query the database
+			List<TelemetryData> resultSet = model.retrieveDataFromDB(sDateTime, eDateTime);
 			
-			//view.tableView.getItems().add(td);
-			ObservableList<TelemetryData> items = FXCollections.<TelemetryData>observableArrayList();
+			ObservableList<TelemetryData> tableItems = view.tableView.getItems();
 			
-			items.add(td);
-			items.add(td);
-			items.add(td);
+			tableItems.clear();
+			tableItems.addAll(resultSet);	
 			
-			
-			view.tableView.setItems(items);
 		});
 		
 		

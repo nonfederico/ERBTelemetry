@@ -162,7 +162,7 @@ public class Model
 	}
 	
 	
-	public TelemetryData retrieveDataFromDB( LocalDateTime startDate, LocalDateTime endDate )
+	public List<TelemetryData> retrieveDataFromDB( LocalDateTime startDate, LocalDateTime endDate )
 	{
 		return db.retrieveRecord(startDate, endDate);	
 	}
