@@ -42,8 +42,7 @@ public class App extends Application {
         stage.getIcons().add(new Image("file:Logo.png"));
         
         //per fare il resize della schermata
-        final boolean resizable = stage.isResizable();
-		stage.setResizable(resizable);
+		stage.setResizable(true);
         stage.show();
     
                
