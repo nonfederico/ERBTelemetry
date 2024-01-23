@@ -52,40 +52,7 @@ public class App extends Application {
 		stage.setResizable(resizable);
         stage.show();
     
-        
-     
-        
-        // Secondary thread
-        thread = new Thread(new Runnable() {
-        	
-        	public void run() {
-
-                while (mainThread.isAlive()) {
-                	   
-                    Platform.runLater(new Runnable(){
-                    	@Override
-                    	public void run()
-                    	{
-                    		//data.setValue(s);
-                    		
-                    		
-                    		
-                    	}
-                          	
-                    });
-                    
-                    try {
-						Thread.sleep(3000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-                }
-            }
-        });
-        
-        thread.start();
-        
+               
     }
     
     public void stop()
