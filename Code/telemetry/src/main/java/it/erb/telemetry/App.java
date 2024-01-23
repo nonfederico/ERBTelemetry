@@ -46,7 +46,14 @@ public class App extends Application {
         stage.setTitle("ERB Telemetry");
         stage.setScene(view.getScene());
         stage.getIcons().add(new Image("file:Logo.png"));
+        
+        //per fare il resize della schermata
+        final boolean resizable = stage.isResizable();
+		stage.setResizable(resizable);
         stage.show();
+    
+        
+     
         
         // Secondary thread
         thread = new Thread(new Runnable() {
