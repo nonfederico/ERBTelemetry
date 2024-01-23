@@ -27,18 +27,12 @@ public class App extends Application {
 	Model model;
 	Controller controller;
 	
-	private Thread thread;
-	private Thread mainThread;
-	
-	
 	ObservableList<String> serialItems;
 	
 	
     @Override
     public void start(Stage stage) 
     {
-    	mainThread = Thread.currentThread();
-    	
     	view = new View();
         model = new Model();
         controller = new Controller(model, view);
