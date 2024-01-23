@@ -547,7 +547,7 @@ public class View
 		bPane.setBackground(new Background(new BackgroundFill(paint, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		// SCENE
-		scene = new Scene(bPane, 1920, 900);
+		scene = new Scene(bPane, 1280, 720);
 		scene.setFill(Color.BLACK);
 		scene.getStylesheets().add("/stylesheet.css");
 		
