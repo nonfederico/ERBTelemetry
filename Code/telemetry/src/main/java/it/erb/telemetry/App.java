@@ -22,7 +22,6 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-	String s;
 	View view;
 	Model model;
 	Controller controller;
@@ -40,9 +39,7 @@ public class App extends Application {
         stage.setTitle("ERB Telemetry");
         stage.setScene(view.getScene());
         stage.getIcons().add(new Image("file:Logo.png"));
-        
-        //per fare il resize della schermata
-		stage.setResizable(true);
+        stage.setResizable(true); //per fare il resize della schermata
         stage.show();
     
                
