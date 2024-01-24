@@ -22,6 +22,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Separator;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
@@ -138,10 +140,19 @@ public class View
 		tlb_com.getItems().add(lbl_comStatus);
 		
 		
+		
+		//tabpane (seleziono le tab)
+		
+		//formatto la tab come tilepane
+		TilePane tilePane = new TilePane(new Label("mettere grafici"));
+		//tilePane.getChildren().addAll(tabPane);
+	
+		
 		// CENTER PANE
 		// TABLE
-		VBox centerPane = new VBox();
-		
+	
+		VBox tableHistoryDataPane = new VBox();
+
 		// CONTROL BOX
 		HBox table_ctrlBox = new HBox();
 		
@@ -291,9 +302,28 @@ public class View
 		
 		tableView.setItems(FXCollections.observableArrayList());
 		
-		centerPane.getChildren().add(table_ctrlBox);
-		centerPane.getChildren().add(tableView);
-		centerPane.setPadding(new Insets(20));
+		tableHistoryDataPane.getChildren().add(table_ctrlBox);
+		tableHistoryDataPane.getChildren().add(tableView);
+		tableHistoryDataPane.setPadding(new Insets(20));
+		
+		TabPane tabPane = new TabPane();
+		Tab	tab1 = new Tab("grafici", tilePane);
+		//tab1.setText("grafici");
+		
+		Tab tab2 = new Tab("tabelle", tableHistoryDataPane);
+		//tab2.setText();
+		tabPane.getTabs().addAll(tab1, tab2);
+	
+		//per vedere se funziona quando clicco
+		tab1.setOnSelectionChanged(e->
+		System.out.println(tab1.isSelected()? "a selected": "a unselected"));
+		tab2.setOnSelectionChanged(e->
+		System.out.println(tab2.isSelected()? "b selected": "b unselected"));
+		
+		//VBox centerPane = new VBox(); //mettilo se vuoi le tabpane
+		
+	
+		
 		
 		// HV accumulator data
 		// TITLE + GRID PANE
@@ -537,7 +567,7 @@ public class View
 		BorderPane bPane = new BorderPane();
 		bPane.getStyleClass().add("borderPane");
 		bPane.setTop(tlb_com);
-		bPane.setCenter(centerPane);
+		bPane.setCenter(tabPane); 
 		bPane.setBottom(bottomPane);
 		
 		LinearGradient paint = new LinearGradient(
@@ -549,7 +579,7 @@ public class View
 		// SCENE
 		scene = new Scene(bPane, 1280, 720);
 		scene.setFill(Color.BLACK);
-		scene.getStylesheets().add("/stylesheet.css");
+		scene.getStylesheets().add(getClass().getResource("stylesheet.css").toExternalForm());
 		
 	}
 	
