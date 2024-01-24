@@ -7,7 +7,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
-public class LinearCharts  { //metti grafici l
+public class LinearCharts  { //metti grafici 
 /*
 NumberAxis xAxis = new NumberAxis(0,100,10);
 
