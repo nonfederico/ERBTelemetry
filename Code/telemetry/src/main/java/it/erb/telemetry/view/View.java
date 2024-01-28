@@ -35,6 +35,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -154,10 +156,16 @@ public class View
 		btn_tableLoad = new Button("Load");
 		btn_tableCsvExport = new Button("CSV Export");
 		
+		Pane spacer = new Pane();
+		spacer.setMinSize(10, 1);
+		
+		table_ctrlBox.setSpacing(10);
+		table_ctrlBox.setHgrow(spacer, Priority.ALWAYS);
 		table_ctrlBox.setPadding(new Insets(0,0,5,0));
 		table_ctrlBox.getChildren().add(dp_tableStartDate);
 		table_ctrlBox.getChildren().add(dp_tableEndDate);
 		table_ctrlBox.getChildren().add(btn_tableLoad);
+		table_ctrlBox.getChildren().add(spacer);
 		table_ctrlBox.getChildren().add(btn_tableCsvExport);
 		
 		// TABLE
@@ -297,7 +305,7 @@ public class View
 		
 		tableHistoryDataPane.getChildren().add(table_ctrlBox);
 		tableHistoryDataPane.getChildren().add(tableView);
-		tableHistoryDataPane.setPadding(new Insets(5));
+		tableHistoryDataPane.setPadding(new Insets(10,5,10,5));
 		tableView.prefHeightProperty().bind(tableHistoryDataPane.heightProperty());
 		
 		// CENTER PANE

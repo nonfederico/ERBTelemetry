@@ -65,8 +65,61 @@
 	-fx-hgap: 5;
 }
 
-.tableView{
+.table-view{
 	-fx-background-color: rgba(0, 0, 0, 0.5);
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: rgba(90, 90, 90, 1);
+    -fx-table-cell-border-color: rgba(200, 90, 90, 1);
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(220, 220, 220, 1);
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: rgba(220, 220, 220, 1);
+}
+
+.table-row-cell{
+    -fx-background-color: rgba(50, 50, 50, 1);
+    -fx-table-cell-border-color: rgba(80, 80, 80, 1);
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-padding: 0.2em; 
+    -fx-cell-size: 20px;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #424242;
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-padding: 0.2em; /* 0 */  
+}
+
+.table-row-cell: hover {
+    -fx-background-color: #202020;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
 }
 			
 .bottomPane {
