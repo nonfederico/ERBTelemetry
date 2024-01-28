@@ -12,9 +12,9 @@ import javafx.beans.property.SimpleObjectProperty;
 public class TelemetryData 
 {
 	public ObjectProperty<LocalDateTime> date = new SimpleObjectProperty<>();
-	public AnalogSensor ThrottlePedal_Pos = new AnalogSensor();
-	public AnalogSensor BrakePedal_Pos = new AnalogSensor();
-	public AnalogSensor SteeringWheel_Pos = new AnalogSensor("°");
+	public AnalogSensor throttlePedal_Pos = new AnalogSensor();
+	public AnalogSensor brakePedal_Pos = new AnalogSensor();
+	public AnalogSensor steeringWheel_Pos = new AnalogSensor("°");
 	public AnalogSensor HVAcc_Voltage = new AnalogSensor("V");
 	public AnalogSensor HVAcc_SoC = new AnalogSensor("%");
 	public AnalogSensor HVAcc_Current = new AnalogSensor("A");
@@ -58,9 +58,9 @@ public class TelemetryData
 	{
 		HashMap<String, Sensor> map = new HashMap<String, Sensor>();
 		
-		map.put("F01", ThrottlePedal_Pos );
-		map.put("F02", BrakePedal_Pos );
-		map.put("F03", SteeringWheel_Pos );
+		map.put("F01", throttlePedal_Pos );
+		map.put("F02", brakePedal_Pos );
+		map.put("F03", steeringWheel_Pos );
 		map.put("F04", HVAcc_Voltage );
 		map.put("F05", HVAcc_SoC );
 		map.put("F06", HVAcc_Current );

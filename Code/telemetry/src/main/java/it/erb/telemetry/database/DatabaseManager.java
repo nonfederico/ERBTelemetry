@@ -137,9 +137,9 @@ public class DatabaseManager
 					+ "?,?)");
 			
 			stmt.setObject(1, data.date.getValue() );
-			stmt.setFloat(2, data.ThrottlePedal_Pos.getValue());
-			stmt.setFloat(3, data.BrakePedal_Pos.getValue());
-			stmt.setFloat(4, data.SteeringWheel_Pos.getValue());
+			stmt.setFloat(2, data.throttlePedal_Pos.getValue());
+			stmt.setFloat(3, data.brakePedal_Pos.getValue());
+			stmt.setFloat(4, data.steeringWheel_Pos.getValue());
 			stmt.setFloat(5, data.HVAcc_Voltage.getValue());
 			stmt.setFloat(6, data.HVAcc_SoC.getValue());
 			stmt.setFloat(7, data.HVAcc_Current.getValue());
@@ -203,9 +203,9 @@ public class DatabaseManager
 			{
 				TelemetryData td = new TelemetryData();
 				td.date.set(rs.getObject("Data",LocalDateTime.class));
-				td.ThrottlePedal_Pos.setValue(rs.getFloat("ThrottlePedal_Pos"));
-				td.BrakePedal_Pos.setValue(rs.getFloat("BrakePedal_Pos"));
-				td.SteeringWheel_Pos.setValue(rs.getFloat("SteeringWheel_Pos"));
+				td.throttlePedal_Pos.setValue(rs.getFloat("ThrottlePedal_Pos"));
+				td.brakePedal_Pos.setValue(rs.getFloat("BrakePedal_Pos"));
+				td.steeringWheel_Pos.setValue(rs.getFloat("SteeringWheel_Pos"));
 				td.HVAcc_Voltage.setValue(rs.getFloat("HVAcc_Voltage"));			
 				td.HVAcc_SoC.setValue(rs.getFloat("HVAcc_SoC")); 			
 				td.HVAcc_Current.setValue(rs.getFloat("HVAcc_Current")); 		

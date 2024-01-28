@@ -141,19 +141,12 @@ public class View
 		
 		
 		
-		//tabpane (seleziono le tab)
-		
-		//formatto la tab come tilepane
-		TilePane tilePane = new TilePane(new Label("mettere grafici"));
-		//tilePane.getChildren().addAll(tabPane);
-	
-		
-		// CENTER PANE
-		// TABLE
-	
+		// GRAPH PANE
+		TilePane tilePane = new TilePane(new Label("mettere grafici"));	//formatto la tab come tilepane
+			
+		// HISTORY TABLE
 		VBox tableHistoryDataPane = new VBox();
 
-		// CONTROL BOX
 		HBox table_ctrlBox = new HBox();
 		
 		dp_tableStartDate = new DatePicker(LocalDate.now());
@@ -161,6 +154,7 @@ public class View
 		btn_tableLoad = new Button("Load");
 		btn_tableCsvExport = new Button("CSV Export");
 		
+		table_ctrlBox.setPadding(new Insets(0,0,5,0));
 		table_ctrlBox.getChildren().add(dp_tableStartDate);
 		table_ctrlBox.getChildren().add(dp_tableEndDate);
 		table_ctrlBox.getChildren().add(btn_tableLoad);
@@ -213,11 +207,10 @@ public class View
 		TableColumn<TelemetryData,Boolean> col41 = new TableColumn<>("SDC SDB left");
 		TableColumn<TelemetryData,Boolean> col42 = new TableColumn<>("SDC SDB right");
 				
-		
 		col1.setCellValueFactory(data -> data.getValue().date);
-		col2.setCellValueFactory(data -> data.getValue().ThrottlePedal_Pos.getProperty());
-		col3.setCellValueFactory(data -> data.getValue().BrakePedal_Pos.getProperty());
-		col4.setCellValueFactory(data -> data.getValue().SteeringWheel_Pos.getProperty());
+		col2.setCellValueFactory(data -> data.getValue().throttlePedal_Pos.getProperty());
+		col3.setCellValueFactory(data -> data.getValue().brakePedal_Pos.getProperty());
+		col4.setCellValueFactory(data -> data.getValue().steeringWheel_Pos.getProperty());
 		col5.setCellValueFactory(data -> data.getValue().HVAcc_Voltage.getProperty());
 		col6.setCellValueFactory(data -> data.getValue().HVAcc_SoC.getProperty());
 		col7.setCellValueFactory(data -> data.getValue().HVAcc_Current.getProperty());
@@ -304,27 +297,20 @@ public class View
 		
 		tableHistoryDataPane.getChildren().add(table_ctrlBox);
 		tableHistoryDataPane.getChildren().add(tableView);
-		tableHistoryDataPane.setPadding(new Insets(20));
+		tableHistoryDataPane.setPadding(new Insets(5));
+		tableView.prefHeightProperty().bind(tableHistoryDataPane.heightProperty());
 		
+		// CENTER PANE
 		TabPane tabPane = new TabPane();
-		Tab	tab1 = new Tab("grafici", tilePane);
-		//tab1.setText("grafici");
-		
-		Tab tab2 = new Tab("tabelle", tableHistoryDataPane);
-		//tab2.setText();
+		Tab	tab1 = new Tab("Live chart", tilePane);
+		Tab tab2 = new Tab("History database", tableHistoryDataPane);
 		tabPane.getTabs().addAll(tab1, tab2);
 	
 		//per vedere se funziona quando clicco
-		tab1.setOnSelectionChanged(e->
-		System.out.println(tab1.isSelected()? "a selected": "a unselected"));
-		tab2.setOnSelectionChanged(e->
-		System.out.println(tab2.isSelected()? "b selected": "b unselected"));
+		tab1.setOnSelectionChanged(e-> System.out.println(tab1.isSelected()? "a selected": "a unselected"));
+		tab2.setOnSelectionChanged(e-> System.out.println(tab2.isSelected()? "b selected": "b unselected"));
 		
-		//VBox centerPane = new VBox(); //mettilo se vuoi le tabpane
-		
-	
-		
-		
+				
 		// HV accumulator data
 		// TITLE + GRID PANE
 		VBox vb_HVAcc = new VBox();

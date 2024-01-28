@@ -72,10 +72,10 @@ public class Controller
         		view.led_safSDBLeft.update(model.latestData.saf_SDBLeft.getValue());
         		view.led_safSDBRight.update(model.latestData.saf_SDBRight.getValue());
         		
-        		view.driverInputDataPane.set_throttleProgressBar(model.latestData.ThrottlePedal_Pos.getValue()/100f);
-        		view.driverInputDataPane.set_brakeProgressBar(model.latestData.BrakePedal_Pos.getValue()/100f);
-        		view.driverInputDataPane.set_throttleLabel(model.latestData.ThrottlePedal_Pos.getValue());
-        		view.driverInputDataPane.set_brakeLabel(model.latestData.BrakePedal_Pos.getValue());
+        		view.driverInputDataPane.set_throttleProgressBar(model.latestData.throttlePedal_Pos.getValue()/100f);
+        		view.driverInputDataPane.set_brakeProgressBar(model.latestData.brakePedal_Pos.getValue()/100f);
+        		view.driverInputDataPane.set_throttleLabel(model.latestData.throttlePedal_Pos.getValue());
+        		view.driverInputDataPane.set_brakeLabel(model.latestData.brakePedal_Pos.getValue());
         		
         		view.gg_linearSpeed.setValue(model.latestData.vehicle_linearSpeed.getValue());
         			
