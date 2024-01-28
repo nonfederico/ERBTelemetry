@@ -10,6 +10,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -19,7 +20,10 @@ import javafx.stage.Stage;
 
 /**
  * JavaFX App
+ * CONTROLLA VERSIONE DI JAVA CHE STAI USANDO
  */
+
+
 public class App extends Application 
 {
 
@@ -36,13 +40,32 @@ public class App extends Application
     	view = new View();
         model = new Model();
         controller = new Controller(model, view);
+        System.out.println(System.getProperty("java.runtime.version"));
         
         stage.setTitle("ERB Telemetry");
         stage.setScene(view.getScene());
         stage.getIcons().add(new Image("file:Logo.png"));
         stage.setResizable(true); //per fare il resize della schermata
         stage.show();
+        //mostro le cose e poi le reinderizzo (le aggiorno)
+    	//la view detiene l'istanza del grafico e qui compilo i dati, devo triggerare manualmente i dati
+        
+        
+        
+        //crea metodo nel view per aggiungere i dati nel grafico con:
+        Platform.runLater(() -> {   //trigga il render del componente, aggiorno il componente con i dati (UI)
+        
+            XYChart.Series<Number, Number> series = new XYChart.Series<>(); //<-- fuori dal costruttore view
+            
+            series.getData().add(new XYChart.Data<>(1, 5));
+            series.getData().add(new XYChart.Data<>(2, 10));
+            series.getData().add(new XYChart.Data<>(3, 15));
+
+            view.getLineChart().getData().add(series);
+          
+        });
     
+        
                
     }
     
