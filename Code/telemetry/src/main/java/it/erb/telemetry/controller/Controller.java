@@ -1,6 +1,10 @@
 package it.erb.telemetry.controller;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.lang.System.Logger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -21,12 +25,17 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.FXPermission;
 
 public class Controller 
 {
-	public Controller(Model model, View view)
+	
+	List<TelemetryData> historyDataSet;
+	
+	public Controller(Model model, View view, Stage stage)
 	{
 		// UI periodic update
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(200),
@@ -112,17 +121,58 @@ public class Controller
 			System.out.println("Query date range: " + sDateTime + " " + eDateTime);
 			
 			// Query the database
-			List<TelemetryData> resultSet = model.retrieveDataFromDB(sDateTime, eDateTime);
+			historyDataSet = model.retrieveDataFromDB(sDateTime, eDateTime);
 			
 			ObservableList<TelemetryData> tableItems = view.tableView.getItems();
 			
 			tableItems.clear();
-			tableItems.addAll(resultSet);	
+			tableItems.addAll(historyDataSet);	
 			
 		});
+		
+		view.btn_tableCsvExport.setOnAction(event -> saveHistorySetToFile(stage) );
+		
+		
 		
 		
 	}
 	
+	void saveHistorySetToFile(Stage primaryStage) //creates text file with points
+	{
+	    FileChooser fileChooser = new FileChooser();
+
+	    //Set extension filter for text files
+	    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+	    fileChooser.getExtensionFilters().add(extFilter);
+
+	    //Show save file dialog
+	    File file = fileChooser.showSaveDialog(primaryStage);
+	    if (file != null) 
+	    {
+	        try 
+	        {
+	            PrintWriter writer;
+	            writer = new PrintWriter(file);
+	            writer.println(TelemetryData.namesToString());
+	            if(historyDataSet != null )
+	            {
+	            	for(TelemetryData td : historyDataSet)
+	            	{
+	            		writer.println(td.toString());
+	            	}
+	            }
+	            writer.close();
+	        } 
+	        catch (IOException ex) 
+	        {
+	            System.out.println("Exception while exporting csv file");;
+	        }
+	    }
+
+	}
 	
 }
+
+
+
+

@@ -41,5 +41,7 @@ public class AnalogSensor extends Sensor
 	
 	public String toString(){ return String.format("%.0f", value) + unit; }
 		
-	public String toString(int decimals){ return String.format("%."+decimals+"f", value) + unit; }
+	public String toString(int decimals){ return this.toString(decimals, true); }
+	
+	public String toString(int decimals, boolean showUnit){ return String.format("%."+decimals+"f", value) + (showUnit ? unit : "") ; }
 }

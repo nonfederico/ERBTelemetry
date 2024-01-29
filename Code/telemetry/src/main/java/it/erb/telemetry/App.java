@@ -35,7 +35,7 @@ public class App extends Application
     {
     	view = new View();
         model = new Model();
-        controller = new Controller(model, view);
+        controller = new Controller(model, view, stage);
         
         stage.setTitle("ERB Telemetry");
         stage.setScene(view.getScene());

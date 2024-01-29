@@ -16,5 +16,5 @@ public class DigitalSensor extends Sensor
 	
 	public void setValue(String value) { this.value = value.equals("1"); }
 	
-	
+	public String toString(){ return value ? "1" : "0"; }
 }
