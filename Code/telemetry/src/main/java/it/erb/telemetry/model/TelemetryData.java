@@ -1,6 +1,8 @@
 package it.erb.telemetry.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.HashMap;
 
 import it.erb.telemetry.model.sensor.AnalogSensor;
@@ -121,7 +123,106 @@ public class TelemetryData
 		}
 	}
 	
+	public String toString()
+	{
+		String s = new String();
+		String separator = ";";
+		
+		s = s + date.get().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")) + separator;
+		s = s + throttlePedal_Pos.toString(1,false) + separator;
+		s = s + brakePedal_Pos.toString(1,false) + separator;
+		s = s + steeringWheel_Pos.toString(1,false) + separator;
+		s = s + HVAcc_Voltage.toString(1,false) + separator;
+		s = s + HVAcc_SoC.toString(1,false) + separator;
+		s = s + HVAcc_Current.toString(1,false) + separator;
+		s = s + HVAcc_Temp.toString(1,false) + separator;
+		s = s + HVAcc_Cell_1_Temp.toString(1,false) + separator;
+		s = s + HVAcc_Cell_2_Temp.toString(1,false) + separator;
+		s = s + HVAcc_Cell_3_Temp.toString(1,false) + separator;
+		s = s + HVAcc_Cell_4_Temp.toString(1,false) + separator;
+		s = s + LVAcc_Voltage.toString(1,false) + separator;
+		s = s + LVAcc_SoC.toString(1,false) + separator;
+		s = s + LVAcc_Current.toString(1,false) + separator;
+		s = s + inv_Temperature.toString(1,false) + separator;
+		s = s + inv_HVVoltage.toString(1,false) + separator;
+		s = s + inv_LVVoltage.toString(1,false) + separator;
+		s = s + motorRR_ActCurrent.toString(1,false) + separator;
+		s = s + motorRR_ActSpeed.toString(1,false) + separator;
+		s = s + motorRR_ActTorque.toString(1,false) + separator;
+		s = s + motorRR_CmdSpeed.toString(1,false) + separator;
+		s = s + motorRR_CmdTorque.toString(1,false) + separator;
+		s = s + motorRR_Frequency.toString(1,false) + separator;
+		s = s + motorRR_Temperature.toString(1,false) + separator;
+		s = s + motorRL_ActCurrent.toString(1,false) + separator;
+		s = s + motorRL_ActSpeed.toString(1,false) + separator;
+		s = s + motorRL_ActTorque.toString(1,false) + separator;
+		s = s + motorRL_CmdSpeed.toString(1,false) + separator;
+		s = s + motorRL_CmdTorque.toString(1,false) + separator;
+		s = s + motorRL_Frequency.toString(1,false) + separator;
+		s = s + motorRL_Temperature.toString(1,false) + separator;
+		s = s + vehicle_linearSpeed.toString(1,false) + separator;
+		s = s + saf_BSPD.toString() + separator;
+		s = s + saf_IMD.toString() + separator;
+		s = s + saf_LVMS.toString() + separator;
+		s = s + saf_AMS.toString() + separator;
+		s = s + saf_IS.toString() + separator;
+		s = s + saf_BOTS.toString() + separator;
+		s = s + saf_SDBCockpit.toString() + separator;
+		s = s + saf_SDBLeft.toString() + separator;
+		s = s + saf_SDBRight.toString();
+		
+		return s;
+	}
 	
-	
+	public static String namesToString()
+	{
+		String s = new String();
+		String separator = ";";
+		
+		s = s + "Time" + separator;
+		s = s + "Throttle pedal position" + separator;
+		s = s + "Brake pedal position" + separator;
+		s = s + "Steering wheel position" + separator;
+		s = s + "HV acc. voltage" + separator;
+		s = s + "HV acc. SoC" + separator;
+		s = s + "HV acc. current" + separator;
+		s = s + "HV acc. temperature" + separator;
+		s = s + "HV acc. cell 1 temperature" + separator;
+		s = s + "HV acc. cell 2 temperature" + separator;
+		s = s + "HV acc. cell 3 temperature" + separator;
+		s = s + "HV acc. cell 4 temperature" + separator;
+		s = s + "LV acc. voltage" + separator;
+		s = s + "LV acc. SoC" + separator;
+		s = s + "LV acc. current" + separator;
+		s = s + "Inverter temperature" + separator;
+		s = s + "Inverter HV voltage" + separator;
+		s = s + "Inverter LV voltage" + separator;
+		s = s + "Motor RR actual current" + separator;
+		s = s + "Motor RR actual speed" + separator;
+		s = s + "Motor RR actual torque" + separator;
+		s = s + "Motor RR command speed" + separator;
+		s = s + "Motor RR command torque" + separator;
+		s = s + "Motor RR frequency" + separator;
+		s = s + "Motor RR temperature" + separator;
+		s = s + "Motor RL actual current" + separator;
+		s = s + "Motor RL actual speed" + separator;
+		s = s + "Motor RL actual torque" + separator;
+		s = s + "Motor RL command speed" + separator;
+		s = s + "Motor RL command torque" + separator;
+		s = s + "Motor RL frequency" + separator;
+		s = s + "Motor RR temperature" + separator;
+		s = s + "Vehicle linear speed" + separator;
+		s = s + "Safety circuit BSPD" + separator;
+		s = s + "Safety circuit IMD" + separator;
+		s = s + "Safety circuit LVMS" + separator;
+		s = s + "Safety circuit AMS" + separator;
+		s = s + "Safety circuit IS" + separator;
+		s = s + "Safety circuit BOTS" + separator;
+		s = s + "Safety circuit SDB cockpit" + separator;
+		s = s + "Safety circuit BOTS SDB left" + separator;
+		s = s + "Safety circuit BOTS SDB right";
+		
+		return s;
+	}
 	
 }
