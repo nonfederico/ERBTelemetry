@@ -1,5 +1,4 @@
 package it.erb.telemetry.view;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -10,12 +9,16 @@ import eu.hansolo.medusa.Section;
 import it.erb.telemetry.model.TelemetryData;
 import it.erb.telemetry.model.sensor.AnalogSensor;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -50,6 +53,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
+
 
 public class View 
 {
@@ -114,6 +118,10 @@ public class View
 	public Gauge gg_linearSpeed;
 	
 	public DriverInputDataPane driverInputDataPane;
+
+	//inizializzo fuori dal costruttore, vuoto
+	
+	public LineChart lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
 	
 	
 	public View()
@@ -144,8 +152,10 @@ public class View
 		
 		
 		// GRAPH PANE
-		TilePane tilePane = new TilePane(new Label("mettere grafici"));	//formatto la tab come tilepane
-			
+		TilePane tilePane = new TilePane();	//formatto la tab come tilepane
+		//TilePane tilePane = new TilePane(new Label("mettere grafici"));	//formatto la tab come tilepane
+				
+				
 		// HISTORY TABLE
 		VBox tableHistoryDataPane = new VBox();
 
@@ -308,17 +318,53 @@ public class View
 		tableHistoryDataPane.setPadding(new Insets(10,5,10,5));
 		tableView.prefHeightProperty().bind(tableHistoryDataPane.heightProperty());
 		
+
+		lineChart.setTitle("Grafico01");
+		
+		/*
+		// Grafici
+		NumberAxis xAxis = new NumberAxis();
+		xAxis.setLabel("x");
+		NumberAxis yAxis = new NumberAxis();
+		yAxis.setLabel("y");
+		LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
+		
+		XYChart.Series<Number, Number> dataSeries1 = new XYChart.Series<Number,Number>();
+		dataSeries1.setName("2014");
+		System.out.println("debug 316");
+		
+		dataSeries1.getData().add(new XYChart.Data<Number,Number>(1, 567));
+		System.out.println("debug 318");
+		dataSeries1.getData().add(new XYChart.Data(5, 612));
+		dataSeries1.getData().add(new XYChart.Data(10, 800));
+		dataSeries1.getData().add(new XYChart.Data(20, 780));
+		dataSeries1.getData().add(new XYChart.Data(40, 810));
+		dataSeries1.getData().add(new XYChart.Data(80, 850));
+		
+		lineChart.getData().clear();
+		System.out.println("debug 326");
+		lineChart.getData().add(dataSeries1);
+		System.out.println("debug 327");
+		*/
+		
+		/* questo funziona
+		Button but01 = new Button("but01");
+		tilePane.getChildren().add(but01);
+		*/
+		tilePane.getChildren().add(lineChart);
+
+	
 		// CENTER PANE
 		TabPane tabPane = new TabPane();
 		Tab	tab1 = new Tab("Live chart", tilePane);
 		Tab tab2 = new Tab("History database", tableHistoryDataPane);
-		tabPane.getTabs().addAll(tab1, tab2);
-	
+		tabPane.getTabs().addAll(tab2, tab1);
+		//tabPane.setTabClosingPolicy(tabPane.un);
 		//per vedere se funziona quando clicco
 		tab1.setOnSelectionChanged(e-> System.out.println(tab1.isSelected()? "a selected": "a unselected"));
 		tab2.setOnSelectionChanged(e-> System.out.println(tab2.isSelected()? "b selected": "b unselected"));
 		
-				
+			
 		// HV accumulator data
 		// TITLE + GRID PANE
 		VBox vb_HVAcc = new VBox();
@@ -582,7 +628,9 @@ public class View
 		return scene;
 	}
 	
-	
+	public LineChart<Number, Number> getLineChart() {
+        return lineChart;
+    }
 }
 
 class UpwardProgress 
