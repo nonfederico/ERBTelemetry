@@ -27,6 +27,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
@@ -359,6 +360,7 @@ public class View
 		Tab	tab1 = new Tab("Live chart", tilePane);
 		Tab tab2 = new Tab("History database", tableHistoryDataPane);
 		tabPane.getTabs().addAll(tab2, tab1);
+		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		//tabPane.setTabClosingPolicy(tabPane.un);
 		//per vedere se funziona quando clicco
 		tab1.setOnSelectionChanged(e-> System.out.println(tab1.isSelected()? "a selected": "a unselected"));
@@ -631,6 +633,8 @@ public class View
 	public LineChart<Number, Number> getLineChart() {
         return lineChart;
     }
+	
+
 }
 
 class UpwardProgress 

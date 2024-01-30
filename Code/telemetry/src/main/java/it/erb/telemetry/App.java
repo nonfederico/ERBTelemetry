@@ -37,6 +37,7 @@ public class App extends Application
     	view = new View();
         model = new Model();
         controller = new Controller(model, view);
+        System.out.println(System.getProperty("java.runtime.version"));
         
         stage.setTitle("ERB Telemetry");
         stage.setScene(view.getScene());
@@ -48,9 +49,9 @@ public class App extends Application
     	//la view detiene l'istanza del grafico e qui compilo i dati, devo triggerare manualmente i dati
         
         
-        
         //crea metodo nel view per aggiungere i dati nel grafico con:
         Platform.runLater(() -> {   //trigga il render del componente, aggiorno il componente con i dati (UI)
+        
         
         XYChart.Series<Number, Number> series = new XYChart.Series<>(); //<-- fuori dal costruttore view
             
