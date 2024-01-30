@@ -1,6 +1,6 @@
 # ERB Telemetry
 Software to monitor wirelessly the telemetry of FSAE electric vehicle by E-Racing Bergamo team.
-<img src="https://github.com/nonfederico/ERBTelemetry/blob/main/Img/IMG004.png" height="200">
+<img src="https://github.com/nonfederico/ERBTelemetry/blob/main/Img/IMG004.png" height="400">
 
 ## Key functionalities
 * Live data monitoring
