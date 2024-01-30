@@ -10,12 +10,16 @@ import eu.hansolo.medusa.Section;
 import it.erb.telemetry.model.TelemetryData;
 import it.erb.telemetry.model.sensor.AnalogSensor;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -24,6 +28,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
@@ -115,6 +120,7 @@ public class View
 	
 	public DriverInputDataPane driverInputDataPane;
 	
+	public LineChart lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
 	
 	public View()
 	{
@@ -144,7 +150,7 @@ public class View
 		
 		
 		// GRAPH PANE
-		TilePane tilePane = new TilePane(new Label("mettere grafici"));	//formatto la tab come tilepane
+		TilePane tilePane = new TilePane();	//formatto la tab come tilepane
 			
 		// HISTORY TABLE
 		VBox tableHistoryDataPane = new VBox();
@@ -309,14 +315,18 @@ public class View
 		tableView.prefHeightProperty().bind(tableHistoryDataPane.heightProperty());
 		
 		// CENTER PANE
+		lineChart.setTitle("Grafico01");
+		tilePane.getChildren().add(lineChart);
+		
 		TabPane tabPane = new TabPane();
-		Tab	tab1 = new Tab("Live chart", tilePane);
-		Tab tab2 = new Tab("History database", tableHistoryDataPane);
-		tabPane.getTabs().addAll(tab1, tab2);
-	
+		Tab	tabChart = new Tab("Live chart", tilePane);
+		Tab tabData = new Tab("History database", tableHistoryDataPane);
+		tabPane.getTabs().addAll(tabData, tabChart);
+		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+		
 		//per vedere se funziona quando clicco
-		tab1.setOnSelectionChanged(e-> System.out.println(tab1.isSelected()? "a selected": "a unselected"));
-		tab2.setOnSelectionChanged(e-> System.out.println(tab2.isSelected()? "b selected": "b unselected"));
+		tabChart.setOnSelectionChanged(e-> System.out.println(tabChart.isSelected()? "a selected": "a unselected"));
+		tabData.setOnSelectionChanged(e-> System.out.println(tabData.isSelected()? "b selected": "b unselected"));
 		
 				
 		// HV accumulator data
@@ -581,6 +591,10 @@ public class View
 	{
 		return scene;
 	}
+	
+	public LineChart<Number, Number> getLineChart() {
+        return lineChart;
+    }
 	
 	
 }
