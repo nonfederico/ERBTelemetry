@@ -15,7 +15,7 @@ Java applicatyion for remote monitoring the telemetry of FSAE electric vehicle b
 * Radio transmitter and receiver module
 
 ## Documents
-* <title="title"
+* <a title="title"
 href="https://github.com/nonfederico/ERBTelemetry/blob/main/Documenti/ProjectPlan/ProjectPlanProgetto.pdf" target="_blank" >
 Project plan
 </a>
