@@ -28,3 +28,4 @@ replay_pid*
 Code/telemetry/DB.db
 Code/telemetry/target/classes/META-INF/maven/it.erb/telemetry/pom.properties
 *.properties
+*.db
