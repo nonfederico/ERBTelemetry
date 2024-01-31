@@ -1,6 +1,7 @@
 package it.erb.telemetry;
 
 import it.erb.telemetry.controller.Controller;
+import it.erb.telemetry.controller.ModChart;
 import it.erb.telemetry.model.Model;
 import it.erb.telemetry.view.View;
 import javafx.application.Application;
@@ -34,6 +35,7 @@ public class App extends Application
     @Override
     public void start(Stage stage) 
     {
+    	ModChart A= new ModChart();
     	view = new View();
         model = new Model();
         controller = new Controller(model, view, stage);
@@ -43,18 +45,13 @@ public class App extends Application
         stage.getIcons().add(new Image("file:Logo.png"));
         stage.setResizable(true); //per fare il resize della schermata
         stage.show();
+       
         
-        Platform.runLater(() -> {   //trigga il render del componente, aggiorno il componente con i dati (UI)
-            
-            
-        XYChart.Series<Number, Number> series = new XYChart.Series<>(); //<-- fuori dal costruttore view
-                
-        series.getData().add(new XYChart.Data<>(1, 5));
-        series.getData().add(new XYChart.Data<>(2, 10));
-        series.getData().add(new XYChart.Data<>(3, 15));
-
-        view.getLineChart().getData().add(series);
-              
+        //triggero il render del componente per aggiornare la UI
+        Platform.runLater(() -> {   
+ 
+        //uso funzione ModChart per aggiungere dati al grafico creato nella view
+        A.AddSeries(view.getLineChart());
         });
         
     

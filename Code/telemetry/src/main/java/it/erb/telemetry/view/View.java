@@ -120,7 +120,7 @@ public class View
 	
 	public DriverInputDataPane driverInputDataPane;
 	
-	public LineChart lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
+	private LineChart lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
 	
 	public View()
 	{
@@ -315,7 +315,7 @@ public class View
 		tableView.prefHeightProperty().bind(tableHistoryDataPane.heightProperty());
 		
 		// CENTER PANE
-		lineChart.setTitle("Grafico01");
+		//lineChart.setTitle("Grafico01");
 		tilePane.getChildren().add(lineChart);
 		
 		TabPane tabPane = new TabPane();
@@ -591,6 +591,8 @@ public class View
 	{
 		return scene;
 	}
+	
+
 	
 	public LineChart<Number, Number> getLineChart() {
         return lineChart;

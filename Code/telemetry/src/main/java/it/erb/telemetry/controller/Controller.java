@@ -34,6 +34,7 @@ public class Controller
 {
 	
 	List<TelemetryData> historyDataSet;
+	public ModChart ModChartA;
 	
 	public Controller(Model model, View view, Stage stage)
 	{
@@ -171,7 +172,9 @@ public class Controller
 
 	}
 	
+	
 }
+
 
 
 
