@@ -13,6 +13,7 @@ import it.erb.telemetry.database.DatabaseManager;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.chart.XYChart;
 
 
 
@@ -22,10 +23,12 @@ public class Model
 	private SerialPort comPort;
 	private SerialPort[] availableSerialPorts;		
 	private ObservableList<String> serialPortNameList = FXCollections.observableArrayList();
+	
 	private int SelectComPortIndex = -1;
 	private boolean isComPortOpen = false;
 	
 	public TelemetryData latestData = new TelemetryData();
+	private NewPacketListener packetListener;
 	
 	
 	public Model()
@@ -156,6 +159,13 @@ public class Model
 			
 			// Add data to database
 			db.addRecord(td);
+			
+			System.out.println(Thread.currentThread().getName());
+			
+			if(packetListener != null) 
+			{
+				packetListener.packetHandling(td);
+			}
 		}
 
 		
@@ -167,7 +177,10 @@ public class Model
 		return db.retrieveRecord(startDate, endDate);	
 	}
 	
-	
+	public void setListener(NewPacketListener listener)
+	{
+		packetListener = listener;		
+	}
 }
 
 

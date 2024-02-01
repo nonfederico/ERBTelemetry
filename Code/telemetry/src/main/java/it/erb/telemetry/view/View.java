@@ -120,7 +120,8 @@ public class View
 	
 	public DriverInputDataPane driverInputDataPane;
 	
-	public LineChart lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
+	public LineChart<Number,Number> lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
+	public XYChart.Series<Number, Number> series = new XYChart.Series<>();
 	
 	public View()
 	{
@@ -316,6 +317,7 @@ public class View
 		
 		// CENTER PANE
 		lineChart.setTitle("Grafico01");
+		lineChart.getData().add(series);
 		tilePane.getChildren().add(lineChart);
 		
 		TabPane tabPane = new TabPane();

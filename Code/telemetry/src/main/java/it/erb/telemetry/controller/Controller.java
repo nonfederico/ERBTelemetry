@@ -19,20 +19,23 @@ import it.erb.telemetry.view.View;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.FXPermission;
+import javafx.util.converter.LocalDateTimeStringConverter;
 
 public class Controller 
 {
-	
+	Integer counter = 0;
 	List<TelemetryData> historyDataSet;
 	
 	public Controller(Model model, View view, Stage stage)
@@ -134,6 +137,18 @@ public class Controller
 		
 		
 		
+		model.setListener((td) -> {
+			System.out.println("First interface");
+			
+			Platform.runLater(() -> {
+				counter ++;
+				view.series.getData().add(new XYChart.Data<>( counter , td.throttlePedal_Pos.getValue()));
+			});
+			
+			
+		});
+		
+		//
 		
 	}
 	
