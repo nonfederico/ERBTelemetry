@@ -11,6 +11,8 @@ module-info.class
 it\erb\telemetry\model\sensor\Sensor.class
 it\erb\telemetry\model\Model.class
 it\erb\telemetry\SystemInfo.class
+it\erb\telemetry\view\TableColumnGroup.class
+it\erb\telemetry\controller\ControlChart.class
 it\erb\telemetry\view\Led.class
 it\erb\telemetry\App.class
 it\erb\telemetry\model\sensor\AnalogSensor.class

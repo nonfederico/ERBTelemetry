@@ -1,5 +1,6 @@
 package it.erb.telemetry;
 
+import it.erb.telemetry.controller.ControlChart;
 import it.erb.telemetry.controller.Controller;
 import it.erb.telemetry.model.Model;
 import it.erb.telemetry.view.View;
@@ -37,6 +38,7 @@ public class App extends Application
     	view = new View();
         model = new Model();
         controller = new Controller(model, view, stage);
+        ControlChart con = new ControlChart();
         
         stage.setTitle("ERB Telemetry");
         stage.setScene(view.getScene());
@@ -46,15 +48,8 @@ public class App extends Application
         
         Platform.runLater(() -> {   //trigga il render del componente, aggiorno il componente con i dati (UI)
             
-            
-        XYChart.Series<Number, Number> series = new XYChart.Series<>(); //<-- fuori dal costruttore view
-                
-        series.getData().add(new XYChart.Data<>(1, 5));
-        series.getData().add(new XYChart.Data<>(2, 10));
-        series.getData().add(new XYChart.Data<>(3, 15));
-
-        view.getLineChart().getData().add(series);
-              
+        con.AddSeries(view.getLineChart());
+        
         });
         
     

@@ -1,5 +1,6 @@
 C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\model\sensor\Sensor.java
 C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\controller\Controller.java
+C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\view\TableColumnGroup.java
 C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\SystemInfo.java
 C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\database\DatabaseManager.java
 C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\App.java
@@ -7,6 +8,7 @@ C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\module
 C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\view\Led.java
 C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\model\sensor\DigitalSensor.java
 C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\view\DriverInputDataPane.java
+C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\controller\ControlChart.java
 C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\view\DataLabel.java
 C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\model\TelemetryData.java
 C:\Users\fedec\Documents\GitHub\ERBTelemetry\Code\telemetry\src\main\java\it\erb\telemetry\view\View.java
