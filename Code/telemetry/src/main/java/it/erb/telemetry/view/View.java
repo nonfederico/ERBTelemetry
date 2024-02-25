@@ -18,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.LineChart.SortingPolicy;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
@@ -31,6 +32,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -62,10 +64,17 @@ public class View
 	
 	public ChoiceBox<String> chBox_comPort;
 	
+	
+	
+	public TextField textField1;
+	public TextField textField2;
+	
 	public Button btn_comConnect;
 	public Button btn_comDisconnect;
 	public Button btn_tableLoad;
 	public Button btn_tableCsvExport;
+	public Button btn_testButton;
+	public Button btn_testButton2;
 	
 	public DataLabel lbl_HVAccVoltage;
 	public DataLabel lbl_HVAccCurrent;
@@ -316,9 +325,25 @@ public class View
 		tableView.prefHeightProperty().bind(tableHistoryDataPane.heightProperty());
 		
 		// CENTER PANE
+		btn_testButton = new Button();
+		btn_testButton.setText("Add");
+		btn_testButton2 = new Button();
+		btn_testButton2.setText("Log");
+		ToolBar tb = new ToolBar();
+		textField1 = new TextField();
+		textField2 = new TextField();
+		tb.getItems().add(textField1);
+		tb.getItems().add(textField2);
+		tb.getItems().add(btn_testButton);
+		tb.getItems().add(btn_testButton2);
+		
 		lineChart.setTitle("Grafico01");
 		lineChart.getData().add(series);
+		lineChart.setAxisSortingPolicy(SortingPolicy.NONE);
+		
+		tilePane.getChildren().add(tb);
 		tilePane.getChildren().add(lineChart);
+		
 		
 		TabPane tabPane = new TabPane();
 		Tab	tabChart = new Tab("Live chart", tilePane);

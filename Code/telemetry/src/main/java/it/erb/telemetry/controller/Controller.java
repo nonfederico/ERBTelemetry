@@ -25,6 +25,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
@@ -142,13 +143,32 @@ public class Controller
 			
 			Platform.runLater(() -> {
 				counter ++;
-				view.series.getData().add(new XYChart.Data<>( counter , td.throttlePedal_Pos.getValue()));
+				//view.series.getData().add(new XYChart.Data<>( counter , td.throttlePedal_Pos.getValue()));
+				
+				
+
 			});
 			
 			
 		});
 		
-		//
+		view.series.getData().add(new XYChart.Data( 3, 20));
+		view.series.getData().add(new XYChart.Data( 5, 70));
+		view.series.getData().add(new XYChart.Data( 1, 30));
+		view.series.getData().add(new XYChart.Data( -1, 30));
+		
+		view.btn_testButton.setOnAction(event -> view.series.getData().add( new XYChart.Data( 
+																								Integer.valueOf(view.textField1.getText()),
+																								Integer.valueOf(view.textField2.getText())
+																								)));
+		
+		view.btn_testButton2.setOnAction(event -> {
+													System.out.print("0: ");	System.out.print(view.series.getData().get(0).getXValue()); System.out.print(","); System.out.println(view.series.getData().get(0).getYValue());
+													System.out.print("1: ");	System.out.print(view.series.getData().get(1).getXValue()); System.out.print(","); System.out.println(view.series.getData().get(1).getYValue());
+													System.out.print("2: ");	System.out.print(view.series.getData().get(2).getXValue()); System.out.print(","); System.out.println(view.series.getData().get(2).getYValue()); 
+											
+													
+		});
 		
 	}
 	
