@@ -60,12 +60,15 @@ public class View
 {
 	public Scene scene;
 	
+	
 	public ChoiceBox<String> chBox_comPort;
+	
 	
 	public Button btn_comConnect;
 	public Button btn_comDisconnect;
 	public Button btn_tableLoad;
 	public Button btn_tableCsvExport;
+	
 	
 	public DataLabel lbl_HVAccVoltage;
 	public DataLabel lbl_HVAccCurrent;
@@ -96,8 +99,8 @@ public class View
 	
 	
 	public Label lbl_comStatus;
-	
 	public Circle circle_comStatus;
+	
 	
 	public Led led_safBSPD;
 	public Led led_safIMD;
@@ -109,10 +112,11 @@ public class View
 	public Led led_safSDBLeft;
 	public Led led_safSDBRight;
 	
+	/*
 	public DatePicker dp_tableStartDate;
 	public DatePicker dp_tableEndDate;
-	
-	public TableView<TelemetryData> tableView;
+	*/
+
 	
 	public Gauge gg_HVAcc;
 	public Gauge gg_LVAcc;
@@ -120,10 +124,15 @@ public class View
 	
 	public DriverInputDataPane driverInputDataPane;
 	
+	
 	private LineChart lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
-	private TableColumnGroup tableGroupA = new TableColumnGroup();
+	
+    public CenterVbox vBoxTable = new CenterVbox();
+	
+	
 	public View()
 	{
+		
 		
 		btn_comConnect = new Button();
 		btn_comConnect.setText("Connect");
@@ -139,7 +148,7 @@ public class View
 		lbl_comStatus = new Label("Not connected");
 		
 		
-		// TOOL BAR COM port
+		
 		ToolBar tlb_com = new ToolBar();
 		tlb_com.getItems().add(chBox_comPort);
 		tlb_com.getItems().add(btn_comConnect);
@@ -153,6 +162,7 @@ public class View
 		TilePane tilePane = new TilePane();	//formatto la tab come tilepane
 			
 		// HISTORY TABLE
+		/*
 		VBox tableHistoryDataPane = new VBox();
 
 		HBox table_ctrlBox = new HBox();
@@ -176,12 +186,13 @@ public class View
 		
 		// TABLE
 		tableView = new TableView<>(); //guarda classe TableColumnGroup per inserimento dati tabella
-		
+	
 		
 		tableHistoryDataPane.getChildren().add(table_ctrlBox);
 		tableHistoryDataPane.getChildren().add(tableGroupA.tableGroupReturn(tableView));
 		tableHistoryDataPane.setPadding(new Insets(10,5,10,5));
 		tableView.prefHeightProperty().bind(tableHistoryDataPane.heightProperty());
+		*/
 		
 		// CENTER PANE
 		//lineChart.setTitle("Grafico01");
@@ -189,7 +200,7 @@ public class View
 		
 		TabPane tabPane = new TabPane();
 		Tab	tabChart = new Tab("Live chart", tilePane);
-		Tab tabData = new Tab("History database", tableHistoryDataPane);
+		Tab tabData = new Tab("History database", vBoxTable.getVbox());
 		tabPane.getTabs().addAll(tabData, tabChart);
 		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		
@@ -492,4 +503,7 @@ class UpwardProgress
     public Group getProgressHolder() {
         return progressHolder;
     }
+    
+   
+    
 }

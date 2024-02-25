@@ -14,6 +14,7 @@ import java.util.List;
 import it.erb.telemetry.model.Model;
 import it.erb.telemetry.model.TelemetryData;
 import it.erb.telemetry.model.sensor.AnalogSensor;
+import it.erb.telemetry.view.CenterVbox;
 import it.erb.telemetry.view.DataLabel;
 import it.erb.telemetry.view.View;
 import javafx.animation.Animation;
@@ -34,6 +35,7 @@ public class Controller
 {
 	
 	List<TelemetryData> historyDataSet;
+	private CenterVbox vBox= new CenterVbox();
 	
 	public Controller(Model model, View view, Stage stage)
 	{
@@ -108,12 +110,12 @@ public class Controller
 		
 		view.btn_comConnect.setOnAction(event -> model.startListening() );
 		
-		view.btn_comDisconnect.setOnAction(event -> model.stopListening() );
+		view.btn_comDisconnect.setOnAction(event -> model.stopListening());
 		
-		view.btn_tableLoad.setOnAction(event -> {
+		view.vBoxTable.getBtn_tableLoad().setOnAction(event -> {
 			
-			LocalDate sDate = view.dp_tableStartDate.getValue();
-			LocalDate eDate = view.dp_tableEndDate.getValue();
+			LocalDate sDate = vBox.getStartDate().getValue();
+			LocalDate eDate = vBox.getEndDate().getValue();
 			
 			LocalDateTime sDateTime = LocalDateTime.of(sDate, LocalTime.MIDNIGHT);
 			LocalDateTime eDateTime = LocalDateTime.of(eDate, LocalTime.MIDNIGHT);
@@ -123,7 +125,8 @@ public class Controller
 			// Query the database
 			historyDataSet = model.retrieveDataFromDB(sDateTime, eDateTime);
 			
-			ObservableList<TelemetryData> tableItems = view.tableView.getItems();
+			//ObservableList<TelemetryData> tableItems = view.tableView.getItems();
+			ObservableList<TelemetryData> tableItems = view.vBoxTable.getTableview().getItems(); 
 			
 			tableItems.clear();
 			tableItems.addAll(historyDataSet);	

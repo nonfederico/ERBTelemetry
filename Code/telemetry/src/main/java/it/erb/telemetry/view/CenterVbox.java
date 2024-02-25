@@ -1,18 +1,75 @@
 package it.erb.telemetry.view;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import it.erb.telemetry.model.TelemetryData;
 import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 
-public class TableColumnGroup {
+public class CenterVbox {
 
-public TableColumnGroup() {}
+public CenterVbox() {}
 
-public TableView<TelemetryData> tableGroupReturn(TableView tableView) {
+
+private VBox tableHistory = new VBox();
+private HBox table_ctrlBox = new HBox();
+
+private TableView<TelemetryData> tableView;
+
+private Button btn_tableLoad;
+private Button btn_tableCsvExport;
+
+private DatePicker dp_tableStartDate;
+private DatePicker dp_tableEndDate;
+
+
+public VBox getVbox() {
+	
+
+	
+	dp_tableStartDate = new DatePicker(LocalDate.now());
+	dp_tableEndDate = new DatePicker(LocalDate.now().plusDays(1));
+	btn_tableLoad = new Button("Load");
+	btn_tableCsvExport = new Button("CSV Export");
+	
+	Pane spacer = new Pane();
+	spacer.setMinSize(10, 1);
+	
+	table_ctrlBox.setSpacing(10);
+	table_ctrlBox.setHgrow(spacer, Priority.ALWAYS);
+	table_ctrlBox.setPadding(new Insets(0,0,5,0));
+	table_ctrlBox.getChildren().add(dp_tableStartDate);
+	table_ctrlBox.getChildren().add(dp_tableEndDate);
+	table_ctrlBox.getChildren().add(btn_tableLoad);
+	table_ctrlBox.getChildren().add(spacer);
+	table_ctrlBox.getChildren().add(btn_tableCsvExport);
+	
+	tableView = new TableView<>(); //guarda classe TableColumnGroup per inserimento dati tabella
+	
+	tableHistory.getChildren().add(table_ctrlBox);
+	tableHistory.getChildren().add(tableGroupReturn(tableView));
+	tableHistory.setPadding(new Insets(10,5,10,5));
+	tableView.prefHeightProperty().bind(tableHistory.heightProperty());
+	
+	
+	return tableHistory;
+}
+
+private TableView<TelemetryData> tableGroupReturn(TableView tableView) {
 
 tableView.setPlaceholder(new Label("No rows to display"));
 
@@ -58,7 +115,9 @@ TableColumn<TelemetryData,Boolean> col39 = new TableColumn<>("SDC BOTS");
 TableColumn<TelemetryData,Boolean> col40 = new TableColumn<>("SDC SDB cockpit");
 TableColumn<TelemetryData,Boolean> col41 = new TableColumn<>("SDC SDB left");
 TableColumn<TelemetryData,Boolean> col42 = new TableColumn<>("SDC SDB right");
-		
+
+
+
 col1.setCellValueFactory(data -> data.getValue().date);
 col2.setCellValueFactory(data -> data.getValue().throttlePedal_Pos.getProperty());
 col3.setCellValueFactory(data -> data.getValue().brakePedal_Pos.getProperty());
@@ -148,5 +207,22 @@ tableView.getColumns().add(col42);
 tableView.setItems(FXCollections.observableArrayList());
 return tableView;
 }
+
+public TableView getTableview() {
+	return tableView;
+}
+
+public DatePicker  getStartDate() {
+	return dp_tableStartDate;
+}
+
+public DatePicker  getEndDate() {
+	return dp_tableEndDate;
+}
+
+public Button getBtn_tableLoad(){
+	return btn_tableLoad;
+}
+
 
 }

@@ -48,6 +48,7 @@ public class App extends Application
         
         Platform.runLater(() -> {   //trigga il render del componente, aggiorno il componente con i dati (UI)
             
+        	//prendiamo il lineChart creato nel view e aggiungiamo le serie
         con.AddSeries(view.getLineChart());
         
         });
