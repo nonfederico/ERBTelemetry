@@ -22,54 +22,33 @@ import javafx.scene.shape.Circle;
 
 public class CenterVbox {
 
-public CenterVbox() {}
+	public VBox tableHistory;
+	public HBox table_ctrlBox;
 
+	public TableView<TelemetryData> tableView;
 
-private VBox tableHistory = new VBox();
-private HBox table_ctrlBox = new HBox();
+	public Button btn_tableLoad;
+	public Button btn_tableCsvExport;
 
-private TableView<TelemetryData> tableView;
-
-private Button btn_tableLoad;
-private Button btn_tableCsvExport;
-
-private DatePicker dp_tableStartDate;
-private DatePicker dp_tableEndDate;
-
-
-public VBox getVbox() {
-	
+	public DatePicker dp_tableStartDate;
+	public DatePicker dp_tableEndDate;
+	public Pane spacer;
 
 	
-	dp_tableStartDate = new DatePicker(LocalDate.now());
-	dp_tableEndDate = new DatePicker(LocalDate.now().plusDays(1));
-	btn_tableLoad = new Button("Load");
-	btn_tableCsvExport = new Button("CSV Export");
-	
-	Pane spacer = new Pane();
-	spacer.setMinSize(10, 1);
-	
-	table_ctrlBox.setSpacing(10);
-	table_ctrlBox.setHgrow(spacer, Priority.ALWAYS);
-	table_ctrlBox.setPadding(new Insets(0,0,5,0));
-	table_ctrlBox.getChildren().add(dp_tableStartDate);
-	table_ctrlBox.getChildren().add(dp_tableEndDate);
-	table_ctrlBox.getChildren().add(btn_tableLoad);
-	table_ctrlBox.getChildren().add(spacer);
-	table_ctrlBox.getChildren().add(btn_tableCsvExport);
-	
-	tableView = new TableView<>(); //guarda classe TableColumnGroup per inserimento dati tabella
-	
-	tableHistory.getChildren().add(table_ctrlBox);
-	tableHistory.getChildren().add(tableGroupReturn(tableView));
-	tableHistory.setPadding(new Insets(10,5,10,5));
-	tableView.prefHeightProperty().bind(tableHistory.heightProperty());
-	
-	
-	return tableHistory;
+
+public CenterVbox() {
+		spacer = new Pane();
+		tableHistory = new VBox();
+		table_ctrlBox = new HBox();
+		dp_tableStartDate = new DatePicker(LocalDate.now());
+		dp_tableEndDate = new DatePicker(LocalDate.now().plusDays(1));
+		btn_tableLoad = new Button("Load");
+		btn_tableCsvExport = new Button("CSV Export");
+		spacer.setMinSize(10, 1);
 }
 
-private TableView<TelemetryData> tableGroupReturn(TableView tableView) {
+
+public TableView<TelemetryData> tableGroupReturn(TableView tableView) {
 
 tableView.setPlaceholder(new Label("No rows to display"));
 
@@ -207,6 +186,30 @@ tableView.getColumns().add(col42);
 tableView.setItems(FXCollections.observableArrayList());
 return tableView;
 }
+
+public VBox getVbox() {
+	
+	table_ctrlBox.setSpacing(10);
+	table_ctrlBox.setHgrow(spacer, Priority.ALWAYS);
+	table_ctrlBox.setPadding(new Insets(0,0,5,0));
+	table_ctrlBox.getChildren().add(dp_tableStartDate);
+	table_ctrlBox.getChildren().add(dp_tableEndDate);
+	table_ctrlBox.getChildren().add(btn_tableLoad);
+	table_ctrlBox.getChildren().add(spacer);
+	table_ctrlBox.getChildren().add(btn_tableCsvExport);
+	
+	tableView = new TableView<>(); //guarda classe TableColumnGroup per inserimento dati tabella
+	
+	tableHistory.getChildren().add(table_ctrlBox);
+	tableHistory.getChildren().add(tableGroupReturn(tableView));
+	tableHistory.setPadding(new Insets(10,5,10,5));
+	tableView.prefHeightProperty().bind(tableHistory.heightProperty());
+	
+	
+	return tableHistory;
+}
+
+
 
 public TableView getTableview() {
 	return tableView;

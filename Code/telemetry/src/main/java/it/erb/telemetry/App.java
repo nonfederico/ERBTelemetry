@@ -26,6 +26,7 @@ public class App extends Application
 {
 
 	View view;
+	
 	Model model;
 	Controller controller;
 	
