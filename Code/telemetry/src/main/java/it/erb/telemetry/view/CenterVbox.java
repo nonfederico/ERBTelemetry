@@ -22,17 +22,17 @@ import javafx.scene.shape.Circle;
 
 public class CenterVbox {
 
-	public VBox tableHistory;
-	public HBox table_ctrlBox;
+	private VBox tableHistory;
+	private HBox table_ctrlBox;
 
-	public TableView<TelemetryData> tableView;
+	private TableView<TelemetryData> tableView;
 
-	public Button btn_tableLoad;
-	public Button btn_tableCsvExport;
+	private Button btn_tableLoad;
+	private Button btn_tableCsvExport;
 
-	public DatePicker dp_tableStartDate;
-	public DatePicker dp_tableEndDate;
-	public Pane spacer;
+	private DatePicker dp_tableStartDate;
+	private DatePicker dp_tableEndDate;
+	private Pane spacer;
 
 	
 
@@ -226,6 +226,11 @@ public DatePicker  getEndDate() {
 public Button getBtn_tableLoad(){
 	return btn_tableLoad;
 }
+
+public Button getBtn_tableCsvExport() {
+    return btn_tableCsvExport;
+}
+
 
 
 }

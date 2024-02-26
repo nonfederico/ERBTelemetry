@@ -66,8 +66,8 @@ public class View
 	
 	public Button btn_comConnect;
 	public Button btn_comDisconnect;
-	public Button btn_tableLoad;
-	public Button btn_tableCsvExport;
+	//public Button btn_tableLoad;
+	//public Button btn_tableCsvExport;
 	
 	
 	public DataLabel lbl_HVAccVoltage;
@@ -504,6 +504,8 @@ class UpwardProgress
         return progressHolder;
     }
     
+
+   
    
     
 }

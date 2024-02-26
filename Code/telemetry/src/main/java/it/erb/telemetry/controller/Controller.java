@@ -133,7 +133,7 @@ public class Controller
 			
 		});
 		
-		view.btn_tableCsvExport.setOnAction(event -> saveHistorySetToFile(stage) );
+		view.vBoxTable.getBtn_tableCsvExport().setOnAction(event -> saveHistorySetToFile(stage) );
 		
 		
 		
