@@ -117,6 +117,7 @@ public class Controller
 			LocalDate sDate = vBox.getStartDate().getValue();
 			LocalDate eDate = vBox.getEndDate().getValue();
 			
+			
 			LocalDateTime sDateTime = LocalDateTime.of(sDate, LocalTime.MIDNIGHT);
 			LocalDateTime eDateTime = LocalDateTime.of(eDate, LocalTime.MIDNIGHT);
 			

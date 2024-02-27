@@ -212,23 +212,23 @@ public VBox getVbox() {
 
 
 public TableView getTableview() {
-	return tableView;
+	return this.tableView;
 }
 
 public DatePicker  getStartDate() {
-	return dp_tableStartDate;
+	return this.dp_tableStartDate;
 }
 
 public DatePicker  getEndDate() {
-	return dp_tableEndDate;
+	return this.dp_tableEndDate;
 }
 
 public Button getBtn_tableLoad(){
-	return btn_tableLoad;
+	return this.btn_tableLoad;
 }
 
 public Button getBtn_tableCsvExport() {
-    return btn_tableCsvExport;
+    return this.btn_tableCsvExport;
 }
 
 
