@@ -128,8 +128,10 @@ public class View
 	private LineChart lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
 	
     public CenterVbox vBoxTable = new CenterVbox();
-	
-	
+
+    //metodo 2 data
+    public DatePicker dataInizio = new DatePicker();
+    public DatePicker dataFine = new DatePicker();
 	public View()
 	{
 		
@@ -146,8 +148,10 @@ public class View
 		circle_comStatus = new Circle(5);
 		
 		lbl_comStatus = new Label("Not connected");
+		dataInizio = vBoxTable.getStartDate();
 		
-		
+		//metodo2
+		dataFine = vBoxTable.getEndDate();
 		
 		ToolBar tlb_com = new ToolBar();
 		tlb_com.getItems().add(chBox_comPort);
@@ -478,7 +482,25 @@ public class View
         return lineChart;
     }
 	
+	// Delegation pattern metodo 01
+	/*
+	public DatePicker getStartDate() {
+		return vBoxTable.getStartDate();
+	}
 	
+	public DatePicker getEndDate() {
+		return vBoxTable.getEndDate();
+	}
+	*/
+//	metodo 02
+	public DatePicker getStartDate() {
+		dataInizio = vBoxTable.getStartDate();
+		return dataInizio;
+	}
+	public DatePicker getEndDate() {
+		dataFine = vBoxTable.getEndDate();
+		return dataFine;
+	}
 }
 
 class UpwardProgress 
@@ -504,8 +526,7 @@ class UpwardProgress
         return progressHolder;
     }
     
-   
-   
+  
    
     
 }

@@ -114,9 +114,13 @@ public class Controller
 		
 		view.vBoxTable.getBtn_tableLoad().setOnAction(event -> {
 			
+			/*prima
 			LocalDate sDate = vBox.getStartDate().getValue();
 			LocalDate eDate = vBox.getEndDate().getValue();
+			*/
 			
+			LocalDate sDate = view.getStartDate().getValue();
+			LocalDate eDate = view.getEndDate().getValue();
 			
 			LocalDateTime sDateTime = LocalDateTime.of(sDate, LocalTime.MIDNIGHT);
 			LocalDateTime eDateTime = LocalDateTime.of(eDate, LocalTime.MIDNIGHT);

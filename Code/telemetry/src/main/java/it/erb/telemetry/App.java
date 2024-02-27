@@ -26,7 +26,6 @@ public class App extends Application
 {
 
 	View view;
-	
 	Model model;
 	Controller controller;
 	
@@ -36,21 +35,29 @@ public class App extends Application
     @Override
     public void start(Stage stage) 
     {
+    	System.out.println("01");
     	view = new View();
+    	System.out.println("2");
         model = new Model();
+        System.out.println("3");
         controller = new Controller(model, view, stage);
+        System.out.println("4");
         ControlChart con = new ControlChart();
         
         stage.setTitle("ERB Telemetry");
+        System.out.println("44");
         stage.setScene(view.getScene());
+        System.out.println("46");
         stage.getIcons().add(new Image("file:Logo.png"));
         stage.setResizable(true); //per fare il resize della schermata
+        System.out.println("49");
         stage.show();
-        
+        System.out.println("51");
         Platform.runLater(() -> {   //trigga il render del componente, aggiorno il componente con i dati (UI)
-            
+        	System.out.println("53");
         	//prendiamo il lineChart creato nel view e aggiungiamo le serie
         con.AddSeries(view.getLineChart());
+        System.out.println("56");
         
         });
         
