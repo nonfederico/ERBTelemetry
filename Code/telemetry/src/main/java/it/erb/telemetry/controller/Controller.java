@@ -114,9 +114,9 @@ public class Controller
 		
 		view.vBoxTable.getBtn_tableLoad().setOnAction(event -> {
 			
-			/*prima
-			LocalDate sDate = vBox.getStartDate().getValue();
-			LocalDate eDate = vBox.getEndDate().getValue();
+			/*cosi non funziona
+			LocalDate sDate = view.vBoxTable.getStartDate().getValue();
+			LocalDate eDate = view.vBoxTable.getEndDate().getValue();
 			*/
 			
 			LocalDate sDate = view.getStartDate().getValue();

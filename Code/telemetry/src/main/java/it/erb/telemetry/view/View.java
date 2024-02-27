@@ -132,6 +132,7 @@ public class View
     //metodo 2 data
     public DatePicker dataInizio = new DatePicker();
     public DatePicker dataFine = new DatePicker();
+    
 	public View()
 	{
 		
