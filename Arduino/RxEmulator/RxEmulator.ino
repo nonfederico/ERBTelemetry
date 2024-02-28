@@ -46,21 +46,25 @@ struct TelemetryData
 };
 
 TelemetryData td;
+int pot = A0;
 
 void setup() 
 {
   Serial.begin(38400);
   Serial.println("E32 Rx emulator setup..");
-
+  pinMode(A0, INPUT);
   delay(500);
   
   Serial.println("E32 Rx emulator setup completed");
+ 
 }
  
 void loop() 
 {
-  td.ThrottlePedal_Pos = random(0,1000)/10.0;
-  td.BrakePedal_Pos = random(0,1000)/10.0;
+  td.ThrottlePedal_Pos = analogRead(A0)*2;
+   Serial.println(td.ThrottlePedal_Pos);
+  //td.ThrottlePedal_Pos = random(0,1000)/10.0;
+  td.BrakePedal_Pos = 0;
   td.SteeringWheel_Pos = random(0,1000)/10.0;
   td.HVAcc_Voltage = random(0,1000)/10.0;
   td.HVAcc_SoC = random(0,1000)/10.0;
@@ -77,20 +81,21 @@ void loop()
   td.inv_HVVoltage = random(0,1000)/10.0;
   td.inv_LVVoltage = random(0,240)/10.0;
   td.MotorRR_ActCurrent = random(0,1000)/10.0;
-	td.MotorRR_ActSpeed = random(0,200000)/10.0;
-	td.MotorRR_ActTorque = random(0,2000)/10.0;
-	td.MotorRR_CmdSpeed = random(0,200000)/10.0;
-	td.MotorRR_CmdTorque = random(0,2000)/10.0;
+	//td.MotorRR_ActSpeed = random(0,200000)/10.0;
+  td.MotorRR_ActSpeed = td.ThrottlePedal_Pos/10.0;
+	td.MotorRR_ActTorque = td.ThrottlePedal_Pos/10.0;
+	td.MotorRR_CmdSpeed = td.ThrottlePedal_Pos/10.0;
+	td.MotorRR_CmdTorque = td.ThrottlePedal_Pos/10.0;
 	td.MotorRL_ActCurrent = random(0,1000)/10.0;
-	td.MotorRL_ActSpeed = random(0,200000)/10.0;
-	td.MotorRL_ActTorque = random(0,2000)/10.0;
-	td.MotorRL_CmdSpeed = random(0,200000)/10.0;
-	td.MotorRL_CmdTorque = random(0,2000)/10.0;
+	td.MotorRL_ActSpeed = td.ThrottlePedal_Pos/10.0;
+	td.MotorRL_ActTorque = td.ThrottlePedal_Pos/10.0;
+	td.MotorRL_CmdSpeed = td.ThrottlePedal_Pos/10.0;
+	td.MotorRL_CmdTorque = td.ThrottlePedal_Pos/10.0;
 	td.MotorRL_Frequency = random(0,1000)/10.0;
 	td.MotorRR_Frequency = random(0,1000)/10.0;
 	td.MotorRL_Temperature = random(0,1000)/10.0;
 	td.MotorRR_Temperature = random(0,1000)/10.0;
-	td.vehicle_linearSpeed = random(0,1500)/10.0; 
+	td.vehicle_linearSpeed = td.ThrottlePedal_Pos; 
   td.saf_BSPD = random(0,100)>20;
   td.saf_IMD = random(0,100)>20;
   td.saf_LVMS = random(0,100)>20;
