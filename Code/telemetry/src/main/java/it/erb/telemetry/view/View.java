@@ -124,11 +124,11 @@ public class View
 	
 	public DriverInputDataPane driverInputDataPane;
 	
+	//00 private LineChart lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
 	
-	private LineChart lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
-	
-    public CenterVbox vBoxTable = new CenterVbox();
-
+    public Tab1 vBoxTable = new Tab1();
+    public Tab2 chart = new Tab2();
+    
     //metodo 2 data
     public DatePicker dataInizio = new DatePicker();
     public DatePicker dataFine = new DatePicker();
@@ -162,9 +162,8 @@ public class View
 		tlb_com.getItems().add(lbl_comStatus);
 		
 		
-		
-		// GRAPH PANE
-		TilePane tilePane = new TilePane();	//formatto la tab come tilepane
+		//Center
+		//00 TilePane tilePane = new TilePane();	
 			
 		// HISTORY TABLE
 		/*
@@ -200,19 +199,21 @@ public class View
 		*/
 		
 		// CENTER PANE
-		//lineChart.setTitle("Grafico01");
-		tilePane.getChildren().add(lineChart);
+		
+		
+		//00 tilePane.getChildren().add(lineChart);
 		
 		TabPane tabPane = new TabPane();
-		Tab	tabChart = new Tab("Live chart", tilePane);
+		Tab	tabChart = new Tab("Live chart", chart.getTilePane());
 		Tab tabData = new Tab("History database", vBoxTable.getVbox());
 		tabPane.getTabs().addAll(tabData, tabChart);
 		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		
+		/*
 		//per vedere se funziona quando clicco
 		tabChart.setOnSelectionChanged(e-> System.out.println(tabChart.isSelected()? "a selected": "a unselected"));
 		tabData.setOnSelectionChanged(e-> System.out.println(tabData.isSelected()? "b selected": "b unselected"));
-		
+		*/
 				
 		// HV accumulator data
 		// TITLE + GRID PANE
@@ -480,7 +481,8 @@ public class View
 
 	
 	public LineChart<Number, Number> getLineChart() {
-        return lineChart;
+		return chart.getLineChart();
+        //00 return lineChart;
     }
 	
 	// Delegation pattern metodo 01
@@ -493,6 +495,7 @@ public class View
 		return vBoxTable.getEndDate();
 	}
 	*/
+	
 //	metodo 02
 	public DatePicker getStartDate() {
 		dataInizio = vBoxTable.getStartDate();

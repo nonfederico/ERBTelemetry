@@ -3,7 +3,6 @@ it\erb\telemetry\model\sensor\DigitalSensor.class
 it\erb\telemetry\view\View.class
 it\erb\telemetry\controller\Controller.class
 it\erb\telemetry\view\UpwardProgress.class
-it\erb\telemetry\view\CenterVbox.class
 it\erb\telemetry\view\DriverInputDataPane.class
 it\erb\telemetry\model\TelemetryData.class
 it\erb\telemetry\view\DataLabel.class
@@ -12,6 +11,7 @@ module-info.class
 it\erb\telemetry\model\sensor\Sensor.class
 it\erb\telemetry\model\Model.class
 it\erb\telemetry\SystemInfo.class
+it\erb\telemetry\view\Tab1.class
 it\erb\telemetry\controller\ControlChart.class
 it\erb\telemetry\view\Led.class
 it\erb\telemetry\App.class

@@ -1,7 +1,7 @@
 package it.erb.telemetry.controller;
 
 
-import java.io.File;
+import java.io.File;	
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.System.Logger;
@@ -14,7 +14,7 @@ import java.util.List;
 import it.erb.telemetry.model.Model;
 import it.erb.telemetry.model.TelemetryData;
 import it.erb.telemetry.model.sensor.AnalogSensor;
-import it.erb.telemetry.view.CenterVbox;
+import it.erb.telemetry.view.Tab1;
 import it.erb.telemetry.view.DataLabel;
 import it.erb.telemetry.view.View;
 import javafx.animation.Animation;
@@ -35,7 +35,7 @@ public class Controller
 {
 	
 	List<TelemetryData> historyDataSet;
-	private CenterVbox vBox= new CenterVbox();
+	private Tab1 vBox= new Tab1();
 	
 	public Controller(Model model, View view, Stage stage)
 	{
