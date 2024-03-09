@@ -119,7 +119,7 @@ public DriverInputDataPane driverInputDataPane = new DriverInputDataPane();
 		  led_safSDBRight= new Led();
 	}
 	
-	
+	/*
 	public Gauge getGg_HVAcc() {
 		   return gg_HVAcc;
 	}
@@ -127,11 +127,13 @@ public DriverInputDataPane driverInputDataPane = new DriverInputDataPane();
 	public VBox getVb_lvAcc() {
 		return vb_lvAcc;
 	} 
+	*/
+	
 	public HBox getBottomPane() {
 		driverInputDataPane = new DriverInputDataPane();
 		bottomPane.getStyleClass().add("bottomPane");
 		bottomPane.getChildren().add(getVb_HVAcc());
-		bottomPane.getChildren().add(getVb_lvAcc());
+		bottomPane.getChildren().add(vb_lvAcc);
 		bottomPane.getChildren().add(getVb_inv());
 		bottomPane.getChildren().add(getVb_mot());
 		bottomPane.getChildren().add(getVb_saf());
