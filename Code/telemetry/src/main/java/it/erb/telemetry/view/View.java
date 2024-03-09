@@ -1,6 +1,6 @@
 package it.erb.telemetry.view;
 
-import java.time.LocalDate;
+import java.time.LocalDate;	
 import java.time.LocalDateTime;
 
 import eu.hansolo.medusa.Gauge;
@@ -69,7 +69,7 @@ public class View
 	//public Button btn_tableLoad;
 	//public Button btn_tableCsvExport;
 	
-	
+	/*
 	public DataLabel lbl_HVAccVoltage;
 	public DataLabel lbl_HVAccCurrent;
 	public DataLabel lbl_HVAccPower;
@@ -96,12 +96,12 @@ public class View
 	public DataLabel lbl_motRRActFrequency;
 	public DataLabel lbl_motRLTemperature;
 	public DataLabel lbl_motRRTemperature;
-	
+	*/
 	
 	public Label lbl_comStatus;
 	public Circle circle_comStatus;
 	
-	
+	/*
 	public Led led_safBSPD;
 	public Led led_safIMD;
 	public Led led_safLVMS;
@@ -111,19 +111,19 @@ public class View
 	public Led led_safSDBCockpit;
 	public Led led_safSDBLeft;
 	public Led led_safSDBRight;
-	
+	*/
 	/*
 	public DatePicker dp_tableStartDate;
 	public DatePicker dp_tableEndDate;
 	*/
 
-	
+	/*
 	public Gauge gg_HVAcc;
 	public Gauge gg_LVAcc;
 	public Gauge gg_linearSpeed;
 	
 	public DriverInputDataPane driverInputDataPane;
-	
+	*/
 	//00 private LineChart lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
 	
     public Tab1 vBoxTable = new Tab1();
@@ -132,6 +132,9 @@ public class View
     //metodo 2 data
     public DatePicker dataInizio = new DatePicker();
     public DatePicker dataFine = new DatePicker();
+    
+    //bottomPane
+    public DataSensorReal dataReal = new DataSensorReal();
     
 	public View()
 	{
@@ -217,6 +220,8 @@ public class View
 				
 		// HV accumulator data
 		// TITLE + GRID PANE
+		
+		/*
 		VBox vb_HVAcc = new VBox();
 		vb_HVAcc.getStyleClass().add("dataPane");
 		
@@ -243,6 +248,8 @@ public class View
 				.build();
 		gg_HVAcc.setStyle("-fx-padding: 10;");
 		gg_HVAcc.setValue(90);
+		
+		
 		
 		// GRIDPANE
 		GridPane gridPane_HVAcc = new GridPane();
@@ -452,13 +459,15 @@ public class View
 		bottomPane.getChildren().add(vb_saf);
 		bottomPane.getChildren().add(driverInputDataPane.getPane());
 		bottomPane.getChildren().add(vb_speed);
+		*/
 		
 		// MAIN PANE
 		BorderPane bPane = new BorderPane();
 		bPane.getStyleClass().add("borderPane");
 		bPane.setTop(tlb_com);
 		bPane.setCenter(tabPane); 
-		bPane.setBottom(bottomPane);
+		//bPane.setBottom(bottomPane);
+		bPane.setBottom(dataReal.getBottomPane());
 		
 		LinearGradient paint = new LinearGradient(
 				0.0, 0.0038, 0.0, 1.0, true, CycleMethod.NO_CYCLE,
@@ -505,6 +514,9 @@ public class View
 		dataFine = vBoxTable.getEndDate();
 		return dataFine;
 	}
+	
+	
+	    
 }
 
 class UpwardProgress 
@@ -532,5 +544,4 @@ class UpwardProgress
     
   
    
-    
 }
