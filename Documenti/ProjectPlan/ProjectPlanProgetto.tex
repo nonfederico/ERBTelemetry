@@ -97,15 +97,16 @@ Abbiamo deciso di adottare un modello di processo Agile ibrido per i seguenti mo
 \item GUI: Visualizzazione real-time dei dati ricevuti.
 \item GUI: Gestione porta COM 
 \item GUI: Visualizzazione tabellare storico dati
-\item GUI: Grafico dei trend 
 \item GUI: Visualizzazione errori di connessione
 \item Export dello storico dati tramite file CSV
+\item ricevere dati in tempo reale dall'arduino
 \end{itemize}
 
 \subsection*{Requisiti Should have:}
 \begin{itemize}
 \item GUI: identificazione tramite colore dei valori che richiedono l'attenzione dell'operatore
 \item Accesso utenti
+\item Visualizzazione dati tramite grafico real time
 \end{itemize}
 
 \subsection*{Could have:}
@@ -137,7 +138,7 @@ Entrambi i membri del Team hanno pari responsabilità all'interno del progetto.
 Le procedure che il team dovrà seguire sono:
 \begin{itemize}
 \item Individuazione dei requisiti, stima dei costi e delle tempistiche
-\item Progettazione dei modelli UML su cui si baserà il codice
+\item Progettazione dei modelli UML su cui si baserà la scrittura del codice
 \item Implementazione del codice
 \item Verifica della qualità e della validità
 \end{itemize}
@@ -150,10 +151,11 @@ Adotteremo le linee guida ISO/IEC 9126
 Dopo esserci occupati dell'individuazione dei requisiti e aver fatto la prima stesura del Product Backlog, dobbiamo occuparci dello Sprint Planning.	\\
 \textbf{Sprint:}\\
 \begin{itemize}
-\item La durata di ogni sprint sarà di 7 giorni.
+\item La durata di ogni sprint sarà di circa 15 giorni.
 \item Al termine del primo Sprint avverrà il rilascio di una prima versione del software, che non conterrà tutti i requisiti individuati nel Product Backlog, ma fungerà da Prototipo.
-\item Al termine del secondo Sprint, verrà rilasciata una versione software contenente tutti i requisiti "Must Have".
-\item Nei successivi Sprint andremo ad implementare i requisiti "Should have" ed eventuali nuovi requisiti "Must Have" e ci concentreremo principalmente sul miglioramento degli elementi già implementati nel software.
+\item Al termine del secondo Sprint, verrà rilasciata una versione software contenente la maggior parte dei requisiti "Must Have".
+\item Nei successivi Sprint andremo ad implementare gli ultimi requisiti "Must Have" e alcuni requisiti "Should have".
+Eventualmente aggiungeremo nuovi requisiti "Must Have" e ci concentreremo principalmente sul miglioramento degli elementi già implementati nel software.
 \item Al termine di ogni Sprint presentiamo il software al team ERB per avere un feedback utile per apportare modifiche o individuare nuove funzionalità.
 \end{itemize}
 
@@ -168,7 +170,7 @@ Abbiamo individuato diverse tipologie di rischi:
 \begin{itemize}
 \item Ritardo nel rappresentare i dati ricevuti dal trasmettitore
 \item Possibilità di ottenere grafici non intuitivi da leggere
-\item Errore di eliminazione dei dati sul database da parte del Capo Reparto
+\item Errore di eliminazione dei dati sul database da parte del Capo Reparto nel caso venga implementata la funzionalità di modifica del database
 \item Possibilità di perdita dei dati nel caso in cui ci sia un guasto dell'hardware, poiché il database è locale, sulla macchina dell'utente
 \end{itemize}
 
