@@ -20,12 +20,17 @@ public class DatabaseManager
 	private String path;
 	
 	
-	private DatabaseManager(String nome, String path)
+	private DatabaseManager(String nome01, String path01)
 	{
-		this.nome = nome;
-		this.path = path;
+		this.nome = nome01;
+		this.path = path01;
 	
 		File db = new File(path + nome + ".db");
+		
+		/*
+		 * per prima cosa controlliamo che il database non esista, altrimenti lo carichiamo.
+		 * se non esiste viene creato un nuovo db
+		 */
 		
 		try
 		{
@@ -98,19 +103,17 @@ public class DatabaseManager
 				
 			}
 			
-			
-			
 		}
 		catch(Exception e)
 		{
 			System.out.println(e.getMessage());
-			
 		}
 	}
 	
 	/**
 	 * Restituisce l'istanza DatabaseManager
 	 */ 
+	
 	public static DatabaseManager getInstance(){ return instance; }
 	
 	/**
