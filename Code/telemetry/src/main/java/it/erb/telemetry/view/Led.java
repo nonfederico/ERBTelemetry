@@ -2,6 +2,7 @@ package it.erb.telemetry.view;
 
 import javafx.scene.shape.Circle;
 
+//classe utilizzata per determinare le caratteristiche dell'elemento Led, utilizzato nei Pane
 public class Led extends Circle
 {
 	Led()

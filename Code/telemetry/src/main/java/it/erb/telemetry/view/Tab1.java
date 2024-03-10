@@ -1,6 +1,6 @@
 package it.erb.telemetry.view;
 
-import java.time.LocalDate;
+import java.time.LocalDate;	
 import java.time.LocalDateTime;
 
 import it.erb.telemetry.model.TelemetryData;
@@ -8,19 +8,16 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 
+//classe utilizzata per determinare il contenuto della tab1
 public class Tab1 {
 
 	private VBox tableHistory;
@@ -195,7 +192,7 @@ return tableView;
 public VBox getVbox() {
 	
 	table_ctrlBox.setSpacing(10);
-	table_ctrlBox.setHgrow(spacer, Priority.ALWAYS);
+	table_ctrlBox.setHgrow(spacer, Priority.ALWAYS); //per avere CSV export tutto a destra
 	table_ctrlBox.setPadding(new Insets(0,0,5,0));
 	table_ctrlBox.getChildren().add(dp_tableStartDate);
 	table_ctrlBox.getChildren().add(dp_tableEndDate);

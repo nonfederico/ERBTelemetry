@@ -5,8 +5,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.layout.TilePane;
 
 public class Tab2 {
-
-	//aggiungo un grafico vuoti (contenitore) che sarà modificato da un'altra classe
+	//classe utilizzata per determinare il contenuto della tab1
+	
+	//aggiungo un grafico vuoto (contenitore)
 	
 	private LineChart lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
 	private TilePane tilePane = new TilePane();	

@@ -5,6 +5,12 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
+/*
+ * classe che determina le caratteristiche dell'elemento animato che rappresenta
+ * l'input di accelleratore e freno
+ */
+
+
 public class DriverInputDataPane 
 {
 	VBox vb = new VBox();

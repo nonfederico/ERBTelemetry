@@ -2,6 +2,8 @@ package it.erb.telemetry.view;
 
 import javafx.scene.control.Label;
 
+//classe che determina le caratteristiche delle Label
+
 public class DataLabel extends Label
 {
 	private int decimals;

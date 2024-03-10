@@ -10,7 +10,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-//uso pattern private
+/*
+ * classe utilizzata per determinare le informazioni
+ * che vengono visualizzate nel bottomPane
+ */
+
 public class DataSensorReal {
 	
 private HBox bottomPane = new HBox();
@@ -22,7 +26,6 @@ private GridPane gridPane_mot = new GridPane();
 private VBox vb_mot = new VBox();
 private GridPane gridPane_inv = new GridPane();
 private VBox vb_inv = new VBox();
-private GridPane gridPane_lvAcc = new GridPane();
 private VBox vb_lvAcc = new VBox();
 private GridPane gridPane_HVAcc = new GridPane();
 private VBox vb_HVAcc = new VBox();
@@ -119,21 +122,13 @@ public DriverInputDataPane driverInputDataPane = new DriverInputDataPane();
 		  led_safSDBRight= new Led();
 	}
 	
-	/*
-	public Gauge getGg_HVAcc() {
-		   return gg_HVAcc;
-	}
 	
-	public VBox getVb_lvAcc() {
-		return vb_lvAcc;
-	} 
-	*/
 	
 	public HBox getBottomPane() {
 		driverInputDataPane = new DriverInputDataPane();
 		bottomPane.getStyleClass().add("bottomPane");
 		bottomPane.getChildren().add(getVb_HVAcc());
-		bottomPane.getChildren().add(vb_lvAcc);
+		bottomPane.getChildren().add(getVb_LVAcc());
 		bottomPane.getChildren().add(getVb_inv());
 		bottomPane.getChildren().add(getVb_mot());
 		bottomPane.getChildren().add(getVb_saf());
@@ -142,7 +137,9 @@ public DriverInputDataPane driverInputDataPane = new DriverInputDataPane();
 		return bottomPane;
 	}
 	
+//HV ccumulator data
 private VBox getVb_HVAcc() {
+		//titolo
 		vb_HVAcc.getStyleClass().add("dataPane");
 		lbl_HVAccVoltage = new DataLabel("-",1,true);
 		lbl_HVAccCurrent = new DataLabel("-",1,true);
@@ -151,6 +148,7 @@ private VBox getVb_HVAcc() {
 		Label lbl_accTitle = new Label("HV Accumulator");
 		lbl_accTitle.getStyleClass().add("titleLabel");
 		
+		//gridpane
 		gridPane_HVAcc.getStyleClass().add("gridPane");
 		gridPane_HVAcc.add(new Label("Voltage"), 0, 0);
 		gridPane_HVAcc.add(lbl_HVAccVoltage, 1, 0);
@@ -187,77 +185,46 @@ private VBox getVb_HVAcc() {
 		return vb_HVAcc;
 	}
 
-
-/*	se divido così non si vede
-public GridPane getGridPane_HVAcc() {
-		Label lbl_accTitle = new Label("HV Accumulator");
-		lbl_accTitle.getStyleClass().add("titleLabel");
-		
-		gridPane_HVAcc.getStyleClass().add("gridPane");
-		gridPane_HVAcc.add(new Label("Voltage"), 0, 0);
-		gridPane_HVAcc.add(lbl_HVAccVoltage, 1, 0);
-		gridPane_HVAcc.add(new Label("Current"), 0, 1);
-		gridPane_HVAcc.add(lbl_HVAccCurrent, 1, 1);
-		gridPane_HVAcc.add(new Label("Power"), 0, 2);
-		gridPane_HVAcc.add(lbl_HVAccPower, 1, 2);
-		gridPane_HVAcc.add(new Label("Temperature"), 0, 3);
-		gridPane_HVAcc.add(lbl_HVAccTemp, 1, 3);
-		gridPane_HVAcc.setMaxWidth(400);
-		gridPane_HVAcc.setMaxHeight(200);
-		
-		
-		gg_HVAcc = GaugeBuilder.create()
-				.skinType(SkinType.SIMPLE_SECTION)
-				.prefSize(90,90)  
-				.minValue(0)                                                                     
-                .maxValue(100) 
-                .title("")
-                .barColor(Color.GREEN)
-                .valueColor(Color.WHITE)
-                .decimals(1)  
-                .sectionsAlwaysVisible(true)
-                .sectionsVisible(true)
-                .highlightSections(true)
-                .sections(new Section(0, 30, Color.RED), new Section(30, 50, Color.ORANGE), new Section(50, 100, Color.GREEN))
-				.build();
-		gg_HVAcc.setStyle("-fx-padding: 10;");
-		gg_HVAcc.setValue(90);
-		
-		vb_HVAcc.getChildren().add(lbl_accTitle);
-		vb_HVAcc.getChildren().add(gg_HVAcc);
-		vb_HVAcc.getChildren().add(gridPane_HVAcc);
-		return gridPane_HVAcc;
-	}
-	*/
-/*
-public GridPane getGridPane_inv() {
+//lv accumulator data
+private VBox getVb_LVAcc() {
+	vb_lvAcc.getStyleClass().add("dataPane");
 	
-gridPane_inv.getStyleClass().add("gridPane");
-gridPane_inv.add(new Label("Temperature"), 0, 0);
-gridPane_inv.add(lbl_inv_Temperature, 1, 0);
-gridPane_inv.add(new Label("HV Voltage"), 0, 1);
-gridPane_inv.add(lbl_inv_HVVoltage, 1, 1);
-gridPane_inv.add(new Label("LV Voltage"), 0, 2);
-gridPane_inv.add(lbl_inv_LVVoltage, 1, 2);
-gridPane_inv.setMaxWidth(400);
-gridPane_inv.setMaxHeight(200);
-
-return gridPane_inv ;
-
+	Label lbl_LVAccTitle = new Label("LV Accumulator");
+	lbl_LVAccTitle.getStyleClass().add("titleLabel");
+	lbl_LVAcc_Voltage = new DataLabel("-",1,true);
+	lbl_LVAcc_Current = new DataLabel("-",1,true);
+			
+	gg_LVAcc = GaugeBuilder.create()
+			.skinType(SkinType.SIMPLE_SECTION)
+			.prefSize(90,90)  
+			.minValue(0)                                                                     
+            .maxValue(100) 
+            .title("")
+            .barColor(Color.GREEN)
+            .valueColor(Color.WHITE)
+            .decimals(1)   
+            .build();
+	gg_LVAcc.setStyle("-fx-padding: 10; ");
+	gg_LVAcc.setValue(90);
+	
+	GridPane gridPane_lvAcc = new GridPane();
+	gridPane_lvAcc.getStyleClass().add("gridPane");
+	gridPane_lvAcc.add(new Label("Voltage"), 0, 0);
+	gridPane_lvAcc.add(lbl_LVAcc_Voltage, 1, 0);
+	gridPane_lvAcc.add(new Label("Current"), 0, 1);
+	gridPane_lvAcc.add(lbl_LVAcc_Current, 1, 1);
+	gridPane_lvAcc.setMaxWidth(400);
+	gridPane_lvAcc.setMaxHeight(200);
+	
+	vb_lvAcc.getChildren().add(lbl_LVAccTitle);
+	vb_lvAcc.getChildren().add(gg_LVAcc);
+	vb_lvAcc.getChildren().add(gridPane_lvAcc);
+	return vb_lvAcc;
 }
-*/
 
-	public VBox getVb_inv() {
-		gridPane_inv.getStyleClass().add("gridPane");
-		gridPane_inv.add(new Label("Temperature"), 0, 0);
-		gridPane_inv.add(lbl_inv_Temperature, 1, 0);
-		gridPane_inv.add(new Label("HV Voltage"), 0, 1);
-		gridPane_inv.add(lbl_inv_HVVoltage, 1, 1);
-		gridPane_inv.add(new Label("LV Voltage"), 0, 2);
-		gridPane_inv.add(lbl_inv_LVVoltage, 1, 2);
-		gridPane_inv.setMaxWidth(400);
-		gridPane_inv.setMaxHeight(200);
-		
+//inverter data
+public VBox getVb_inv() {
+		//titolo
 		vb_inv.getStyleClass().add("dataPane");
 		
 		Label lbl_invTitle = new Label("Inverter");
@@ -268,12 +235,22 @@ return gridPane_inv ;
 	
 		vb_inv.getChildren().add(lbl_invTitle);
 		vb_inv.getChildren().add(gridPane_inv);
-
+		//gridpane
+		gridPane_inv.getStyleClass().add("gridPane");
+		gridPane_inv.add(new Label("Temperature"), 0, 0);
+		gridPane_inv.add(lbl_inv_Temperature, 1, 0);
+		gridPane_inv.add(new Label("HV Voltage"), 0, 1);
+		gridPane_inv.add(lbl_inv_HVVoltage, 1, 1);
+		gridPane_inv.add(new Label("LV Voltage"), 0, 2);
+		gridPane_inv.add(lbl_inv_LVVoltage, 1, 2);
+		gridPane_inv.setMaxWidth(400);
+		gridPane_inv.setMaxHeight(200);
+		
 		return vb_inv;
 	}
 	
-	
-	public VBox getVb_mot() {
+//motor data
+public VBox getVb_mot() {
 		vb_mot.getStyleClass().add("dataPane");
 		
 		
@@ -325,46 +302,10 @@ return gridPane_inv ;
 		
 		return vb_mot;
 		}
-	/*
-	public GridPane getGridPaneMot() {
 
-		Label lbl_motTitle = new Label("Motors");
-		lbl_motTitle.getStyleClass().add("titleLabel");
-		
-		gridPane_mot.getStyleClass().add("gridPane");
-		gridPane_mot.add(new Label("Act. speed"), 0, 0);
-		gridPane_mot.add(lbl_motRLActSpeed, 1, 0);
-		gridPane_mot.add(lbl_motRRActSpeed, 2, 0);
-		gridPane_mot.add(new Label("Cmd speed"), 0, 1);
-		gridPane_mot.add(lbl_motRLCmdSpeed, 1, 1);
-		gridPane_mot.add(lbl_motRRCmdSpeed, 2, 1);
-		gridPane_mot.add(new Label("Act. torque"), 0, 2);
-		gridPane_mot.add(lbl_motRLActTorque, 1, 2);
-		gridPane_mot.add(lbl_motRRActTorque, 2, 2);
-		gridPane_mot.add(new Label("Cmd torque"), 0, 3);
-		gridPane_mot.add(lbl_motRLCmdTorque, 1, 3);
-		gridPane_mot.add(lbl_motRRCmdTorque, 2, 3);
-		gridPane_mot.add(new Label("Current"), 0, 4);
-		gridPane_mot.add(lbl_motRLActCurrent, 1, 4);
-		gridPane_mot.add(lbl_motRRActCurrent, 2, 4);
-		gridPane_mot.add(new Label("Frequency"), 0, 5);
-		gridPane_mot.add(lbl_motRLActFrequency, 1, 5);
-		gridPane_mot.add(lbl_motRRActFrequency, 2, 5);
-		gridPane_mot.add(new Label("Temperature"), 0, 6);
-		gridPane_mot.add(lbl_motRLTemperature, 1, 6);
-		gridPane_mot.add(lbl_motRRTemperature, 2, 6);
-		gridPane_mot.setMaxWidth(400);
-		gridPane_mot.setMaxHeight(200);
-		
-		vb_mot.getChildren().add(lbl_motTitle);
-		vb_mot.getChildren().add(gridPane_mot);	
-		
-		return gridPane_mot;
-
-	}
-	*/
 	
-	public VBox getVb_saf() {
+//safety circuit data
+public VBox getVb_saf() {
 vb_saf.getStyleClass().add("dataPane");
 Label lbl_safTitle = new Label("Safety circuit");
 lbl_safTitle.getStyleClass().add("titleLabel");
@@ -378,8 +319,6 @@ lbl_safTitle.getStyleClass().add("titleLabel");
 		led_safSDBCockpit = new Led(5);
 		led_safSDBLeft = new Led(5);
 		led_safSDBRight = new Led(5);
-		vb_saf.getChildren().add(gridPane_saf);
-		vb_saf.getChildren().add(lbl_safTitle);
 		
 		gridPane_saf.getStyleClass().add("gridPane");
 		gridPane_saf.add(led_safBSPD, 0, 0);
@@ -402,44 +341,15 @@ lbl_safTitle.getStyleClass().add("titleLabel");
 		gridPane_saf.add(new Label("SDB Right"), 1, 8);
 		gridPane_saf.setMaxWidth(400);
 		gridPane_saf.setMaxHeight(200);
+		
+		vb_saf.getChildren().add(gridPane_saf);
+		vb_saf.getChildren().add(lbl_safTitle);
 		
 		return vb_saf;
 	}
 	
-	/*
-	public GridPane getGridPane_saf() {
-		/*
-		//Label lbl_safTitle = new Label("Safety circuit");
-		//lbl_safTitle.getStyleClass().add("titleLabel");
-		 
-		gridPane_saf.getStyleClass().add("gridPane");
-		gridPane_saf.add(led_safBSPD, 0, 0);
-		gridPane_saf.add(new Label("BSPD"), 1, 0);
-		gridPane_saf.add(led_safIMD, 0, 1);
-		gridPane_saf.add(new Label("IMD"), 1, 1);
-		gridPane_saf.add(led_safLVMS, 0, 2);
-		gridPane_saf.add(new Label("LVMS"), 1, 2);
-		gridPane_saf.add(led_safAMS, 0, 3);		
-		gridPane_saf.add(new Label("AMS"), 1, 3);
-		gridPane_saf.add(led_safIS, 0, 4);
-		gridPane_saf.add(new Label("IS"), 1, 4);
-		gridPane_saf.add(led_safBOTS, 0, 5);
-		gridPane_saf.add(new Label("BOTS"), 1, 5);
-		gridPane_saf.add(led_safSDBCockpit, 0, 6);
-		gridPane_saf.add(new Label("SDB Cockpit"), 1, 6);
-		gridPane_saf.add(led_safSDBLeft, 0, 7);
-		gridPane_saf.add(new Label("SDB Left"), 1, 7);
-		gridPane_saf.add(led_safSDBRight, 0, 8);
-		gridPane_saf.add(new Label("SDB Right"), 1, 8);
-		gridPane_saf.setMaxWidth(400);
-		gridPane_saf.setMaxHeight(200);
-		
-		//getVb_saf().getChildren().add(lbl_safTitle);
-	
-		return gridPane_saf;
-	}
-	*/
-	public VBox getVb_speed() {
+//speed data
+public VBox getVb_speed() {
 vb_speed.getStyleClass().add("dataPane");
 		
 		Label lbl_vehicleTitle = new Label("Speed");

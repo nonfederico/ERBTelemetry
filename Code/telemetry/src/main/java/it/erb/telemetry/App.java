@@ -1,21 +1,13 @@
 package it.erb.telemetry;
 
-import it.erb.telemetry.controller.ControlChart;
+import it.erb.telemetry.controller.ControlChart;	
 import it.erb.telemetry.controller.Controller;
 import it.erb.telemetry.model.Model;
 import it.erb.telemetry.view.View;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 

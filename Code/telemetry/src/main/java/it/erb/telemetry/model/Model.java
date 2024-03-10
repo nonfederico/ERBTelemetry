@@ -1,20 +1,20 @@
 package it.erb.telemetry.model;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.LocalDateTime;	
 import java.util.List;
 
 import com.fazecast.jSerialComm.SerialPort;
-import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 import com.fazecast.jSerialComm.SerialPortMessageListener;
 
 import it.erb.telemetry.database.DatabaseManager;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
+/*
+ * all'interno della classe creiamo un database locale
+ */
 
 public class Model 
 {
@@ -34,6 +34,7 @@ public class Model
 		
 	}
 	
+	//utilizzato per caricare le porte seriali connesse
 	public void loadSerialPorts()
 	{
 		availableSerialPorts = SerialPort.getCommPorts();
@@ -49,10 +50,12 @@ public class Model
 	
 	public ObservableList<String> getSerialPortName(){ return serialPortNameList; }
 	
+	
 	public void setSelectedComPortIndex(int index)
 	{
 		SelectComPortIndex = index;		
 	}
+	
 	
 	public void startListening()
 	{

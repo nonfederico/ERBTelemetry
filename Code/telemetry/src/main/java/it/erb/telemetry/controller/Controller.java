@@ -1,41 +1,30 @@
 package it.erb.telemetry.controller;
 
 
-import java.io.File;	
+import java.io.File;		
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.System.Logger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
-
 import it.erb.telemetry.model.Model;
 import it.erb.telemetry.model.TelemetryData;
-import it.erb.telemetry.model.sensor.AnalogSensor;
-import it.erb.telemetry.view.Tab1;
-import it.erb.telemetry.view.DataLabel;
 import it.erb.telemetry.view.View;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.util.FXPermission;
 
 public class Controller 
 {
 	
 	List<TelemetryData> historyDataSet;
-	private Tab1 vBox= new Tab1();
+	
 	
 	public Controller(Model model, View view, Stage stage)
 	{
@@ -45,7 +34,6 @@ public class Controller
 			e ->
 			{
 				view.dataReal.gg_HVAcc.setValue(model.latestData.HVAcc_SoC.getValue());
-				//view.gg_HVAcc.setValue(model.latestData.HVAcc_SoC.getValue());
         		view.dataReal.lbl_HVAccVoltage.update(model.latestData.HVAcc_Voltage.getValue(), model.latestData.HVAcc_Voltage.getUnit());
         		view.dataReal.lbl_HVAccCurrent.update(model.latestData.HVAcc_Current.getValue(), model.latestData.HVAcc_Current.getUnit());
         		view.dataReal.lbl_HVAccPower.update(model.latestData.HVAcc_Voltage.getValue()*model.latestData.HVAcc_Current.getValue(), "W");
@@ -101,11 +89,7 @@ public class Controller
 			
 		view.chBox_comPort.setOnAction((event) -> {
 			int selectedIndex = view.chBox_comPort.getSelectionModel().getSelectedIndex();
-			Object selectedItem = view.chBox_comPort.getSelectionModel().getSelectedItem();
-		    
 			model.setSelectedComPortIndex(selectedIndex);
-		    //System.out.println("Selection made: [" + selectedIndex + "] " + selectedItem);
-		    //System.out.println("   ChoiceBox.getValue(): " + view.chBox_comPort.getValue());
 		});
 		
 		view.chBox_comPort.addEventHandler(ChoiceBox.ON_SHOWING, event -> model.loadSerialPorts());
@@ -115,11 +99,6 @@ public class Controller
 		view.btn_comDisconnect.setOnAction(event -> model.stopListening());
 		
 		view.vBoxTable.getBtn_tableLoad().setOnAction(event -> {
-			
-			/*cosi non funziona
-			LocalDate sDate = view.vBoxTable.getStartDate().getValue();
-			LocalDate eDate = view.vBoxTable.getEndDate().getValue();
-			*/
 			
 			LocalDate sDate = view.getStartDate().getValue();
 			LocalDate eDate = view.getEndDate().getValue();
@@ -132,7 +111,6 @@ public class Controller
 			// Query the database
 			historyDataSet = model.retrieveDataFromDB(sDateTime, eDateTime);
 			
-			//ObservableList<TelemetryData> tableItems = view.tableView.getItems();
 			ObservableList<TelemetryData> tableItems = view.vBoxTable.getTableview().getItems(); 
 			
 			tableItems.clear();
