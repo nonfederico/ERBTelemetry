@@ -35,6 +35,11 @@
    			<artifactId>Medusa</artifactId>
     		<version>11.7</version>
 		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>hellofx</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
     </dependencies>
     <build>
         <plugins>

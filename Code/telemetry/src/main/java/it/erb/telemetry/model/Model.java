@@ -26,7 +26,7 @@ public class Model
 	private boolean isComPortOpen = false;
 	
 	public TelemetryData latestData = new TelemetryData();
-	
+	private NewPacketListener packetListener;
 	
 	public Model()
 	{
@@ -142,12 +142,13 @@ public class Model
 		
 		int startIndex = text.indexOf("#$*");
 		int endIndex = text.indexOf("*&#");
-		 
+		TelemetryData td = new TelemetryData();
+		
 		if( endIndex > startIndex && startIndex >= 0)
 		{
 			text = text.substring(startIndex+3, endIndex);
 			
-			TelemetryData td = new TelemetryData();
+			
 			
 			td.parsePacket(text);
 						
@@ -157,7 +158,11 @@ public class Model
 			// Add data to database
 			db.addRecord(td);
 		}
-
+		
+		if(packetListener != null) 
+		{
+			packetListener.packetHandling(td);
+		}
 		
 	}
 	
@@ -167,6 +172,10 @@ public class Model
 		return db.retrieveRecord(startDate, endDate);	
 	}
 	
+	public void setListener(NewPacketListener listener)
+	{
+		packetListener = listener;		
+	} 
 	
 }
 

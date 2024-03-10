@@ -18,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.LineChart.SortingPolicy;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
@@ -120,7 +121,8 @@ public class View
 	
 	public DriverInputDataPane driverInputDataPane;
 	
-	public LineChart lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
+	public LineChart<Number,Number> lineChart = new LineChart(new NumberAxis(), new NumberAxis()); 
+	public XYChart.Series<LocalDateTime, Number> series = new XYChart.Series<>();
 	
 	public View()
 	{
@@ -316,6 +318,8 @@ public class View
 		
 		// CENTER PANE
 		lineChart.setTitle("Grafico01");
+		lineChart.getData().add(series);
+		lineChart.setAxisSortingPolicy(SortingPolicy.NONE);
 		tilePane.getChildren().add(lineChart);
 		
 		TabPane tabPane = new TabPane();
@@ -509,7 +513,7 @@ public class View
 		led_safSDBCockpit = new Led(5);
 		led_safSDBLeft = new Led(5);
 		led_safSDBRight = new Led(5);
-		       
+		     
 		GridPane gridPane_saf = new GridPane();
 		gridPane_saf.getStyleClass().add("gridPane");
 		gridPane_saf.add(led_safBSPD, 0, 0);
@@ -583,7 +587,7 @@ public class View
 		// SCENE
 		scene = new Scene(bPane, 1280, 720);
 		scene.setFill(Color.BLACK);
-		scene.getStylesheets().add(getClass().getResource("stylesheet.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/stylesheet.css").toExternalForm());
 		
 	}
 	

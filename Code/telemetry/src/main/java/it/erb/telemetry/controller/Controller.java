@@ -13,13 +13,11 @@ import java.util.List;
 
 import it.erb.telemetry.model.Model;
 import it.erb.telemetry.model.TelemetryData;
-import it.erb.telemetry.model.sensor.AnalogSensor;
-import it.erb.telemetry.view.DataLabel;
 import it.erb.telemetry.view.View;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -133,7 +131,19 @@ public class Controller
 		view.btn_tableCsvExport.setOnAction(event -> saveHistorySetToFile(stage) );
 		
 		
-		
+		model.setListener((td) -> {
+			System.out.println("First interface");
+			
+			Platform.runLater(() -> {
+				
+				//view.series.getData().add(new XYChart.Data<>( counter , td.throttlePedal_Pos.getValue()));
+				
+				
+
+			});
+			
+			
+		});
 		
 	}
 	
