@@ -102,8 +102,7 @@ public class View
 		// SCENE
 		scene = new Scene(bPane, 1280, 720);
 		scene.setFill(Color.BLACK);
-		scene.getStylesheets().add(getClass().getResource("stylesheet.css").toExternalForm());
-		
+		scene.getStylesheets().add(getClass().getResource("/stylesheet.css").toExternalForm());
 	}
 	
 	public Scene getScene()
