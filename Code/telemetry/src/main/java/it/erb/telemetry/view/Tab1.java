@@ -1,5 +1,6 @@
 package it.erb.telemetry.view;
 
+import java.sql.Date;
 import java.time.LocalDate;	
 import java.time.LocalDateTime;
 
@@ -219,11 +220,12 @@ public TableView getTableview() {
 
 //fare test junit su questi casi
 
-public DatePicker  getStartDate() {
+public DatePicker getStartDate() {
+	DatePicker dp_errorDate= new DatePicker(null);
 	if(dp_tableStartDate.getValue().isAfter(dp_tableEndDate.getValue())) { 
 		alert.setContentText("Data iniziale successiva a data finale");
         alert.showAndWait();
-        return dp_tableStartDate;
+        return dp_errorDate;
 	}
 	else if(dp_tableStartDate.getValue().isBefore(today.getValue()) || dp_tableStartDate.getValue().isEqual(today.getValue()) ) {
 		return dp_tableStartDate;
@@ -231,14 +233,14 @@ public DatePicker  getStartDate() {
 	else {
 		alert.setContentText("Data iniziale non valida");
         alert.showAndWait();
-		return dp_tableStartDate;
+		return dp_errorDate;
 	}
 
 }
 
 //fare test junit su questi casi:
 public DatePicker  getEndDate() {
-	if(dp_tableEndDate.getValue().isBefore(dp_tableEndDate.getValue())) { //bug: qui dovrebbe essere //qui dovrei porre datafinale isbefore datainiziale
+	if(dp_tableEndDate.getValue().isBefore(dp_tableEndDate.getValue())) { //bug: qui dovrei porre datafinale isbefore datainiziale
 		alert.setContentText("Data finale precedente la data iniziale");
         alert.showAndWait();
         return this.dp_tableEndDate;
@@ -254,12 +256,26 @@ public DatePicker  getEndDate() {
 	
 }
 
+
 public Button getBtn_tableLoad(){
 	return this.btn_tableLoad;
 }
 
 public Button getBtn_tableCsvExport() {
     return this.btn_tableCsvExport;
+}
+
+
+//metodi per junit
+public DatePicker setInizio(DatePicker inizio) {
+	dp_tableStartDate = inizio;
+	return inizio;
+}
+
+
+public DatePicker setFine(DatePicker fine) {
+	dp_tableEndDate = fine;
+	return fine;
 }
 
 
