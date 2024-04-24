@@ -48,7 +48,7 @@ public class View
     //bottomPane
     public DataSensorReal dataReal = new DataSensorReal();
     
-	public View()
+	public View()//aggiungere array di tab e creare funzione per aggiungere tab dinamiche
 	{
 		
 		
