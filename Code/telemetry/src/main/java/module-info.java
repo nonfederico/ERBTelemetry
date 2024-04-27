@@ -18,8 +18,10 @@ module ManCatt_Telemetry {
 	requires java.sql;
 	requires javafx.base;
 	requires javafx.controls;
+	requires javafx.fxml;
 	requires javafx.graphics;
 	requires junit;
 	requires org.testfx;
 	requires org.testfx.junit;
+	requires testFx;
 }

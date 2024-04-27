@@ -61,6 +61,11 @@
   <artifactId>jfx-testrunner</artifactId>
   <version>1.2</version>
 </dependency>
+<dependency>
+    <groupId>org.loadui</groupId>
+    <artifactId>testFx</artifactId>
+    <version>3.1.0</version>
+</dependency>
     </dependencies>
     <build>
         <plugins>
