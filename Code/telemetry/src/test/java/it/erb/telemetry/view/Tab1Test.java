@@ -13,6 +13,7 @@ import it.erb.telemetry.controller.ControlChart;
 import it.erb.telemetry.controller.Controller;
 import it.erb.telemetry.model.Model;
 import javafx.scene.control.Button;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +31,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 
-public class Tab1Test extends ApplicationTest{	
+public class Tab1Test extends Application{	
 
 	View view;
 	Model model;
