@@ -8,8 +8,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+
+import it.erb.telemetry.data.TelemetryData;
 import it.erb.telemetry.model.Model;
-import it.erb.telemetry.model.TelemetryData;
 import it.erb.telemetry.view.View;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;

@@ -3,7 +3,7 @@ package it.erb.telemetry.view;
 import java.time.LocalDate;	
 import java.time.LocalDateTime;
 
-import it.erb.telemetry.model.TelemetryData;
+import it.erb.telemetry.data.TelemetryData;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
