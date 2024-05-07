@@ -7,6 +7,7 @@ import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortEvent;
 import com.fazecast.jSerialComm.SerialPortMessageListener;
 
+import it.erb.telemetry.data.TelemetryData;
 import it.erb.telemetry.database.DatabaseManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,6 +1,5 @@
 package it.erb.telemetry.database;
 
-import it.erb.telemetry.model.TelemetryData;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +9,8 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import it.erb.telemetry.data.TelemetryData;
 
 
 public class DatabaseManager 

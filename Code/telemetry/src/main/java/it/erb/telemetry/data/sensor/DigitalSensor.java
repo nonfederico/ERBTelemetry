@@ -1,4 +1,4 @@
-package it.erb.telemetry.model.sensor;
+package it.erb.telemetry.data.sensor;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;

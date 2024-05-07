@@ -1,12 +1,12 @@
-package it.erb.telemetry.model;
+package it.erb.telemetry.data;
 
 import java.time.LocalDateTime;	
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
-import it.erb.telemetry.model.sensor.AnalogSensor;
-import it.erb.telemetry.model.sensor.DigitalSensor;
-import it.erb.telemetry.model.sensor.Sensor;
+import it.erb.telemetry.data.sensor.AnalogSensor;
+import it.erb.telemetry.data.sensor.DigitalSensor;
+import it.erb.telemetry.data.sensor.Sensor;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
