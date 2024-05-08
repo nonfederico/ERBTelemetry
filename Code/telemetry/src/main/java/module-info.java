@@ -6,6 +6,9 @@ module it.erb.telemetry {
 	requires java.desktop;
 	requires java.sql;
 	requires eu.hansolo.medusa;
-	
+	requires junit;
+			
     exports it.erb.telemetry;
+    exports it.erb.telemetry.data;
+    exports it.erb.telemetry.data.sensor;
 }

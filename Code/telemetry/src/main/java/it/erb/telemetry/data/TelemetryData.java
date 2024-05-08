@@ -55,6 +55,8 @@ public class TelemetryData
 	public DigitalSensor saf_SDBLeft = new DigitalSensor();
 	public DigitalSensor saf_SDBRight = new DigitalSensor();
 	
+	
+	// Esegue il parsing della stringa JSON passata come argomento e aggiorna i campi con id corrispondente
 	public void parsePacket(String packet)
 	{
 		HashMap<String, Sensor> map = new HashMap<String, Sensor>();
@@ -122,6 +124,8 @@ public class TelemetryData
 		}
 	}
 	
+	
+	// Genera una stringa con tutti i dati dei sensori (Debug function only)
 	public String toString()
 	{
 		String s = new String();
@@ -173,6 +177,7 @@ public class TelemetryData
 		return s;
 	}
 	
+	// Genera una stringa con tutti i nomi dei sensori (Debug function only)
 	public static String namesToString()
 	{
 		String s = new String();

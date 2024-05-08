@@ -21,10 +21,10 @@ public class DatabaseManager
 	private String path;
 	
 	
-	private DatabaseManager(String nome01, String path01)
+	private DatabaseManager(String nome, String path)
 	{
-		this.nome = nome01;
-		this.path = path01;
+		this.nome = nome;
+		this.path = path;
 	
 		File db = new File(path + nome + ".db");
 		
@@ -114,13 +114,11 @@ public class DatabaseManager
 	/**
 	 * Restituisce l'istanza DatabaseManager
 	 */ 
-	
 	public static DatabaseManager getInstance(){ return instance; }
 	
 	/**
 	 * Aggiunge un record alla tabella History
-	 * @param data contiene i dati da salvare.
-	 * @param p_iva the agency EIN.
+	 * @data data contiene i dati da salvare.
 	 * @return vero se l'operazione di insert è andata a buon fine.
 	 */
 	public boolean addRecord(TelemetryData data) 
