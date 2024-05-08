@@ -1,7 +1,9 @@
 package it.erb.telemetry.view;
 
+import java.sql.Date;	
 import java.time.LocalDate;	
 import java.time.LocalDateTime;
+import java.util.Calendar;
 
 import it.erb.telemetry.data.TelemetryData;
 import javafx.collections.FXCollections;
@@ -28,13 +30,12 @@ public class Tab1 {
 	private Button btn_tableLoad;
 	private Button btn_tableCsvExport;
 
-	private DatePicker today = new DatePicker(LocalDate.now());
-	private DatePicker dp_tableStartDate;
-	private DatePicker dp_tableEndDate;
-	private Pane spacer;
-	private Alert alert = new Alert(Alert.AlertType.ERROR);
-
-	
+	public DatePicker today = new DatePicker(LocalDate.now());
+	public DatePicker dp_tableStartDate;
+	public DatePicker dp_tableEndDate;
+	public Pane spacer;
+	public Alert alert = new Alert(Alert.AlertType.ERROR);
+	public Date error;
 
 public Tab1() {
 		spacer = new Pane();
@@ -219,11 +220,12 @@ public TableView getTableview() {
 
 //fare test junit su questi casi
 
-public DatePicker  getStartDate() {
+public DatePicker getStartDate() {
+	//DatePicker dp_errorDate= new DatePicker(null);
 	if(dp_tableStartDate.getValue().isAfter(dp_tableEndDate.getValue())) { 
 		alert.setContentText("Data iniziale successiva a data finale");
         alert.showAndWait();
-        return dp_tableStartDate;
+        return dp_tableEndDate;
 	}
 	else if(dp_tableStartDate.getValue().isBefore(today.getValue()) || dp_tableStartDate.getValue().isEqual(today.getValue()) ) {
 		return dp_tableStartDate;
@@ -231,14 +233,14 @@ public DatePicker  getStartDate() {
 	else {
 		alert.setContentText("Data iniziale non valida");
         alert.showAndWait();
-		return dp_tableStartDate;
+		return dp_tableEndDate;
 	}
 
 }
 
 //fare test junit su questi casi:
 public DatePicker  getEndDate() {
-	if(dp_tableEndDate.getValue().isBefore(dp_tableEndDate.getValue())) { //bug: qui dovrebbe essere //qui dovrei porre datafinale isbefore datainiziale
+	if(dp_tableEndDate.getValue().isBefore(dp_tableEndDate.getValue())) { //bug: qui dovrei porre datafinale isbefore datainiziale
 		alert.setContentText("Data finale precedente la data iniziale");
         alert.showAndWait();
         return this.dp_tableEndDate;
@@ -254,12 +256,55 @@ public DatePicker  getEndDate() {
 	
 }
 
+
 public Button getBtn_tableLoad(){
 	return this.btn_tableLoad;
 }
 
 public Button getBtn_tableCsvExport() {
     return this.btn_tableCsvExport;
+}
+
+
+//metodi implementati per fare i casi di test con TestFx
+
+public DatePicker getStartDate(DatePicker inizio, DatePicker fine) {
+	LocalDate error = LocalDate.of(0, 0, 0);
+	/*Calendar error = Calendar.getInstance();
+	error.set(0000, 00, 00);
+	DatePicker today = new DatePicker(LocalDate.now());
+	LocalDate localDate = LocalDateTime.ofInstant(error.toInstant(), error.getTimeZone().toZoneId()).toLocalDate();
+	*/
+	DatePicker dp_errorDate= new DatePicker(error);
+	
+	//se data iniziale è dopo data finale -> errore (ritorna data nulla)
+	if(inizio.getValue().isAfter(fine.getValue())){ 
+		alert.setContentText("Data iniziale successiva a data finale");
+        alert.showAndWait();
+        return dp_errorDate;
+	}
+	
+	//se data iniziale è prima di data finale oppure è la stessa data -> giusto
+	else if(inizio.getValue().isBefore(today.getValue()) || inizio.getValue().isEqual(today.getValue()) ) {
+		return dp_tableStartDate;
+	}
+	//per altri casi non considerati precedentemente
+	else {
+		alert.setContentText("Data iniziale non valida");
+        alert.showAndWait();
+		return dp_errorDate;
+	}
+
+}
+public DatePicker setInizio(DatePicker inizio) {
+	dp_tableStartDate = inizio;
+	return inizio;
+}
+
+
+public DatePicker setFine(DatePicker fine) {
+	dp_tableEndDate = fine;
+	return fine;
 }
 
 

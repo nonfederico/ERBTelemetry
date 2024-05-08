@@ -7,6 +7,10 @@ module it.erb.telemetry {
 	requires java.sql;
 	requires eu.hansolo.medusa;
 	requires junit;
+	requires org.testfx;
+	requires org.testfx.junit;
+	requires javafx.fxml;
+	requires testFx;
 			
     exports it.erb.telemetry;
     exports it.erb.telemetry.data;
