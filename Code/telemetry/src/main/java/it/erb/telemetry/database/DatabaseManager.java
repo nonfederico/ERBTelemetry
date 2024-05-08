@@ -116,9 +116,13 @@ public class DatabaseManager
 	 */ 
 	public static DatabaseManager getInstance(){ return instance; }
 	
+	public Connection getConn() {
+		return conn;
+	}
+	
 	/**
 	 * Aggiunge un record alla tabella History
-	 * @data data contiene i dati da salvare.
+	 * @param data contiene i dati da salvare.
 	 * @return vero se l'operazione di insert è andata a buon fine.
 	 */
 	public boolean addRecord(TelemetryData data) 
