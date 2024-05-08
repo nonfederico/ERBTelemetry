@@ -218,13 +218,12 @@ public TableView getTableview() {
 	return this.tableView;
 }
 
-//fare test junit su questi casi
 
+//Metodo per prendere la data di inizio
 public DatePicker getStartDate() {
-	//DatePicker dp_errorDate= new DatePicker(null);
 	if(dp_tableStartDate.getValue().isAfter(dp_tableEndDate.getValue())) { 
 		alert.setContentText("Data iniziale successiva a data finale");
-        alert.showAndWait();
+        alert.showAndWait(); //finestra di errore
         return dp_tableEndDate;
 	}
 	else if(dp_tableStartDate.getValue().isBefore(today.getValue()) || dp_tableStartDate.getValue().isEqual(today.getValue()) ) {
@@ -238,7 +237,7 @@ public DatePicker getStartDate() {
 
 }
 
-//fare test junit su questi casi:
+//Metodo per prendere la data di fine
 public DatePicker  getEndDate() {
 	if(dp_tableEndDate.getValue().isBefore(dp_tableEndDate.getValue())) { //bug: qui dovrei porre datafinale isbefore datainiziale
 		alert.setContentText("Data finale precedente la data iniziale");
@@ -265,8 +264,8 @@ public Button getBtn_tableCsvExport() {
     return this.btn_tableCsvExport;
 }
 
-
-//metodi implementati per fare i casi di test con TestFx
+/*
+metodi implementati per fare i casi di test con TestFx
 
 public DatePicker getStartDate(DatePicker inizio, DatePicker fine) {
 	LocalDate error = LocalDate.of(0, 0, 0);
@@ -275,7 +274,7 @@ public DatePicker getStartDate(DatePicker inizio, DatePicker fine) {
 	DatePicker today = new DatePicker(LocalDate.now());
 	LocalDate localDate = LocalDateTime.ofInstant(error.toInstant(), error.getTimeZone().toZoneId()).toLocalDate();
 	*/
-	DatePicker dp_errorDate= new DatePicker(error);
+	/*DatePicker dp_errorDate= new DatePicker(error);
 	
 	//se data iniziale è dopo data finale -> errore (ritorna data nulla)
 	if(inizio.getValue().isAfter(fine.getValue())){ 
@@ -296,6 +295,7 @@ public DatePicker getStartDate(DatePicker inizio, DatePicker fine) {
 	}
 
 }
+*/
 public DatePicker setInizio(DatePicker inizio) {
 	dp_tableStartDate = inizio;
 	return inizio;

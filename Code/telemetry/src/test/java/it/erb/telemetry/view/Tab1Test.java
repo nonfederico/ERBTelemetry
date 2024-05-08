@@ -43,7 +43,7 @@ public class Tab1Test extends Application{
 	
 	@Override
     public void start(Stage stage) 
-    {
+    {/*
     	//System.out.println("01");
     	view = new View();
     	//System.out.println("2"); //qui non funziona con il metodo 1 del controller
@@ -57,7 +57,7 @@ public class Tab1Test extends Application{
         stage.getIcons().add(new Image("file:Logo.png"));
         stage.setResizable(true); //per fare il resize della schermata
         stage.show();
-   
+   */
     }
 	
     /*
