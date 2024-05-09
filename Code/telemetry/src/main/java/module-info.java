@@ -15,4 +15,5 @@ module it.erb.telemetry {
     exports it.erb.telemetry;
     exports it.erb.telemetry.data;
     exports it.erb.telemetry.data.sensor;
+    exports it.erb.telemetry.database;
 }
