@@ -1,6 +1,6 @@
 package it.erb.telemetry.model;
 
-import java.time.LocalDateTime;	
+import java.time.LocalDateTime;		
 import java.util.List;
 
 import com.fazecast.jSerialComm.SerialPort;
@@ -11,6 +11,7 @@ import it.erb.telemetry.data.TelemetryData;
 import it.erb.telemetry.database.DatabaseManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 
 /*
@@ -25,13 +26,15 @@ public class Model
 	private ObservableList<String> serialPortNameList = FXCollections.observableArrayList();
 	private int SelectComPortIndex = -1;
 	private boolean isComPortOpen = false;
-	
+	private Alert alert = new Alert(Alert.AlertType.ERROR);
 	public TelemetryData latestData = new TelemetryData();
 	
 	
 	public Model()
 	{
 		db = DatabaseManager.getInstance();
+		alert.setTitle("Errore");
+		alert.setHeaderText("");
 		
 	}
 	
@@ -63,13 +66,17 @@ public class Model
 		// Index selection test
 		if( SelectComPortIndex == -1 )
 		{
-			System.out.println("Invalid COM port selection (" + String.valueOf(SelectComPortIndex + ")"));
+			alert.setContentText("Invalid COM port selection (" + String.valueOf(SelectComPortIndex + ")"));
+	        alert.showAndWait();
+			//System.out.println("Invalid COM port selection (" + String.valueOf(SelectComPortIndex + ")"));
 			return;
 		}
 		
 		if( isComPortOpen ) 
 		{
-			System.out.println("A port is already opened");
+			alert.setContentText("A port is already opened");
+	        alert.showAndWait();
+			//System.out.println("A port is already opened");
 			return;
 		}
 		
@@ -83,7 +90,9 @@ public class Model
 		// Port opening
 		if( !comPort.openPort() )
 		{
-			System.out.println("Port opening " + portName + " failed");
+			alert.setContentText("Port opening " + portName + " failed");
+	        alert.showAndWait();
+			//System.out.println("Port opening " + portName + " failed");
 		    return;
 		}
 		isComPortOpen = true;
@@ -105,7 +114,7 @@ public class Model
 
 				  if (event.getEventType() == SerialPort.LISTENING_EVENT_PORT_DISCONNECTED)
 				  {
-				      System.out.println("Connection has been lost. COM port closing");
+					  System.out.println("Connection has been lost. COM port closing");
 				      stopListening();
 				  }  
 				 
