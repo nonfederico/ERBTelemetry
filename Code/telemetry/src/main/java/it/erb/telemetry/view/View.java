@@ -110,6 +110,7 @@ public class View
 		return scene;
 	}
 	
+	//Delegate pattern
 	public LineChart<Number, Number> getLineChart() {
 		return chart.getLineChart();
     }

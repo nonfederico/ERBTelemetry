@@ -194,6 +194,7 @@ private VBox getVb_LVAcc() {
 	lbl_LVAcc_Voltage = new DataLabel("-",1,true);
 	lbl_LVAcc_Current = new DataLabel("-",1,true);
 			
+	//builder pattern
 	gg_LVAcc = GaugeBuilder.create()
 			.skinType(SkinType.SIMPLE_SECTION)
 			.prefSize(90,90)  
